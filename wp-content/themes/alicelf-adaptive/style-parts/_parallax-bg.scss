@@ -1,0 +1,28 @@
+/**
+ * Parallax things
+ */
+.parallax-part {
+	background-attachment : fixed;
+	overflow              : hidden;
+	padding               : 50px;
+	background-size       : cover;
+	height                : 500px;
+	background-position-y: 100px;
+}
+
+
+.p0 {
+	background-image : url("http://lorempixel.com/1000/800/abstract/1/Dummy-Text");
+}
+
+.p1 {
+	background-image : url("http://lorempixel.com/1000/800/abstract/2/Dummy-Text");
+}
+
+.p2 {
+	background-image : url("http://lorempixel.com/1000/800/abstract/3/Dummy-Text");
+}
+
+.p3 {
+	background-image : url("http://lorempixel.com/1000/800/abstract/4/Dummy-Text");
+}

@@ -1,0 +1,76 @@
+/*Default icon*/
+#menu-posts-recent_projects {
+  .wp-menu-image {
+    &:before {
+      display                 : inline-block;
+      font-family             : FontAwesome !important;
+      font-style              : normal;
+      font-weight             : normal;
+      line-height             : 1;
+      -webkit-font-smoothing  : antialiased;
+      -moz-osx-font-smoothing : grayscale;
+      content                 : "\f110" !important;
+      height                  : 20px !important;
+    }
+  }
+}
+
+#menu-posts-recent_projects.wp-has-current-submenu {
+  .wp-menu-image {
+    &:before {
+      @include animateElem();
+    }
+  }
+}
+
+#menu-posts-testimonials {
+  .wp-menu-image {
+    &:before {
+      display                 : inline-block;
+      font-family             : FontAwesome !important;
+      font-style              : normal;
+      font-weight             : normal;
+      line-height             : 1;
+      -webkit-font-smoothing  : antialiased;
+      -moz-osx-font-smoothing : grayscale;
+      content                 : "\f086" !important;
+      height                  : 20px !important;
+    }
+
+  }
+}
+
+#toplevel_page_alicelf_customizer {
+  .wp-menu-image {
+    &:before {
+      display                 : inline-block;
+      font-family             : FontAwesome !important;
+      font-style              : normal;
+      font-weight             : normal;
+      line-height             : 1;
+      -webkit-font-smoothing  : antialiased;
+      -moz-osx-font-smoothing : grayscale;
+      content                 : "\f006" !important;
+      height                  : 20px !important;
+    }
+
+  }
+}
+
+#toplevel_page_alicelf_customizer.current,
+#toplevel_page_alicelf_customizer.wp-has-current-submenu {
+  .wp-menu-image {
+    @extend .perspective;
+    &:before {
+      @include animateElem(flip-horizontal);
+    }
+  }
+}
+
+.form-button {
+  &:hover {
+    i {
+      @include animateElem(spin, 2, infinite, ease-in-out);
+    }
+  }
+}

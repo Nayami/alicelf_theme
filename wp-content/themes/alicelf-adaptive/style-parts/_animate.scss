@@ -1,0 +1,79 @@
+/**
+ * Animations and Keyframes
+ * @extend .perspective; for parent element who contains animation
+ * @include animateElem($animationName: spin, $duration : 10, $times : infinite, $type : linear); for animate elements
+ */
+
+.perspective {
+  -webkit-perspective : 80px;
+  perspective         : 80px;
+}
+
+/*Spin*/
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform : rotate(0deg);
+    transform         : rotate(0deg);
+  }
+  100% {
+    -webkit-transform : rotate(359deg);
+    transform         : rotate(359deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    -webkit-transform : rotate(0deg);
+    transform         : rotate(0deg);
+  }
+  100% {
+    -webkit-transform : rotate(359deg);
+    transform         : rotate(359deg);
+  }
+}
+
+/*Flip horizontal*/
+@-webkit-keyframes flip-horizontal {
+  0% {
+    -webkit-transform : rotateY(0deg);
+    transform         : rotateY(0deg);
+  }
+  100% {
+    -webkit-transform : rotateY(360deg);
+    transform         : rotateY(360deg);
+  }
+}
+
+@keyframes flip-horizontal {
+  0% {
+    -webkit-transform : rotateY(0deg);
+    transform         : rotateY(0deg);
+  }
+  100% {
+    -webkit-transform : rotateY(360deg);
+    transform         : rotateY(360deg);
+  }
+}
+
+/*Flip vertical*/
+@-webkit-keyframes flip-vertical {
+  0% {
+    -webkit-transform : rotateX(0deg);
+    transform         : rotateX(0deg);
+  }
+  100% {
+    -webkit-transform : rotateX(360deg);
+    transform         : rotateX(360deg);
+  }
+}
+
+@keyframes flip-vertical {
+  0% {
+    -webkit-transform : rotateX(0deg);
+    transform         : rotateX(0deg);
+  }
+  100% {
+    -webkit-transform : rotateX(360deg);
+    transform         : rotateX(360deg);
+  }
+}

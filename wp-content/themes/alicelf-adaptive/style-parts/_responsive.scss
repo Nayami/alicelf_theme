@@ -1,0 +1,24 @@
+/*
+ * Responsive Rules
+ */
+
+//Desktop
+@media (min-width : 768px) {
+  .phone-visible {
+    display : none;
+  }
+
+  .phone-hidden {
+    display : block;
+  }
+}
+
+//Mobile
+@media (max-width : 767px) {
+  .phone-visible {
+    display : block;
+  }
+  .phone-hidden {
+    display : none;
+  }
+}

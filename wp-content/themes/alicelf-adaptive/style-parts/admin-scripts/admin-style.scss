@@ -1,0 +1,91 @@
+/*
+ * Include parts
+ */
+@import "admin-vars-and-mixins";
+
+// Components
+@import "admin-menu-icons";
+@import "admin-bootstrap/bootstrap-min.css";
+@import "../animate";
+@import "../loader";
+
+input[type=submit] {
+  @include primButton();
+}
+
+
+textarea,
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  @include textFields();
+}
+
+/****************************
+ *        Site Style        *
+ ****************************/
+
+#ed_toolbar {
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+#menu-to-edit, .theme {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  * {
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+}
+#menu-to-edit {
+  p {
+    textarea,
+    input[type="text"] {
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+  }
+}
+.brdbox {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.content-box {
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+}
+
+//Additional Styles
+#screen-meta-links {
+  a.show-settings {
+    height : auto;
+    &:focus{
+      outline : none;
+      box-shadow: none;
+    }
+  }
+}
+
+#toplevel_page_alicelf_theme_setup_options{
+  div.wp-menu-image {
+    &:before {
+      font-family : alicelf-icon;
+      content: "a";
+    }
+  }
+}
+.redux-group-tab-link-li {
+  &.active {
+    >a {
+      width : auto !important;
+    }
+  }
+}
+.redux-main #redux-sticky #info_bar {
+  height : 46px;
+}
+
+#convert-tables-section {
+	min-height : 20px;
+}

@@ -1,0 +1,11 @@
+$baseFont : "Open Sans", sans-serif;
+
+$mainColor : #21759b;
+
+$infoColor : #67a6df;
+$successColor : #2da519;
+$warningColor : #edcf87;
+$dangerColor : #df4343;
+
+$opacity : transparentize($mainColor, 0.5);
+$lighten : lighten($mainColor, 50%);

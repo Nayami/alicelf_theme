@@ -1,0 +1,23 @@
+/*!
+ Theme Name: Alicelf Adaptive
+ Author: Alicelf dev
+ Description: simple adaptive, development theme. ReduxFramework based
+ Version: 2.3.1
+ Tags: white, one-column, two-columns, customizable, theme-editor, right-sidebar, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, translation-ready
+ */
+
+
+@import "style-parts/_vars";
+@import "style-parts/_mix";
+@import "style-parts/_basics";
+@import "style-parts/_thumbs";
+@import "style-parts/_animate";
+@import "style-parts/_parallax-bg";
+
+// Content Parts
+@import "style-parts/_header";
+@import "style-parts/_main";
+@import "style-parts/_footer";
+
+@import "style-parts/_responsive";
+@import "style-parts/_loader";
