@@ -24,7 +24,6 @@ class Repeater extends GenerateMeta {
 			$loop_type = "multiple";
 		}
 		?>
-
 		<div class='GenerateMeta generate-repeater-metabox' data-post-id="<?php echo $post->ID ?>">
 			<textarea value="<?php echo $value ?>" id="<?php echo $this->id ?>-identifier" name="<?php echo $this->id ?>" data-handler="data" class="hidden-meta-repeater-container"><?php echo $value ?></textarea>
 			<div class="data-page-repeater">
