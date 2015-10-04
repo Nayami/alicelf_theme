@@ -511,13 +511,28 @@ body.wp-admin .loader-backdrop .lb, body.wp-admin .loader-backdrop .rb {
   .generate-repeater-metabox > .labsolut .preview-area {
     margin-top: 40%; }
   .generate-repeater-metabox section {
+    position: relative;
     padding: 10px;
     background-color: #eee;
     border: 1px solid #ccc;
     margin-bottom: 15px; }
+    .generate-repeater-metabox section button[data-destroy] {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      background-color: #df4343;
+      color: #fff;
+      border: 1px solid #db2d2d;
+      box-shadow: inset 0 2px 2px #ea8484; }
+      .generate-repeater-metabox section button[data-destroy]:focus, .generate-repeater-metabox section button[data-destroy]:hover {
+        background-color: #db2d2d;
+        color: #fff;
+        border: 1px solid #b61f1f; }
   .generate-repeater-metabox .hidden-meta-repeater-container {
     height: 1px;
     display: none;
     min-height: 0; }
+  .generate-repeater-metabox .create-section-repeater {
+    text-align: right; }
 
 /*# sourceMappingURL=style.css.map */

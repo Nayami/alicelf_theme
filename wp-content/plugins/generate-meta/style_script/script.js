@@ -151,14 +151,24 @@ jQuery(document).ready(function ($){
 				iteratorsWrapper.append(sectionTemlate);
 			});
 
-			// Delete section
-			$('button[data-destroy="destroy"]').waitUntilExists(function() {
-				metabox.find("button[data-destroy='destroy']").on('click', function(e) {
+			// Delete section (For appeared buttons)
+			$('button[data-stored-template="btn-destroy"]').waitUntilExists(function() {
+				$("button[data-destroy='destroy']").on('click', function(e) {
 					e.preventDefault();
 					var that = $(this), thatParent = that.parents('section');
-					thatParent.remove();
+					if(confirm('Are you sure?') !== false)
+						thatParent.remove();
 				});
+
 			});
+			// Delete section (For existing buttons)
+			$("button[data-destroy='destroy']").on('click', function(e) {
+				e.preventDefault();
+				var that = $(this), thatParent = that.parents('section');
+				if(confirm('Are you sure?') !== false)
+					thatParent.remove();
+			});
+
 
 			// Submit Process
 			submitRepeater.on('click', function(e) {
@@ -189,7 +199,6 @@ jQuery(document).ready(function ($){
 						};
 					}
 				}
-				console.log(collector);
 
 				metabox.append(Loaders.bouncingAbsolute);
 				$.ajax({

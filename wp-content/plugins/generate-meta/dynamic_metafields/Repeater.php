@@ -28,9 +28,10 @@ class Repeater extends GenerateMeta {
 			<textarea value="<?php echo $value ?>" id="<?php echo $this->id ?>-identifier" name="<?php echo $this->id ?>" data-handler="data" class="hidden-meta-repeater-container"><?php echo $value ?></textarea>
 			<div class="data-page-repeater">
 				<?php
-				// Loop for template
 
-				$template .="<section data-sort=''><div data-section-title=''></div>";
+				// Loop for template
+				$section_head = "<div data-section-head=''></div>";
+				$template .="<section data-sort=''>{$section_head}";
 				$template .="<input type='text' data-section-name='section-name' placeholder='Enter Name of your section'>";
 				foreach ( $this->options as $single_field ) {
 					switch($single_field['type']) {
@@ -47,12 +48,12 @@ class Repeater extends GenerateMeta {
 							$template .="<input value='' class='input-class-{$single_field['name']}' type='text' data-type='text' data-input='{$single_field['name']}'>";
 					}
 				}
-				$template .="<button data-destroy='destroy' class='button-default'>Remove section</button></section>";
+				$template .="<button data-stored-template='btn-destroy' data-destroy='destroy' class='button button-secondary'>Remove section</button></section>";
 				$template.="</section>";
 
 				// Loop for non existing data
 				if($loop_type === 'single') {
-					$out .="<section data-sort='1'><div data-section-title=''></div>";
+					$out .="<section data-sort='1'>$section_head";
 					$out .="<input type='text' data-section-name='section-name' placeholder='Enter Name of your section'>";
 					foreach ( $this->options as $single_field ) {
 
@@ -70,11 +71,11 @@ class Repeater extends GenerateMeta {
 								$out .="<input value='' class='input-class-{$single_field['name']}' type='text' data-type='text' data-input='{$single_field['name']}'>";
 						}
 					}
-					$out .="<button data-destroy='destroy' class='button-default'>Remove section</button></section>";
+					$out .="<button data-destroy='destroy' class='button button-secondary'>Remove section</button></section>";
 					$out .="</section>";
 				} else {
 					foreach ( $sections as $sk => $sv ) {
-						$out .="<section data-sort='1'><div data-section-title=''></div>";
+						$out .="<section data-sort='1'>$section_head";
 						$out .="<input type='text' value='{$sv['sectionName']}' data-section-name='section-name' placeholder='Name of your section'>";
 						foreach ( $sv as $fldsk => $fldsv ) {
 							if($fldsk === 'sectionName')
@@ -96,7 +97,7 @@ class Repeater extends GenerateMeta {
 
 						}
 
-						$out .="<button data-destroy='destroy' class='button-default'>Remove section</button></section>";
+						$out .="<button data-destroy='destroy' class='button button-secondary'>Remove section</button></section>";
 						$out .="</section>";
 					}
 				}
@@ -104,8 +105,11 @@ class Repeater extends GenerateMeta {
 				echo $out;
 				?>
 			</div>
-			<button class="button-default" data-add-section="add">Add section</button>
+			<div class="create-section-repeater">
+				<button class="button button-secondary" data-add-section="add">Add section</button>
+			</div>
 			<input type="hidden" data-template="<?php echo $template ?>"/>
+			<hr>
 			<p><button data-repeater-submit="subm" class="button-primary">Save Repeater</button></p>
 			<p><small><?php echo $this->id ?></small></p>
 		</div>
