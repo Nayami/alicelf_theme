@@ -4,7 +4,7 @@ jQuery(document).ready(function ($){
 		THEME_URI = aa_generate_meta_var.template_uri;
 
 	var Loaders = {
-		bouncingAbsolute: '<div id="loader-absolute"><div class="preview-area"><div class="spinner-jx"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div></div>',
+		bouncingAbsolute: '<div id="loader-absolute" class="labsolut"><div class="preview-area"><div class="spinner-jx"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div></div>',
 		bouncingStatic  : '<div id="loader-static"><div class="preview-area"><div class="spinner-jx"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div></div>',
 		infiniteSpinner : '<div class="loader-backdrop"><div class="loader-infinite-spinner"><div class="lt"></div><div class="rt"></div><div class="lb"></div><div class="rb"></div></div></div>',
 		svgLoader       : '<img id="svg-loader-process" src="' + THEME_URI + '/svg/loader_svg.svg" width="40" alt="loadersvg"/>'
@@ -191,6 +191,7 @@ jQuery(document).ready(function ($){
 				}
 				console.log(collector);
 
+				metabox.append(Loaders.bouncingAbsolute);
 				$.ajax({
 					url    : ajaxurl,
 					type   : "POST",
@@ -203,6 +204,8 @@ jQuery(document).ready(function ($){
 					},
 					success: function(data) {
 						dataHandler.val(data);
+
+						metabox.find('.labsolut').remove();
 					},
 					error  : function(jqXHR, textStatus, errorThrown) {
 						$('#loader-static').remove();

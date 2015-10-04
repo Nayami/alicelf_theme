@@ -258,6 +258,12 @@
  * Repeater
  */
 .generate-repeater-metabox {
+	position : relative;
+	>.labsolut {
+		.preview-area {
+			margin-top : 40%;
+		}
+	}
 	section {
 		padding          : 10px;
 		background-color : #eee;
@@ -265,8 +271,8 @@
 		margin-bottom    : 15px;
 	}
 	.hidden-meta-repeater-container {
-		//height     : 1px;
-		//display    : none;
-		//min-height : 0;
+		height     : 1px;
+		display    : none;
+		min-height : 0;
 	}
 }

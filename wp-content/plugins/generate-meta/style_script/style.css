@@ -506,10 +506,18 @@ body.wp-admin .loader-backdrop .lb, body.wp-admin .loader-backdrop .rb {
 /**
  * Repeater
  */
-.generate-repeater-metabox section {
-  padding: 10px;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  margin-bottom: 15px; }
+.generate-repeater-metabox {
+  position: relative; }
+  .generate-repeater-metabox > .labsolut .preview-area {
+    margin-top: 40%; }
+  .generate-repeater-metabox section {
+    padding: 10px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    margin-bottom: 15px; }
+  .generate-repeater-metabox .hidden-meta-repeater-container {
+    height: 1px;
+    display: none;
+    min-height: 0; }
 
 /*# sourceMappingURL=style.css.map */
