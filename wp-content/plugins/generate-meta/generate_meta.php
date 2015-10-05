@@ -4,7 +4,7 @@ Plugin Name: Generate Meta
 Plugin URI: http://vzazerkalie.com/portf/
 Description: Alicelf Generate Metaboxes plugin - Upload and Activate.
 Author: Alicelf
-Version: 2.0
+Version: 3.0.1
 Author URI: http://vzazerkalie.com/portf/
 */
 //@Template Todo: create separate sections
