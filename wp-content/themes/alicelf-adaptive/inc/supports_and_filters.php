@@ -18,7 +18,7 @@ add_filter( 'widget_text', 'do_shortcode' );
 /**
  * Post Formats
  */
-//add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link', 'audio' ) );
+//add_theme_support( 'post-formats', array( 'aside', 'image', 'video', 'quote', 'link', 'audio','gallery' ) );
 //add_action( 'admin_head', 'alice_remove_post_type_support', 10 );
 function alice_remove_post_type_support()
 {

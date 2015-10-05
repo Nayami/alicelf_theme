@@ -139,11 +139,28 @@ jQuery(document).ready(function ($){
 			var metabox = $(this),
 				dataHandler = metabox.find('>[data-handler]'),
 				iteratorsWrapper = metabox.find('.data-page-repeater'),
-				section = iteratorsWrapper.find('>section:first-of-type'),
+				//section = iteratorsWrapper.find('>section:first-of-type'),
 				sectionTemlate = metabox.find('[data-template]').attr('data-template'),
 				submitRepeater = metabox.find('button[data-repeater-submit]'),
 				postIdentificator = metabox.attr('data-post-id'),
 				metaDescriptor = dataHandler.attr('name');
+
+			// Set the metabox name
+
+			metabox.find('[data-section-head]').waitUntilExists(function(){
+				var that = $(this);
+					that.html(that.parents('section').find('[data-section-name]').val());
+					that.on('click', function(){
+						$(this).parents('section').toggleClass('collapsed-section');
+					})
+			});
+
+			$('[data-section-name]').waitUntilExists(function(){
+				var that = $(this);
+				that.on('keyup', function(){
+					that.parents('section').find('[data-section-head]').html(that.val());
+				});
+			});
 
 			// Add a section
 			metabox.find('[data-add-section]').on('click', function(e) {
@@ -151,22 +168,15 @@ jQuery(document).ready(function ($){
 				iteratorsWrapper.append(sectionTemlate);
 			});
 
-			// Delete section (For appeared buttons)
-			$('button[data-stored-template="btn-destroy"]').waitUntilExists(function() {
-				$("button[data-destroy='destroy']").on('click', function(e) {
+
+			$("button[data-destroy='destroy']").waitUntilExists(function(){
+				var that = $(this);
+				that.on('click', function(e) {
 					e.preventDefault();
 					var that = $(this), thatParent = that.parents('section');
-					if(confirm('Are you sure?') !== false)
+					if(confirm("are you sure?"))
 						thatParent.remove();
 				});
-
-			});
-			// Delete section (For existing buttons)
-			$("button[data-destroy='destroy']").on('click', function(e) {
-				e.preventDefault();
-				var that = $(this), thatParent = that.parents('section');
-				if(confirm('Are you sure?') !== false)
-					thatParent.remove();
 			});
 
 
@@ -184,16 +194,20 @@ jQuery(document).ready(function ($){
 						inputs = cSection.find('[data-input]'),
 						sectionNameDescriptor = cSection.find('[data-section-name]'),
 						sectionName = sectionNameDescriptor.val(),
-						slug = sectionName.replace(' ', '_').toLowerCase();
+						slug = sectionName.replace(' ', '_').toLowerCase(),
+						unique = slug+"|unique|"+i;
 
-					collector[slug] = {
+					cSection.attr('data-unique', unique);
+					cSection.find('button[data-destroy]').attr('data-unique-button', unique);
+
+					collector[unique] = {
 						sectionName : sectionName
 					};
 					// Each item in section
 					for (var j = 0; j < inputs.length; j++) {
 						var thatInput = inputs.eq(j);
 
-						collector[slug][thatInput.attr('data-input')] = {
+						collector[unique][thatInput.attr('data-input')] = {
 							field_type: thatInput.attr('data-type'),
 							value     : thatInput.val()
 						};
@@ -213,7 +227,6 @@ jQuery(document).ready(function ($){
 					},
 					success: function(data) {
 						dataHandler.val(data);
-
 						metabox.find('.labsolut').remove();
 					},
 					error  : function(jqXHR, textStatus, errorThrown) {
