@@ -146,7 +146,6 @@ jQuery(document).ready(function ($){
 				metaDescriptor = dataHandler.attr('name');
 
 			// Set the metabox name
-
 			metabox.find('[data-section-head]').waitUntilExists(function(){
 				var that = $(this);
 					that.html(that.parents('section').find('[data-section-name]').val());
@@ -155,6 +154,7 @@ jQuery(document).ready(function ($){
 					})
 			});
 
+			// Assing name in section header
 			$('[data-section-name]').waitUntilExists(function(){
 				var that = $(this);
 				that.on('keyup', function(){
@@ -168,7 +168,7 @@ jQuery(document).ready(function ($){
 				iteratorsWrapper.append(sectionTemlate);
 			});
 
-
+			// Delete section
 			$("button[data-destroy='destroy']").waitUntilExists(function(){
 				var that = $(this);
 				that.on('click', function(e) {
@@ -179,6 +179,46 @@ jQuery(document).ready(function ($){
 				});
 			});
 
+			// Image field
+			$(metabox.find('.image-repeater-field')).waitUntilExists(function(){
+				var that = $(this),
+					thatButton = that.find('a[data-image-trigger]'),
+					inputText = that.find('input[data-type="image"]'),
+					imagesHolderContainer = that.find('.image-holder');
+
+				thatButton.on('click', function(e){
+					e.preventDefault();
+
+					var frame = wp.media({
+						title   : 'Select your media',
+						frame   : 'post',
+						multiple: true, // set to false if you want only one image
+						library : {type: 'image'},
+						button  : {text: 'Add Image'}
+					});
+					frame.on('close', function(data){
+						var images = frame.state().get('selection');
+						if(images.length > 0) {
+							imagesHolderContainer.empty();
+							var imageArray = [];
+
+							images.each(function(image){
+								imageArray.push(image.attributes.url);
+							});
+							inputText.val(imageArray.join(","));
+
+							if (imageArray.length > 0) {
+								for (var i = imageArray.length; i--;) {
+									var singleImageItem = "<div class='image-repeater-wrap'><img class='repeater-image' src='"+imageArray[i]+"'></div>";
+									imagesHolderContainer.append(singleImageItem);
+								}
+							}
+						}
+					});
+
+					frame.open();
+				});
+			});
 
 			// Submit Process
 			submitRepeater.on('click', function(e) {
@@ -213,6 +253,8 @@ jQuery(document).ready(function ($){
 						};
 					}
 				}
+				if($.isEmptyObject(collector))
+					collector = "empty_data";
 
 				metabox.append(Loaders.bouncingAbsolute);
 				$.ajax({

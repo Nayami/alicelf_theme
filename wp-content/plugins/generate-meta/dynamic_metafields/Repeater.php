@@ -39,14 +39,24 @@ class Repeater extends GenerateMeta {
 				$template .="<input type='text' data-section-name='section-name' placeholder='Enter Name of your section'>";
 				foreach ( $this->options as $single_field ) {
 					switch($single_field['type']) {
+
 						case "textarea" :
 							$template .= "<p>{$single_field['name']}</p>";
 							$template .="<textarea class='input-class-{$single_field['name']}' data-type='textarea' data-input='{$single_field['name']}'></textarea>";
 							break;
+
+						case "image" :
+							$template .= "<div class='image-repeater-field'><div class='image-holder'></div>";
+							$template .="<p>{$single_field['name']}</p>";
+							$template .="<input value='' class='input-class-{$single_field['name']}' type='text' data-type='image' data-input='{$single_field['name']}'><a class='button-secondary' data-image-trigger>Upload</a>";
+							$template .="</div>";
+							break;
+
 						case "flex-field" :
 							$template .="<p>{$single_field['name']}</p>";
 							$template .="<input data-flex='{$single_field['type']}' value='' class='input-class-{$single_field['name']}' type='text' data-type='text' data-input='{$single_field['name']}'>";
 							break;
+
 						default :
 							$template .="<p>{$single_field['name']}</p>";
 							$template .="<input value='' class='input-class-{$single_field['name']}' type='text' data-type='text' data-input='{$single_field['name']}'>";
@@ -56,9 +66,8 @@ class Repeater extends GenerateMeta {
 				$template.="</section>";
 
 
-
 				// Loop for non existing data
-				if($loop_type === 'single') {
+				if($loop_type === 'single' || $sections === 'empty_data' ) {
 					$out .="<section class='collapsed-section' data-unique='' data-sort='1'>$section_head";
 					$out .="<input type='text' data-section-name='section-name' placeholder='Enter Name of your section'>";
 					foreach ( $this->options as $single_field ) {
@@ -68,6 +77,14 @@ class Repeater extends GenerateMeta {
 								$out .= "<p>{$single_field['name']}</p>";
 								$out .="<textarea class='input-class-{$single_field['name']}' data-type='textarea' data-input='{$single_field['name']}'></textarea>";
 								break;
+
+							case "image" :
+								$out .= "<div class='image-repeater-field'><div class='image-holder'></div>";
+								$out .="<p>{$single_field['name']}</p>";
+								$out .="<input value='' class='input-class-{$single_field['name']}' type='text' data-type='image' data-input='{$single_field['name']}'><a class='button-secondary' data-image-trigger>Upload</a>";
+								$out .="</div>";
+								break;
+
 							case "flex-field" :
 								$out .= "<p>{$single_field['name']}</p>";
 								$out .="<input data-flex='{$single_field['type']}' value='' class='input-class-{$single_field['name']}' type='text' data-type='text' data-input='{$single_field['name']}'>";
@@ -84,6 +101,7 @@ class Repeater extends GenerateMeta {
 
 				// Loop for Existing data
 				else {
+
 					foreach ( $sections as $sk => $sv ) {
 						$out .="<section class='collapsed-section' data-unique='{$sk}' data-sort='1'>$section_head";
 						$out .="<input type='text' value='{$sv['sectionName']}' data-section-name='section-name' placeholder='Name of your section'>";
@@ -96,6 +114,18 @@ class Repeater extends GenerateMeta {
 									$out .= "<p>{$fldsk}</p>";
 									$out .="<textarea class='input-class-{$fldsk}' data-type='textarea' data-input='{$fldsk}'>{$fldsv['value']}</textarea>";
 									break;
+
+								case "image" :
+									$image_holders = null;
+									foreach(explode(',', $fldsv['value']) as $image) {
+										$image_holders .= "<div class='image-repeater-wrap'><img class='repeater-image' src='{$image}'></div>";
+									}
+									$out .= "<div class='image-repeater-field'><div class='image-holder'>{$image_holders}</div>";
+									$out .="<p>{$fldsk}</p>";
+									$out .="<input value='{$fldsv['value']}' class='input-class-{$fldsk}' type='text' data-type='image' data-input='{$fldsk}'><a class='button-secondary' data-image-trigger>Upload</a>";
+									$out .="</div>";
+									break;
+
 								case "flex-field" :
 									$out .= "<p>{$fldsk}</p>";
 									$out .="<input data-flex='{$fldsk}' value='{$fldsv['value']}' class='input-class-{$fldsk}' type='text' data-type='{$fldsk}' data-input='{$fldsk}'>";
@@ -132,6 +162,11 @@ $section_template = array(
 	array(
 		'type' => 'text',
 		'name' => 'title',
+		'value' => '',
+	),
+	array(
+		'type' => 'image',
+		'name' => 'slider-image',
 		'value' => '',
 	),
 	array(
