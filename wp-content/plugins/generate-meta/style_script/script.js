@@ -242,5 +242,10 @@ jQuery(document).ready(function ($){
 	};
 	repeaterMetaboxProcess('.generate-repeater-metabox');
 
-
+	$(function() {
+		$( ".data-page-repeater" ).sortable({
+			placeholder: "ui-state-highlight"
+		});
+		$( ".data-page-repeater" ).disableSelection();
+	});
 });

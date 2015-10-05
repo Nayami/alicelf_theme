@@ -29,6 +29,11 @@ add_action('admin_enqueue_scripts', 'aa_func_20154904124919');
 function aa_func_20154904124919()
 {
 	$plugindir = plugin_dir_url( __DIR__ ) . basename( __DIR__ );
+	//jQuery sortable
+	wp_enqueue_style( 'jq-ui-sort-core', $plugindir . '/jq-sortable/jquery-ui.min.css' );
+	wp_enqueue_style( 'jq-ui-sort-structure', $plugindir . '/jq-sortable/jquery-ui.structure.min.css' );
+	wp_enqueue_script( 'jq-ui-sort-js', $plugindir . '/jq-sortable/jquery-ui.min.js', array( 'jquery' ), false, true );
+
 	wp_enqueue_style( 'alice_font_awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' );
 	wp_enqueue_style( 'GenerateMetaStyle', $plugindir . '/style_script/style.css' );
 	wp_enqueue_script( 'GenerateMetaScript', $plugindir . '/style_script/script.js', array( 'jquery' ), false, true );
