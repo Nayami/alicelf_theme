@@ -265,6 +265,9 @@
 			margin-top : 100px;
 		}
 	}
+	p {
+		margin-bottom : 3px;
+	}
 	button {
 		&[data-add-section] {
 			background-color : transparentize($successColor, .2);
