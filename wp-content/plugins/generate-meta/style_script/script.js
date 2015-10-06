@@ -87,7 +87,6 @@ jQuery(document).ready(function ($){
 
 		});
 
-
 		$.each(btn, function() {
 			var that = $(this), parentElemId = that.parent('.al-gal-holder').attr('id');
 
@@ -96,30 +95,56 @@ jQuery(document).ready(function ($){
 				frame = wp.media({
 					title   : 'Select your media',
 					frame   : 'post',
-					multiple: true, // set to false if you want only one image
+					multiple: true,
 					library : {type: 'image'},
 					button  : {text: 'Add Image'}
 				});
 
 				frame.on('close', function(data) {
-					var imageArray = [], parentBlock = $('#' + parentElemId);
+					var parentBlock = $('#' + parentElemId),
+							imageArray = [],
+							imagePreviousArray = parentBlock.find('input:text').val().split(","),
+							images = frame.state().get('selection');
 
-					images = frame.state().get('selection');
-					images.each(function(image) {
-						imageArray.push(image.attributes.url); // want other attributes? Check the available ones with console.log(image.attributes);
-					});
+					if(images.length > 0) {
+						images.each(function(image) {
+							imageArray.push(image.attributes.url);
+						});
+						if(parentBlock.find('input:text').val() !== "")
+							imageArray = imagePreviousArray.concat(imageArray);
 
-					parentBlock.find('input:text').val(imageArray.join(",")); // Adds all image URL's comma seperated to a text input
+						parentBlock.find('input:text').val(imageArray.join(","));
 
-					var imgHldre = parentBlock.find('.gallery-existing-image-holder');
-					if (imageArray.length > 0) {
-						imgHldre.empty();
-						for (var i = imageArray.length; i--;) {
-							imgHldre.append("<div class='img-holder-gal'><img class='img-responsive' src='" + imageArray[i] + "'></div>");
+						var imgHldre = parentBlock.find('.gallery-existing-image-holder');
+						if (imageArray.length > 0) {
+							imgHldre.empty();
+							for (var i = imageArray.length; i--;) {
+								imgHldre.append("<div class='img-holder-gal'><i class='fa fa-remove' data-delete-current-image='"+imageArray[i]+"'></i><img class='img-responsive' src='" + imageArray[i] + "'></div>");
+							}
 						}
 					}
 				});
 				frame.open();
+
+			});
+		});
+
+		$('[data-delete-current-image]').waitUntilExists(function(){
+			$(this).on('click', function(e){
+				e.preventDefault();
+
+				var that = $(this),
+					thatSource = that.attr('data-delete-current-image'),
+					thatImage = that.parents('.img-holder-gal'),
+					thatInput = that.parents('.al-gal-holder').find('input[type="text"]'),
+					imagesAr = thatInput.val().split(','),
+					index = imagesAr.indexOf(thatSource);
+
+				if(index > -1 ) {
+					imagesAr.splice(index, 1);
+					thatInput.val(imagesAr.join(","));
+					thatImage.remove();
+				}
 
 			});
 		});

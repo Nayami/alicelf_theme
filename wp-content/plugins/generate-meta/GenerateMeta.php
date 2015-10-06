@@ -136,7 +136,9 @@ class GenerateMeta {
 			$output = "<div class='GenerateMeta'><label for='" . $this->id . "_identifier'>$this->title</label>";
 			echo $output .= "<input class='meta_color_picker' type='text' id='" . $this->id . "_identifier' name='$this->id' value='$value'></div>";
 
-		} // Gallery
+		}
+
+		// Gallery
 		elseif ( $this->field_type === 'gallery_box' ) {
 			$output = null;
 			$output = "<div id='$this->id' class='al-gal-holder'><input class='glr-dt-hldr' type='text' value='$value' name='$this->id' id='imageurls_" . $this->id . "' />";
@@ -145,7 +147,7 @@ class GenerateMeta {
 				$output .= "<input type='hidden' class='hidden-backup-val' value='$value'>";
 				$arr_images = explode( ',', $value );
 				foreach ( $arr_images as $an_image ) {
-					$output .= "<div class='img-holder-gal'><img class='img-responsive' src='$an_image'></div>";
+					$output .= "<div class='img-holder-gal'><i data-delete-current-image='{$an_image}' class='fa fa-remove'></i><img class='img-responsive' src='$an_image'></div>";
 				}
 			}
 			$output .= "</div>";
@@ -158,6 +160,7 @@ class GenerateMeta {
 			echo $output;
 
 		} // Output for plugin woo external fields
+
 		elseif ( $this->field_type === 'meta_argue_param_box' ) {
 			do_action( 'aa_meta_arg_action', array(
 				'id'         => $this->id,
@@ -356,9 +359,9 @@ add_action( 'post_edit_form_tag', 'update_form_tag_incapsulation' );
 // Dynamic metabox obj end
 
 
-//$gallery = new GenerateMeta( 'gall_images', 'Gallery', 'page' );
-//$gallery->run( 'gallery_box', 'side', 'high' );
-//$gallery->saveMetadata();
+$gallery = new GenerateMeta( 'gall_images', 'Gallery', 'page' );
+$gallery->run( 'gallery_box', 'side', 'high' );
+$gallery->saveMetadata();
 
 //id , title, post_type
 //$mataboz = new GenerateMeta( 'project_price', 'Project price', 'recent_projects' );

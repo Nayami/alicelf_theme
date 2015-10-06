@@ -582,26 +582,38 @@ $section = array(
 	'icon'   => 'el el-folder-open',
 	'fields' => array(
 		array(
-			'id'       => 'opt-content-first',
+			'id'       => 'opt-snippet-html',
 			'type'     => 'ace_editor',
-			'mode'=>'html',
-			'title'    => __( 'Content Snippet 1', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Content Snippet 1', 'alicelf-adaptive' ),
+			'mode'     => 'html',
+			'title'    => __( 'Html Snippet', 'alicelf-adaptive' ),
+			'subtitle' => __( 'Html Snippet', 'alicelf-adaptive' ),
 			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
 //			'msg'      => 'custom error message',
-			'options' => array(
+			'options'  => array(
 				'minLines' => 15
 			),
 		),
 		array(
-			'id'       => 'opt-content-second',
+			'id'       => 'opt-snippet-css',
 			'type'     => 'ace_editor',
-			'mode'=>'html',
-			'title'    => __( 'Content Snippet 2', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Content Snippet 2', 'alicelf-adaptive' ),
+			'mode'     => 'css',
+			'title'    => __( 'Quick Css', 'alicelf-adaptive' ),
+			'subtitle' => __( 'Quick Css', 'alicelf-adaptive' ),
 			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
 //			'msg'      => 'custom error message',
-			'options' => array(
+			'options'  => array(
+				'minLines' => 15
+			),
+		),
+		array(
+			'id'       => 'opt-snippet-js',
+			'type'     => 'ace_editor',
+			'mode'     => 'javascript',
+			'title'    => __( 'Quick Javascript', 'alicelf-adaptive' ),
+			'subtitle' => __( 'Quick Javascript', 'alicelf-adaptive' ),
+			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
+//			'msg'      => 'custom error message',
+			'options'  => array(
 				'minLines' => 15
 			),
 		),
