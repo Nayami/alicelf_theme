@@ -157,25 +157,3 @@ class Repeater extends GenerateMeta {
 		<?php
 	}
 }
-
-$section_template = array(
-	array(
-		'type' => 'text',
-		'name' => 'title',
-		'value' => '',
-	),
-	array(
-		'type' => 'image',
-		'name' => 'slider-image',
-		'value' => '',
-	),
-	array(
-		'type' => 'textarea',
-		'name' => 'description',
-		'value' => '',
-	)
-);
-
-$dynamic_metabox = new Repeater( 'pages_repeater_meta', 'Page Accordion', 'page' );
-$dynamic_metabox->run( 'repeater', null, 'high', $section_template );
-$dynamic_metabox->saveMetadata();
