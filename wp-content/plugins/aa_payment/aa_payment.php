@@ -48,9 +48,9 @@ function aa_func_20150506060514()
 	global $aa_payment;
 	$opt = $aa_payment->getOptions( 'paypa_credentials' );
 	?>
+	<h3>PayPal Credentials</h3>
 	<form action="" method="post" class="aa-pluginsloader-holder">
 		<div class="clearfix">
-
 			<table class="table table-striped table-bordered">
 				<tr>
 					<th><label for="paypal-email">PayPal Email</label></th>
