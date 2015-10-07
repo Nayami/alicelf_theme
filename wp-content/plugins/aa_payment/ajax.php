@@ -37,7 +37,7 @@ function ajx20150207050244()
 				'email'     => $p[ 'email' ],
 				'client_id' => $p[ 'client_id' ],
 				'secret'    => $p[ 'secret' ]
-			)
+			), true
 		);
 		echo "success";
 		die;

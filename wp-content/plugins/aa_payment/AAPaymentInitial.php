@@ -1,8 +1,8 @@
 <?php
+
 /**
  * Class AAPaymentInitial
  */
-
 class AAPaymentInitial {
 
 	public $_plugin_name;
@@ -13,7 +13,7 @@ class AAPaymentInitial {
 	protected $_menu_slug;
 	protected $_positon;
 	protected $_notices_option;
-	protected $_plugin_options;
+	public $_plugin_options;
 
 	/**
 	 * @param string $name
@@ -60,15 +60,28 @@ class AAPaymentInitial {
 		return false;
 	}
 
-	public function setOption( $option_key, $option_value )
+	/**
+	 * @param $option_key
+	 * @param $option_value
+	 * @param null $force
+	 *
+	 * when force in true option will be updated, otherwise will check options is exists
+	 * used for actions
+	 */
+	public function setOption( $option_key, $option_value, $force = null )
 	{
 		$option = get_option( $this->_plugin_options );
 
 		if ( get_option( $this->_plugin_options ) !== false ) {
-			$option[ $option_key ] = $option_value;
+			if ( $force === true ) {
+				$option[ $option_key ] = $option_value;
+			} else {
+				if ( ! array_key_exists( $option_key, $option ) ) {
+					$option[ $option_key ] = $option_value;
+				}
+			}
 			update_option( $this->_plugin_options, $option );
 		}
-
 	}
 
 	public function getNotices( $notice = null )
@@ -139,15 +152,15 @@ class AAPaymentInitial {
 	public function registerPluginEnqueScript()
 	{
 		$plugindir = plugin_dir_url( __DIR__ ) . basename( __DIR__ );
-		wp_enqueue_style( 'AAPluginStyle'.$this->_menu_slug, $plugindir . '/style/style.css' );
-		wp_enqueue_script( 'AAPluginScript'.$this->_menu_slug, $plugindir . '/js/script.js', array( 'jquery' ), false, true );
+		wp_enqueue_style( 'AAPluginStyle' . $this->_menu_slug, $plugindir . '/style/style.css' );
+		wp_enqueue_script( 'AAPluginScript' . $this->_menu_slug, $plugindir . '/js/script.js', array( 'jquery' ), false, true );
 
 		$data = array(
 			'site_url'     => get_site_url(),
 			'ajax_url'     => admin_url( 'admin-ajax.php' ),
 			'template_uri' => get_template_directory_uri(),
 		);
-		wp_localize_script( 'AAPluginScript'.$this->_menu_slug, 'aa_ajax_var', $data );
+		wp_localize_script( 'AAPluginScript' . $this->_menu_slug, 'aa_ajax_var', $data );
 	}
 
 	/**

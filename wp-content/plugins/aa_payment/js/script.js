@@ -14,7 +14,44 @@ var Loaders = {
 
 };
 
+
 jQuery(document).ready(function($) {
+
+	/**
+	 * @param handler
+	 * @param shouldRunHandlerOnce
+	 * @param isChild
+	 * @returns {*|jQuery|HTMLElement}
+	 */
+	$.fn.waitUntilExists = function(handler, shouldRunHandlerOnce, isChild) {
+		var found = 'found';
+		var $this = $(this.selector);
+		var $elements = $this.not(function() {
+			return $(this).data(found);
+		}).each(handler).data(found, true);
+
+		if (!isChild) {
+			(window.waitUntilExists_Intervals = window.waitUntilExists_Intervals || {})[this.selector] =
+				window.setInterval(function() {
+					$this.waitUntilExists(handler, shouldRunHandlerOnce, true);
+				}, 500)
+			;
+		}
+		else
+			if (shouldRunHandlerOnce && $elements.length) {
+				window.clearInterval(window.waitUntilExists_Intervals[this.selector]);
+			}
+
+		return $this;
+	};
+
+
+	var alertsFn = function(status, message){
+		switch (status) {
+			case "success" :
+				return "<div class='updated notice is-dismissible'><p>"+message+"</p></div>";
+		}
+	};
 
 	var processRemoveNotice = function() {
 		var container = $('.aa-plugin-notice-container');
@@ -78,6 +115,7 @@ jQuery(document).ready(function($) {
 			},
 			success: function(data) {
 				thatForm.find('.labsolut').remove();
+				$('#wpbody').before(alertsFn('success', 'Your PayPal settings has been successfully updated'));
 			},
 			error  : function(jqXHR, textStatus, errorThrown) {
 				alert(jqXHR + " :: " + textStatus + " :: " + errorThrown);
