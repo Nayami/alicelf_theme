@@ -20,14 +20,6 @@ function aa_func_20150406060442()
 	global $aa_payment;
 	// Notice content. Can has hrefs or other html
 	$aa_payment->setPluginNotice( 'aa_payment_welcome', "Plugin {$aa_payment->_plugin_name} is enabled" );
-
-	// Set Options
-	$paypal_credentials = array(
-		'email'=>'',
-		'client_id'=>'',
-		'secret'=>''
-	);
-	$aa_payment->setOption('paypa_credentials', $paypal_credentials);
 }
 
 // Change Plugin title
@@ -45,15 +37,27 @@ add_action( 'aa_payment_content', 'aa_func_20150506060514' );
 function aa_func_20150506060514()
 {
 	global $aa_payment;
+	$opt = $aa_payment->getOptions('paypa_credentials');
 	?>
-	<form action="" method="post">
+	<form action="" method="post" class="aa-pluginsloader-holder">
 		<div class="clearfix">
-<?php
-	echo "<pre>";
-	print_r($aa_payment->getOptions());
-	echo "</pre>";
-?>	</div>
-		<button type="submit" class="button button-primary">Save Options</button>
+
+			<table class="table table-striped table-bordered">
+				<tr>
+					<th><label for="paypal-email">PayPal Email</label></th>
+					<td><input value="<?php echo $opt['email'] ?>" class="form-control" type="email" placeholder="PayPal Email" name="aa_pp_payment[paypal_email]" id="paypal-email"></td>
+				</tr>
+				<tr>
+					<th><label for="paypal-client-id">PayPal Client ID</label></th>
+					<td><input value="<?php echo $opt['client_id'] ?>" class="form-control" type="text" placeholder="PayPal Client ID" name="aa_pp_payment[paypal_client_id]" id="paypal-client-id"></td>
+				</tr>
+				<tr>
+					<th><label for="paypal-secret">PayPal Secret</label></th>
+					<td><input value="<?php echo $opt['secret'] ?>" class="form-control" placeholder="PayPal Secret" type="text" name="aa_pp_payment[paypal_secret]" id="paypal-secret"></td>
+				</tr>
+			</table>
+		</div>
+		<button id="paypal-credentials-submit" type="submit" class="button button-primary">Save Options</button>
 	</form>
 	<?php
 }

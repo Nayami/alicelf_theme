@@ -48,12 +48,6 @@ function aa_func_20154807014848( $alicelf, $active, $ac_bullet, $transition )
 		<?php
 	} elseif ($slider_type === '3') { ?>
 
-		<?php
-			echo "<pre>";
-			print_r($alicelf[ 'opt-slides' ]);
-			echo "</pre>";
-		?>
-
 		<div class="slick-slider-container">
 			<div class="slider-for">
 			<?php foreach ( $alicelf[ 'opt-slides' ] as $slide ): ?>

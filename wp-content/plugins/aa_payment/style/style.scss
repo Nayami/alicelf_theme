@@ -1,4 +1,6 @@
 @import "grid";
+@import "style_partials/varmix";
+@import "style_partials/loader";
 
 #plugin-admin-container {
 
@@ -10,4 +12,8 @@
 		margin-left  : 15px;
 		margin-right : 15px;
 	}
+}
+
+.aa-pluginsloader-holder {
+	position : relative;
 }

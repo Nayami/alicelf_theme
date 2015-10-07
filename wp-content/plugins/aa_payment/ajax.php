@@ -22,3 +22,25 @@ function ajx20150506060531()
 	}
 	exit;
 }
+
+/**
+ * Submit PayPal Credentials
+ */
+add_action( 'wp_ajax_ajx20150207050244', 'ajx20150207050244' );
+function ajx20150207050244()
+{
+	global $aa_payment;
+	$p = $_POST[ 'aa_pp_payment' ];
+	if ( isset( $p ) ) {
+		$options = $aa_payment->getOptions();
+		$aa_payment->setOption( 'paypa_credentials', array(
+				'email'     => $p[ 'email' ],
+				'client_id' => $p[ 'client_id' ],
+				'secret'    => $p[ 'secret' ]
+			)
+		);
+		echo "success";
+		die;
+	}
+	die;
+}
