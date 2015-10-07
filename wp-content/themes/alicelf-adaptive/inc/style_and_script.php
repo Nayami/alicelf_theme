@@ -5,6 +5,7 @@
 add_action( 'wp_enqueue_scripts', 'invoke_scripts' );
 function invoke_scripts()
 {
+	global $alicelf;
 	$t_dir = get_template_directory_uri() . '/style-parts';
 	wp_enqueue_style( 'alice-font_awesome', $t_dir . '/font-awesome/css/font-awesome.min.css' );
 	wp_enqueue_style( 'alice-icons', $t_dir . '/alicelf-font-icons/styles.css' );
@@ -33,6 +34,12 @@ function invoke_scripts()
 
 // Third part plugins
 	wp_enqueue_script( 'smooth-scroll', $theme_path . '/js/smooth-scroll.js', array(), false, true );
+
+	if($alicelf[ 'opt-carouseltransition' ] === '3') {
+		wp_enqueue_style( 'slick-20155007025030', $theme_path . '/partials/slick/slick.css' );
+		wp_enqueue_script( 'slick-script-20155307025349', $theme_path . '/partials/slick/slick.min.js', array(), false, true );
+	}
+
 // Progress js
 	wp_enqueue_style( 'progressjs-style', $theme_path . '/js/progressjs/progressjs.min.css' );
 	wp_enqueue_script( 'progressjs', $theme_path . '/js/progressjs/progress.min.js', array(), false, true );

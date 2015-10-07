@@ -11,8 +11,12 @@ require_once ($init_dir.'config.php');
 foreach ( glob( get_template_directory() . "/walkers/*.php" ) as $filename )
 	require_once( $filename );
 
-// Other theme includes
+// Theme Shortcodes, functions, supports, filters, metaboxes and custom posts
 foreach ( glob( get_template_directory() . "/inc/*.php" ) as $filename )
+	require_once( $filename );
+
+// Theme partials
+foreach ( glob( get_template_directory() . "/partials/*.php" ) as $filename )
 	require_once( $filename );
 
 // Ajax content include

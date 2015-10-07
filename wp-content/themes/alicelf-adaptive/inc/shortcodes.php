@@ -148,45 +148,24 @@ function do_the_breadcrumb()
  */
 function get_theme_slider()
 {
+	ob_start();
 	global $alicelf;
 	$active    = 'active';
 	$ac_bullet = 'active';
-	$transition = $alicelf[ 'opt-carouseltransition' ] > 1 ? 'carousel-fade slide' : 'slide';
-	?>
-	<div id="aa-main-site-slider" class="carousel <?php echo $transition ?>" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<?php for ( $indicator = 0; $indicator < count( $alicelf[ 'opt-slides' ] ); $indicator ++ ): ?>
-				<li data-target="#aa-main-site-slider" data-slide-to="<?php echo $indicator ?>" class="<?php echo $ac_bullet ?>"></li>
-				<?php $ac_bullet = null; endfor; ?>
-		</ol>
+	$transition = null;
 
-		<div class="carousel-inner" role="listbox">
-			<?php foreach ( $alicelf[ 'opt-slides' ] as $slide ): ?>
-				<div class="item <?php echo $active ?> attachment-<?php echo $slide[ 'attachment_id' ] ?>">
-					<img src="<?php echo $slide[ 'image' ] ?>" alt="<?php echo $slide[ 'title' ] ?>" data-aa-image="slider-image">
-					<div class="carousel-caption">
-						<h4><?php echo $slide[ 'description' ] ?></h4>
-						<p class="text-center">
-							<?php if ( ! empty( $slide[ 'url' ] ) ): ?>
-								<a class="btn btn-default" href="<?php echo $slide[ 'url' ] ?>"></a>
-							<?php endif; ?>
-						</p>
-					</div>
-				</div>
-				<?php $active = null; endforeach; ?>
-		</div>
+	switch ($alicelf[ 'opt-carouseltransition' ]) {
+		case 2 :
+			$transition = 'carousel-fade slide'; break;
+		case 3 :
+			$transition = 'slick_thumbs'; break;
+		default :
+			$transition = 'slide';
+	}
 
-		<a class="left carousel-control" href="#aa-main-site-slider" role="button" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#aa-main-site-slider" role="button" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	</div>
-<?php
+	do_action('aa_theme_carousel_process', $alicelf, $active, $ac_bullet, $transition);
+
+	return ob_get_clean();
 }
 
 // [aa_option opt="opt-someoption"]

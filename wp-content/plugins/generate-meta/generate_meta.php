@@ -45,3 +45,25 @@ function aa_func_20154904124919()
 	);
 	wp_localize_script( 'GenerateMetaScript', 'aa_generate_meta_var', $data );
 }
+
+$section_template = array(
+	array(
+		'type' => 'text',
+		'name' => 'title',
+		'value' => '',
+	),
+	array(
+		'type' => 'image',
+		'name' => 'slider-image',
+		'value' => '',
+	),
+	array(
+		'type' => 'textarea',
+		'name' => 'description',
+		'value' => '',
+	)
+);
+
+$dynamic_metabox = new Repeater( 'pages_repeater_meta', 'Page Accordion', 'page' );
+$dynamic_metabox->run( 'repeater', null, 'high', $section_template );
+$dynamic_metabox->saveMetadata();

@@ -161,6 +161,7 @@ $section = array(
 			'options'  => array(
 				'1' => 'Slide',
 				'2' => 'Fade',
+				'3' => 'Slick Thumbs'
 			),
 			'default'  => '1'
 		),
@@ -174,7 +175,7 @@ $section = array(
 				'title'       => __( 'This is a title', 'alicelf-adaptive' ),
 				'description' => __( 'Description Here', 'alicelf-adaptive' ),
 				'url'         => __( 'Give us a link!', 'alicelf-adaptive' ),
-				'quick_notes'  => __( 'Quick Notes', 'alicelf-adaptive' ),
+				'quick_notes' => __( 'Quick Notes', 'alicelf-adaptive' ),
 			),
 		),
 
@@ -378,9 +379,24 @@ $section = array(
 			'default'  => ''
 		),
 
-
 	)
 );
+Redux::setSection( $opt_name, $section );
+
+/**
+ * Google Api
+ */
+$section = array(
+	'title'      => 'Google API',
+	'id'         => 'google-api-subsection',
+	'subsection' => true,
+	'desc'       => '',
+	'icon'       => 'el el-googleplus',
+	'fields'     => array(
+		array(),
+	)
+);
+
 Redux::setSection( $opt_name, $section );
 
 /**
@@ -574,7 +590,6 @@ $section = array(
 );
 Redux::setSection( $opt_name, $section );
 
-
 $section = array(
 	'title'  => 'Content Snippets',
 	'id'     => 'content-snippets',
@@ -622,17 +637,16 @@ $section = array(
 
 Redux::setSection( $opt_name, $section );
 
-
 $tabs = array(
 	array(
 		'id'      => 'alice-theme-infotab',
 		'title'   => 'Theme Information',
 		'content' => "Description"
 	),
-    array(
-	    'id'      => 'theme-acitons',
-	    'title'   => 'Theme Actions',
-	    'content' => file_get_contents( dirname( __FILE__ ) . '/theme-actions.php' )
-    )
+	array(
+		'id'      => 'theme-acitons',
+		'title'   => 'Theme Actions',
+		'content' => file_get_contents( dirname( __FILE__ ) . '/theme-actions.php' )
+	)
 );
 Redux::setHelpTab( $opt_name, $tabs );

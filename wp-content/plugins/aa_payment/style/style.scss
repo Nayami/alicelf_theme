@@ -1,0 +1,13 @@
+@import "grid";
+
+#plugin-admin-container {
+
+}
+
+/*Desktop*/
+@media (min-width : 952px) {
+	#plugin-admin-container {
+		margin-left  : 15px;
+		margin-right : 15px;
+	}
+}

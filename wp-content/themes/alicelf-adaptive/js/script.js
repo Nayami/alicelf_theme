@@ -140,7 +140,28 @@ window.onload = function() {
 			});
 		}
 	};
-	parallaxFn('.p0', 5, 1);
-	parallaxFn('.p1', 2, 1);
-	parallaxFn('.p2', 3, 1);
 };
+
+jQuery(document).ready(function ($){
+
+	var slickSliderOpt = function(){
+		$('.slider-for').slick({
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			arrows: false,
+			fade: true,
+			asNavFor: '.slider-nav'
+		});
+		$('.slider-nav').slick({
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			asNavFor: '.slider-for',
+			dots: false,
+			centerMode: true,
+			focusOnSelect: true
+		});
+	};
+	if(typeof $.fn.slick === 'function')
+		slickSliderOpt();
+
+});

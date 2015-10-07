@@ -73,9 +73,11 @@ function custom_excerpt_length( $length )
 add_filter( 'intermediate_image_sizes_advanced', 'add_image_insert_override' );
 function add_image_insert_override( $sizes )
 {
-	unset( $sizes[ 'thumbnail' ] );
+//	unset( $sizes[ 'thumbnail' ] );
 	unset( $sizes[ 'medium' ] );
 	unset( $sizes[ 'large' ] );
+
+	return $sizes;
 }
 
 add_filter( 'wp_revisions_to_keep', 'custom_revisions_number', 10, 2 );
