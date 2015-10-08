@@ -165,24 +165,26 @@ jQuery(document).ready(function($) {
 		slickSliderOpt();
 
 	var stickNavbar = function() {
+
 		$(window).on('scroll', function() {
 			var topOffset = document.documentElement.scrollTop || document.body.scrollTop,
-				selection = $('.stick-to-top').find('>.container > header');
+				selection = $('.stick-to-top').find('>.container > header'),
+				wpAdminBarH = $('#wpadminbar').height();
 
 			if (topOffset > 140) {
 				selection.css({
-					position : 'fixed',
-					width    : '100%',
-					top      : '0',
-					'z-index': '999'
+					position: 'fixed',
+					width   : '100%',
+					top    : (0+wpAdminBarH)+'px',
+					'z-index' : '999'
 				});
 				if (!selection.hasClass('header-touch-top')) {
 					selection.css({
-						top    : '-140px',
+						top    : '-200px',
 						opacity: '0'
 					});
 					selection.animate({
-						top    : '0',
+						top    : (0+wpAdminBarH)+'px',
 						opacity: 1
 					}, 500)
 				}
