@@ -169,32 +169,45 @@ jQuery(document).ready(function($) {
 		$(window).on('scroll', function() {
 			var topOffset = document.documentElement.scrollTop || document.body.scrollTop,
 				selection = $('.stick-to-top').find('>.container > header'),
-				wpAdminBarH = $('#wpadminbar').height();
+				wpAdminBarH = $('#wpadminbar').height(),
+				selectionHeight = selection.height();
+
+			console.log(selection.height());
+
+			if ($(window).width() < 600)
+				wpAdminBarH = 0;
+			$(window).on('resize', function() {
+				if ($(window).width() < 600)
+					wpAdminBarH = 0;
+				selectionHeight = $('.stick-to-top').find('>.container > header').height();
+			});
 
 			if (topOffset > 140) {
 				selection.css({
-					position: 'fixed',
-					width   : '100%',
-					top    : (0+wpAdminBarH)+'px',
-					'z-index' : '999'
+					position : 'fixed',
+					width    : '100%',
+					top      : (0 + wpAdminBarH) + 'px',
+					'z-index': '999'
 				});
 				if (!selection.hasClass('header-touch-top')) {
 					selection.css({
-						top    : '-200px',
+						top    : -selectionHeight + 'px',
 						opacity: '0'
 					});
 					selection.animate({
-						top    : (0+wpAdminBarH)+'px',
+						top    : (0 + wpAdminBarH) + 'px',
 						opacity: 1
 					}, 500)
 				}
 				selection.addClass('header-touch-top');
+				$('#shock-absorber').css({height: selectionHeight + "px"});
 			} else {
 				selection.css({
 					position: 'static',
 					width   : 'auto'
 				});
 				selection.removeClass('header-touch-top');
+				$('#shock-absorber').css({height: 0});
 			}
 		});
 
