@@ -4,4 +4,4 @@
 	<p>This section require your attention. Be sure what are you doing!</p>
 </div>
 <div id='convert-tables-section'></div><hr>
-<button class='button-primary aa-theme-actions invoke-conversion'>Convert Tables to utf8_general_ci</button>
+<button class='button-primary aa-theme-actions invoke-conversion'>Convert Tables to utf8_unicode_ci</button>

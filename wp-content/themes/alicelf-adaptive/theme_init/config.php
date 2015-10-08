@@ -11,13 +11,14 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 $opt_name = "alicelf_theme_setup";
 $theme    = wp_get_theme();
+$subtheme = null;
 $imgdir   = get_template_directory_uri() . '/img/';
 
 $args = array(
 	// TYPICAL -> Change these values as you need/desire
 	'opt_name'        => $opt_name,
 	// This is where your data is stored in the database and also becomes your global variable name.
-	'display_name'    => $theme->get( 'Name' ),
+	'display_name'    => "{$subtheme} <small class='main-theme-titledescr'>({$theme->get( 'Name' )}) --v</small>",
 	// Name that appears at the top of your panel
 	'display_version' => $theme->get( 'Version' ),
 	// Version that appears at the top of your panel

@@ -13,9 +13,15 @@
 </head>
 
 <body id="site-content" <?php body_class(); ?>>
-<?php do_action('aa_afterbodystart') ?>
+<?php
+	global $alicelf;
+	do_action('aa_afterbodystart');
+	$site_content_class = $alicelf['opt-sticky-header'] === '2' ?
+		'main-content-site stick-to-top' :
+		'main-content-site' ;
+?>
 <div id="scroll-trigger-top"></div>
-<div class="main-content-site">
+<div class="<?php echo $site_content_class ?>">
 	<div class="container">
 		<header class="site-header row"><?php header_type() ?></header>
 		<div class="row">

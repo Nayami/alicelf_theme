@@ -134,34 +134,69 @@ window.onload = function() {
 	var parallaxFn = function(elem, speed, param) {
 		var handlerElement = document.querySelector(elem);
 		if (handlerElement) {
-			handlerElement.style.backgroundPositionY =  Math.round(-(window.pageYOffset / speed + param)) + 'px';
+			handlerElement.style.backgroundPositionY = Math.round(-(window.pageYOffset / speed + param)) + 'px';
 			window.document.addEventListener('scroll', function() {
-				handlerElement.style.backgroundPositionY =  Math.round(-(window.pageYOffset / speed + param)) + 'px';
+				handlerElement.style.backgroundPositionY = Math.round(-(window.pageYOffset / speed + param)) + 'px';
 			});
 		}
 	};
 };
 
-jQuery(document).ready(function ($){
+jQuery(document).ready(function($) {
 
-	var slickSliderOpt = function(){
+	var slickSliderOpt = function() {
 		$('.slider-for').slick({
-			slidesToShow: 1,
+			slidesToShow  : 1,
 			slidesToScroll: 1,
-			arrows: false,
-			fade: true,
-			asNavFor: '.slider-nav'
+			arrows        : false,
+			fade          : true,
+			asNavFor      : '.slider-nav'
 		});
 		$('.slider-nav').slick({
-			slidesToShow: 3,
+			slidesToShow  : 3,
 			slidesToScroll: 1,
-			asNavFor: '.slider-for',
-			dots: false,
-			centerMode: true,
-			focusOnSelect: true
+			asNavFor      : '.slider-for',
+			dots          : false,
+			centerMode    : true,
+			focusOnSelect : true
 		});
 	};
-	if(typeof $.fn.slick === 'function')
+	if (typeof $.fn.slick === 'function')
 		slickSliderOpt();
+
+	var stickNavbar = function() {
+		$(window).on('scroll', function() {
+			var topOffset = document.documentElement.scrollTop || document.body.scrollTop,
+				selection = $('.stick-to-top').find('>.container > header');
+
+			if (topOffset > 140) {
+				selection.css({
+					position : 'fixed',
+					width    : '100%',
+					top      : '0',
+					'z-index': '999'
+				});
+				if (!selection.hasClass('header-touch-top')) {
+					selection.css({
+						top    : '-140px',
+						opacity: '0'
+					});
+					selection.animate({
+						top    : '0',
+						opacity: 1
+					}, 500)
+				}
+				selection.addClass('header-touch-top');
+			} else {
+				selection.css({
+					position: 'static',
+					width   : 'auto'
+				});
+				selection.removeClass('header-touch-top');
+			}
+		});
+
+	};
+	stickNavbar();
 
 });

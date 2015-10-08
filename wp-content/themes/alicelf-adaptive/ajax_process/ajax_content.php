@@ -54,8 +54,8 @@ function aa_func_20150827030852()
 		$method   = "Tables_in_" . $wpdb->dbname;
 		$messages = "";
 		foreach ( $tables as $table ) {
-			$wpdb->query( "ALTER TABLE {$table->$method} DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;" );
-			$wpdb->query( "ALTER TABLE {$table->$method} CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;" );
+			$wpdb->query( "ALTER TABLE {$table->$method} DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;" );
+			$wpdb->query( "ALTER TABLE {$table->$method} CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" );
 			$messages .= "Table " . $table->$method . " has been updated<br>";
 		}
 		$messages .= "<hr><div class='alert alert-success'>Conversion complete.</div>";
