@@ -176,13 +176,14 @@ jQuery(document).ready(function($) {
 
 			if ($(window).width() < 600)
 				wpAdminBarH = 0;
+
 			$(window).on('resize', function() {
 				if ($(window).width() < 600)
 					wpAdminBarH = 0;
 				selectionHeight = $('.stick-to-top').find('>.container > header').height();
 			});
 
-			if (topOffset > 140) {
+			if (topOffset > selectionHeight) {
 				selection.css({
 					position : 'fixed',
 					width    : '100%',

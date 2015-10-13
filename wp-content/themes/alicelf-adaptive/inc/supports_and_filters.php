@@ -43,7 +43,6 @@ function title_addon( $title )
 
 add_filter( 'wp_title', 'title_addon' );
 
-
 /**
  * Add "Read More" custom text for Recent Projects (if use the_excerpt())
  */
@@ -56,14 +55,12 @@ function new_excerpt_more( $more )
 
 add_filter( 'excerpt_more', 'new_excerpt_more' );
 
-
 function custom_excerpt_length( $length )
 {
 	return 10;
 }
 
 //add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
-
 
 /**
  * Restict duplicate images with different sizes
@@ -87,15 +84,16 @@ function custom_revisions_number( $num, $post )
 	return $num;
 }
 
-
-function aa_set_favicon() {
+function aa_set_favicon()
+{
 	global $alicelf;
 	$output = null;
-	if(!empty($alicelf['opt-favicon']['url']))
+	if ( ! empty( $alicelf[ 'opt-favicon' ][ 'url' ] ) )
 		$output = "<link rel='icon' type='image/png' href='{$alicelf['opt-favicon']['url']}'>";
 	else
-		$output = "<link rel='icon' type='image/png' href='".get_template_directory_uri()."/img/sitefavicon.png'>";
+		$output = "<link rel='icon' type='image/png' href='" . get_template_directory_uri() . "/img/sitefavicon.png'>";
 
 	echo $output;
 }
-add_action('wp_head', 'aa_set_favicon');
+
+add_action( 'wp_head', 'aa_set_favicon' );

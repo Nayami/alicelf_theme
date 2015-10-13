@@ -9,6 +9,7 @@
  * Dump and die _dd($data)
  * Get browser info aa_browser_info()
  * Unset All Cookies aa_unset_cookies()
+ * Detect Mobile device aa_is_mobile_platform()
  */
 
 if ( ! function_exists( 'content_cutter' ) ) {
@@ -301,17 +302,31 @@ if ( ! function_exists( 'aa_browser_info' ) ) {
  * Unset All Cookies
  */
 
-if(! function_exists('aa_unset_cookies')) {
+if ( ! function_exists( 'aa_unset_cookies' ) ) {
 	function aa_unset_cookies()
 	{
-		if (isset($_SERVER['HTTP_COOKIE'])) {
-			$cookies = explode(';', $_SERVER['HTTP_COOKIE']);
-			foreach($cookies as $cookie) {
-				$parts = explode('=', $cookie);
-				$name = trim($parts[0]);
-				setcookie($name, '', time()-1000);
-				setcookie($name, '', time()-1000, '/');
+		if ( isset( $_SERVER[ 'HTTP_COOKIE' ] ) ) {
+			$cookies = explode( ';', $_SERVER[ 'HTTP_COOKIE' ] );
+			foreach ( $cookies as $cookie ) {
+				$parts = explode( '=', $cookie );
+				$name  = trim( $parts[ 0 ] );
+				setcookie( $name, '', time() - 1000 );
+				setcookie( $name, '', time() - 1000, '/' );
 			}
 		}
+	}
+}
+
+if ( ! function_exists( 'aa_is_mobile_platform' ) ) {
+	/**
+	 * @return bool
+	 */
+	function aa_is_mobile_platform()
+	{
+		$detect = new Mobile_Detect;
+		if ( $detect->isMobile() )
+			return true;
+
+		return false;
 	}
 }
