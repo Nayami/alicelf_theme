@@ -20,4 +20,4 @@ foreach ( glob( get_template_directory() . "/partials/*.php" ) as $filename )
 	require_once( $filename );
 
 // Ajax content include
-require_once("ajax_process/ajax_content.php");
+require_once("ajax.php");

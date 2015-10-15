@@ -172,8 +172,6 @@ jQuery(document).ready(function($) {
 				wpAdminBarH = $('#wpadminbar').height(),
 				selectionHeight = selection.height();
 
-			console.log(selection.height());
-
 			if ($(window).width() < 600)
 				wpAdminBarH = 0;
 
