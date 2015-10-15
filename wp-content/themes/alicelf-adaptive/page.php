@@ -6,7 +6,6 @@
 <?php get_header(); ?>
 <!--DEFAULT PAGE LOOP START-->
 <div id="page-<?php the_ID(); ?>"  <?php post_class( 'default-page-loop ghostly-wrap' ); ?>>
-
 	<div class="row">
 		<?php
 		aa_dynamic_sidebar_view( 4 );
