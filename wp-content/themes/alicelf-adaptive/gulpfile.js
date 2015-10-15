@@ -44,6 +44,10 @@ gulp.task('aa-concat', function(){
 		.pipe(gulp.dest('js_prod'));
 });
 
+gulp.task('watch', function() {
+	gulp.watch(['js_dev/_js/ajax.js', 'js_dev/_js/script.js'], ['aa-concat']);
+});
+
 // @Template Todo: create watch task
 
-gulp.task('default', ['aa-concat'], function(){});
+gulp.task('default', ['aa-concat'], function() {});
