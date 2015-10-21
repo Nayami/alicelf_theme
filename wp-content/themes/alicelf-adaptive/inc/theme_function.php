@@ -1,5 +1,6 @@
 <?php
 /**
+ * is_localhost
  * Content cutter
  * Fetch CUrl
  * Paged Navigation
@@ -11,6 +12,16 @@
  * Unset All Cookies aa_unset_cookies()
  * Detect Mobile device aa_is_mobile_platform()
  */
+
+if ( ! function_exists( 'is_localhost' ) ) {
+	function is_localhost()
+	{
+		return ( $_SERVER[ 'REMOTE_ADDR' ] === '127.0.0.1'
+		         || $_SERVER[ 'REMOTE_ADDR' ] === 'localhost' )
+		         || $_SERVER[ 'REMOTE_ADDR' ] === "::1"
+			? true : false;
+	}
+}
 
 if ( ! function_exists( 'content_cutter' ) ) {
 	function content_cutter( $string, $num_start = null, $num_end = null )

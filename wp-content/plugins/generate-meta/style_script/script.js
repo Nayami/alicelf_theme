@@ -309,10 +309,15 @@ jQuery(document).ready(function ($){
 	};
 	repeaterMetaboxProcess('.generate-repeater-metabox');
 
-	$(function() {
-		$( ".data-page-repeater" ).sortable({
-			placeholder: "ui-state-highlight"
-		});
-		$( ".data-page-repeater" ).disableSelection();
-	});
+	var dragNdropMetaProcess = function(selector){
+		var dnd = $(selector);
+		if(dnd.length > 0) {
+			dnd.sortable({
+				placeholder: "ui-state-highlight"
+			});
+			dnd.disableSelection();
+		}
+	};
+	dragNdropMetaProcess('.data-page-repeater');
+
 });
