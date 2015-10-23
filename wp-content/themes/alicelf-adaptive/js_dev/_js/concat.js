@@ -925,7 +925,7 @@ window.onload = function() {
 
 			formHolder.onsubmit = function(e) {
 				var counterEl = formHolder.elements.length,
-					pattern = /^[a-z]+@[a-z]+\.[a-z]{2,6}$/i,
+					pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/,
 					alertMsg = '<div class="alert alert-danger alert-dismissible" role="alert">' +
 						'<button type="button" class="close" data-dismiss="alert">' +
 						'<span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>' +

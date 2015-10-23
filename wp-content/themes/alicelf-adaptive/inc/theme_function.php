@@ -247,6 +247,7 @@ function aa_social_list( $classes = null )
 
 function form_process_to_send()
 {
+	// $regexp = "^([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})$";
 	if (
 		isset( $_POST[ 'visitor_name' ], $_POST[ 'visitor_email' ], $_POST[ 'visitor_message' ] ) &&
 		( ! empty( $_POST[ 'visitor_name' ] ) && ! empty( $_POST[ 'visitor_email' ] ) && ! empty( $_POST[ 'visitor_message' ] ) )

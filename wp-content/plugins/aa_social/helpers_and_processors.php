@@ -52,20 +52,23 @@ if ( ! function_exists( 'aa_fetch_curl' ) ) {
  * Add Fb Root to site
  * Define the app
  */
-add_action( 'wp_footer', 'aa_fbrootinitiator', 20 );
+add_action('aa_afterbodystart', 'aa_func_20155923115930');
+function aa_func_20155923115930()
+{
+	?><div id="fb-root"></div><?php
+}
+add_action( 'after_theme_footer', 'aa_fbrootinitiator', 20 );
 function aa_fbrootinitiator()
 {
 	global $plugin_temp_vars;
 	?>
-	<div id="fb-root"></div>
 	<script>
 		$.ajaxSetup({cache: false});
 		$.getScript('//connect.facebook.net/en_US/sdk.js', function() {
 			FB.init({
 				appId  : "<?php echo $plugin_temp_vars["facebook_app_id"] ?>",
-				version: 'v2.4' // or v2.0, v2.1, v2.0
+				status: true, cookie: true, xfbml: true,
 			});
-			$('#loginbutton,#feedbutton').removeAttr('disabled');
 //			console.log(FB);
 		});
 	</script>

@@ -9,9 +9,9 @@ Author URI: http://vzazerkalie.com/portf/
 */
 
 $plugin_temp_vars = array(
-	'facebook_app_id'       => '790092147756606',
-	'facebook_app_token'    => '790092147756606|KJDAyRtS9JbQADwfq_2QKMggRdg',
-	'facebook_app_secret'   => 'f5bfcccade71c0bed60e3d4cd619b2c9',
+	'facebook_app_id'       => '1651075215180567',
+	'facebook_app_token'    => '1651075215180567|MfENeTLsrBxAGgGunabspN0tal0',
+	'facebook_app_secret'   => '747b7b816b16144ea5608cd010f2f5ab',
 );
 
 include_once( 'helpers_and_processors.php' );
