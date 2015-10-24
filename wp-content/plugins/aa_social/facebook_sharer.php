@@ -36,6 +36,33 @@ function aa_plugin_social_init()
 	<script>
 		jQuery(document).ready(function($) {
 
+			/**
+			 * ==================== Wait Until Exists ======================
+			 * 25.10.2015
+			 */
+			$.fn.waitUntilExists = function(handler, shouldRunHandlerOnce, isChild) {
+				var found = 'found';
+				var $this = $(this.selector);
+				var $elements = $this.not(function() {
+					return $(this).data(found);
+				}).each(handler).data(found, true);
+
+				if (!isChild) {
+					(window.waitUntilExists_Intervals = window.waitUntilExists_Intervals || {})[this.selector] =
+						window.setInterval(function() {
+							$this.waitUntilExists(handler, shouldRunHandlerOnce, true);
+						}, 500)
+					;
+				}
+				else
+					if (shouldRunHandlerOnce && $elements.length) {
+						window.clearInterval(window.waitUntilExists_Intervals[this.selector]);
+					}
+
+				return $this;
+			};
+
+
 			function postToFeed(title, desc, url, image) {
 				var noimage = '<?php echo get_template_directory_uri() ?>/img/alicelf-brand.png';
 				if (image.length === 0) {
@@ -57,6 +84,18 @@ function aa_plugin_social_init()
 
 				FB.ui(obj, callback);
 			}
+
+			/**
+			 * ==================== Wait For Variable Processor ======================
+			 * 25.10.2015
+			 */
+			var waiterForFBinitial = setInterval(function(){
+				if(isLoaded === true) {
+					clearInterval(waiterForFBinitial);
+					launchLikeprocessor();
+				}
+			},250);
+
 
 			var fbShareBtn = $('.fb_share');
 
@@ -117,27 +156,37 @@ function aa_plugin_social_init()
 				 * ==================== Check Likes ======================
 				 * 24.10.2015
 				 */
-				setTimeout(function(){
-					$.each(fbLikeBtn, function(){
-						var that = $(this),
-							link = that.attr('data-href');
-						FB.api(
-							"/me/og.likes",
-							{
-								"object": link
-							},
-							function(response) {
-								if(response.data !== undefined )
-									that.addClass('btn-primary');
+				var launchLikeprocessor = function() {
+					FB.getLoginStatus(function(response) {
+						if (response.status === "connected") {
 
-								if (response.data !== undefined) {}
-								if (response && !response.error) {}
-							}
-						);
+							$.each(fbLikeBtn, function() {
+								var that = $(this),
+									link = that.attr('data-href');
+								FB.api(
+									"/me/og.likes",
+									{
+										"object": link
+									},
+									function(response) {
+										if (response.data !== undefined)
+											that.addClass('btn-primary');
+
+										if (response.data !== undefined) {
+										}
+										if (response && !response.error) {
+										}
+									}
+								);
+							});
+
+						}
 					});
-				},2000);
+				};
+
 			}
 			//@Template Todo: remove like and actions...
+
 		});
 	</script>
 	<?php

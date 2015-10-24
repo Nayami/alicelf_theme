@@ -79,15 +79,15 @@ function aa_func_20155923115930()
 	<div id="fb-root"></div><?php
 }
 
-add_action( 'after_theme_footer', 'aa_fbrootinitiator', 20 );
+add_action( 'aa_afterbodystart', 'aa_fbrootinitiator', 2 );
 function aa_fbrootinitiator()
 {
 	global $aa_plugin_social;
 	$fb = $aa_plugin_social->getOptions( 'facebook_credentials' );
 	?>
 	<script>
-		$.ajaxSetup({cache: false});
-		$.getScript('//connect.facebook.net/en_US/sdk.js', function() {
+		var isLoaded = false;
+		window.fbAsyncInit = function() {
 
 			FB.init({
 				appId  : "<?php echo $fb['app_id'] ?>",
@@ -97,19 +97,21 @@ function aa_fbrootinitiator()
 				xfbml  : true
 			});
 
-			(function(d, debug) {
-				var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
-				if (d.getElementById(id)) {
-					return;
-				}
-				js = d.createElement('script');
-				js.id = id;
-				js.async = true;
-				js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
-				ref.parentNode.insertBefore(js, ref);
-			}(document, /*debug*/ false));
+		};
 
-		});
+		(function(d, debug) {
+			var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+			if (d.getElementById(id)) {
+				return;
+			}
+			js = d.createElement('script');
+			js.id = id;
+			js.async = true;
+			js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+			ref.parentNode.insertBefore(js, ref);
+		}(document, /*debug*/ false));
+
+		isLoaded = true;
 	</script>
 	<?php
 }
