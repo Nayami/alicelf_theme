@@ -4,7 +4,7 @@ Plugin Name: AA Social
 Plugin URI: http://vzazerkalie.com/portf/
 Description: Alicelf AA Social plugin - Upload and Activate.
 Author: Alicelf
-Version: 2.0
+Version: 3.0.1
 Author URI: http://vzazerkalie.com/portf/
 */
 
@@ -20,7 +20,7 @@ require_once( 'facebook_sharer.php' );
 require_once( 'AAPluginInitialStart.php' );
 include( 'ajax.php' );
 // $name $pagetitle $menutitle $menuslug $position
-$aa_plugin_social = new AAPluginInitialStart();
+$aa_plugin_social = new AAPluginInitialStart("AA Socials");
 
 add_action('admin_notices', 'aa_func_20154113024145');
 function aa_func_20154113024145()

@@ -18,13 +18,14 @@ if ( ! function_exists( 'content_cutter' ) ) {
 
 if ( ! function_exists( 'aa_fetch_curl' ) ) {
 	/* cURL fetch*/
-	function aa_fetch_curl( $url )
+	function aa_fetch_curl( $url, $timeout = null )
 	{
+		$tm = $timeout !== null ? $timeout : 10;
 		if ( is_callable( 'curl_init' ) ) {
 			$ch = curl_init();
 			curl_setopt( $ch, CURLOPT_URL, $url );
 			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-			curl_setopt( $ch, CURLOPT_TIMEOUT, 20 );
+			curl_setopt( $ch, CURLOPT_TIMEOUT, $tm );
 			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
 //		set headers if need
 //		curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
@@ -48,29 +49,66 @@ if ( ! function_exists( 'aa_fetch_curl' ) ) {
 	}
 }
 
+//add_action('after_theme_footer', 'aa_func_20155324055302',25);
+function aa_func_20155324055302()
+{
+	$app_id       = "1651075215180567";
+	$my_url       = "http://vzazerkalie.com/?p=17";
+	$app_secret   = "47b7b816b16144ea5608cd010f2f5ab";
+	$access_token = "CAAXdpOeywxcBABTl9ATh71Omm2ZBfZB42ImWJm0RETSnpevXcWJ1UsW5HjLY4JJZBYyNNs8xvsea2Ww7ZCKrLSRZBZAy71kp8kUcN3IL6lQyhfFyHZCvZCxOTeXhtBVX3XE5IIZChsROlX70rahZCGjpnS8B48IicikaUkLV1sl4gMSkQjRW3Ug3A0a43k8kooiZBj7MEZBHMyOTIVcxZCvgLNSez";
+
+	$url = "https://graph.facebook.com/" .
+	       "fql?q=SELECT+user_id+FROM+url_like+WHERE+user_id=me()+and url='{$my_url}'" .
+	       "&access_token=" . $access_token;
+
+	$somevar = aa_fetch_curl( $url );
+
+	echo "<pre>";
+	print_r( $somevar );
+	echo "</pre>";
+}
+
 /**
  * Add Fb Root to site
  * Define the app
  */
-add_action('aa_afterbodystart', 'aa_func_20155923115930');
+add_action( 'aa_afterbodystart', 'aa_func_20155923115930', 1 );
 function aa_func_20155923115930()
 {
-	?><div id="fb-root"></div><?php
+	?>
+	<div id="fb-root"></div><?php
 }
+
 add_action( 'after_theme_footer', 'aa_fbrootinitiator', 20 );
 function aa_fbrootinitiator()
 {
 	global $aa_plugin_social;
-	$fb = $aa_plugin_social->getOptions('facebook_credentials');
+	$fb = $aa_plugin_social->getOptions( 'facebook_credentials' );
 	?>
 	<script>
 		$.ajaxSetup({cache: false});
 		$.getScript('//connect.facebook.net/en_US/sdk.js', function() {
+
 			FB.init({
 				appId  : "<?php echo $fb['app_id'] ?>",
-				status: true, cookie: true, xfbml: true,
+				version: 'v2.5',
+				status : true,
+				cookie : true,
+				xfbml  : true
 			});
-//			console.log(FB);
+
+			(function(d, debug) {
+				var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+				if (d.getElementById(id)) {
+					return;
+				}
+				js = d.createElement('script');
+				js.id = id;
+				js.async = true;
+				js.src = "//connect.facebook.net/en_US/all" + (debug ? "/debug" : "") + ".js";
+				ref.parentNode.insertBefore(js, ref);
+			}(document, /*debug*/ false));
+
 		});
 	</script>
 	<?php
