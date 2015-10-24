@@ -51,8 +51,11 @@ class AAPaymentInitial {
 	public function getOptions( $option = null )
 	{
 		if ( get_option( $this->_plugin_options ) ) {
-			if ( $option !== null )
-				return get_option( $this->_plugin_options )[ $option ];
+			if ( $option !== null ) {
+				$plugin_options = get_option( $this->_plugin_options );
+
+				return $plugin_options[ $option ];
+			}
 
 			return get_option( $this->_plugin_options );
 		}
@@ -87,8 +90,11 @@ class AAPaymentInitial {
 	public function getNotices( $notice = null )
 	{
 		if ( get_option( $this->_notices_option ) ) {
-			if ( $notice !== null )
-				return get_option( $this->_notices_option )[ $notice ];
+			if ( $notice !== null ) {
+				$plugin_notices_opt = get_option( $this->_notices_option );
+
+				return $plugin_notices_opt[ $notice ];
+			}
 
 			return get_option( $this->_notices_option );
 		}

@@ -22,3 +22,21 @@ function ajx20151209121256()
 	}
 	exit;
 }
+
+/**
+ * Form Submittion
+ */
+add_action( 'wp_ajax_ajx20153324113320', 'ajx20153324113320' );
+function ajx20153324113320()
+{
+	global $aa_plugin_social;
+	$p = $_POST[ 'facebook' ];
+	if ( isset( $p ) ) {
+		$aa_plugin_social->setOption( 'facebook_credentials', array(
+			'app_id' => $p[ 'appId' ],
+		), true
+		);
+	}
+	echo "success";
+	die;
+}

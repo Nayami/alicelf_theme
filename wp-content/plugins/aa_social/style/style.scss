@@ -1,4 +1,6 @@
+@import "var_mix";
 @import "grid";
+@import "loader";
 
 #plugin-admin-container {
 
@@ -10,4 +12,12 @@
 		margin-left  : 15px;
 		margin-right : 15px;
 	}
+}
+
+/**
+ * ==================== Main Social Credentials Form ======================
+ * 24.10.2015
+ */
+#social-form-20152424112452 {
+	position : relative;
 }

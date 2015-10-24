@@ -62,15 +62,20 @@ class AAPluginInitialStart {
 		return false;
 	}
 
-	public function setOption( $option_key, $option_value )
+	public function setOption( $option_key, $option_value, $force = null )
 	{
 		$option = get_option( $this->_plugin_options );
 
 		if ( get_option( $this->_plugin_options ) !== false ) {
-			$option[ $option_key ] = $option_value;
+			if ( $force === true ) {
+				$option[ $option_key ] = $option_value;
+			} else {
+				if ( ! array_key_exists( $option_key, $option ) ) {
+					$option[ $option_key ] = $option_value;
+				}
+			}
 			update_option( $this->_plugin_options, $option );
 		}
-
 	}
 
 	public function getNotices( $notice = null )

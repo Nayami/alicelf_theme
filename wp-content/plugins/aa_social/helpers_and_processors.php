@@ -60,13 +60,14 @@ function aa_func_20155923115930()
 add_action( 'after_theme_footer', 'aa_fbrootinitiator', 20 );
 function aa_fbrootinitiator()
 {
-	global $plugin_temp_vars;
+	global $aa_plugin_social;
+	$fb = $aa_plugin_social->getOptions('facebook_credentials');
 	?>
 	<script>
 		$.ajaxSetup({cache: false});
 		$.getScript('//connect.facebook.net/en_US/sdk.js', function() {
 			FB.init({
-				appId  : "<?php echo $plugin_temp_vars["facebook_app_id"] ?>",
+				appId  : "<?php echo $fb['app_id'] ?>",
 				status: true, cookie: true, xfbml: true,
 			});
 //			console.log(FB);
