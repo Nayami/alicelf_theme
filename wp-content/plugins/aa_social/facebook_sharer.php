@@ -19,10 +19,10 @@ function aa_append_share_button( $excerpt )
 
 	$share_btn = "<a {$attributes} class='fb_share btn btn-default'><i class='fa fa-share'></i><i class='fa fa-facebook'></i>{$share_count}</a>";
 
-	$like_btn = "<a class='fb-like btn btn-default'
+	$like_btn = "<a class='fb-like btn btn-default aa-btn-like'
 				data-href='{$link}'
         data-action='like'
-        data-show-faces='true'><i class='fa fa-thumbs-up'></i>{$like_count}</a>";
+        data-show-faces='true'><i class='fa fa-thumbs-up'></i><span class='likes-count'>{$like_count}</span></a>";
 
 	$excerpt .= $share_btn . $like_btn;
 
@@ -118,12 +118,17 @@ function aa_plugin_social_init()
 			}
 
 
+
 			var fbLikeBtn = $('.fb-like');
 			if (fbLikeBtn.length > 0) {
 				fbLikeBtn.on('click', function(e) {
 					e.preventDefault();
 					var that = $(this),
-						link = that.attr('data-href');
+						link = that.attr('data-href'),
+						thatCountLikes = that.find('.likes-count');
+
+					that.addClass('in-progress');
+					that.prepend("<i class='fa fa-spinner fa-spin'></i>");
 
 					FB.api(
 						"/me/og.likes",
@@ -144,9 +149,11 @@ function aa_plugin_social_init()
 									}
 
 								} else {
-									// Success
-									console.log(response);
+									thatCountLikes.html(parseInt(thatCountLikes.html()) + 1);
+									that.prepend('<i class="fa fa-remove"></i>');
 								}
+								that.removeClass('in-progress');
+								that.find('.fa-spinner').remove();
 							}
 						}
 					);
@@ -170,7 +177,7 @@ function aa_plugin_social_init()
 									},
 									function(response) {
 										if (response.data !== undefined)
-											that.addClass('btn-primary');
+											that.prepend('<i class="fa fa-remove"></i>');
 
 										if (response.data !== undefined) {
 										}
@@ -185,7 +192,8 @@ function aa_plugin_social_init()
 				};
 
 			}
-			//@Template Todo: remove like and actions...
+			//@Template Todo: remove like
+
 
 		});
 	</script>

@@ -21,3 +21,24 @@
 #social-form-20152424112452 {
 	position : relative;
 }
+
+.aa-btn-like {
+	@include transition();
+	&.in-progress {
+		color            : transparent;
+		background-color : $mainColor;
+		&:hover {
+			color            : transparent;
+			background-color : $mainColor;
+		}
+	}
+	position : relative;
+	> .fa-spinner {
+		position    : absolute;
+		z-index     : 1;
+		top         : 7px;
+		color       : #fff;
+		margin-left : -6px;
+		left        : 50%;
+	}
+}
