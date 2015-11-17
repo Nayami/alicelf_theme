@@ -24,6 +24,16 @@
 
 .aa-btn-like {
 	@include transition();
+	.fa-remove {
+		padding : 0 5px;
+		cursor : pointer;
+		&:hover{
+			color : $mainColor;
+		}
+	}
+	&.active-like-by-current-user {
+		cursor : default;
+	}
 	&.in-progress {
 		color            : transparent;
 		background-color : $mainColor;

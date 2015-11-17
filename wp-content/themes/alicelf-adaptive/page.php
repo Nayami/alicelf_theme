@@ -8,9 +8,10 @@
 <div id="page-<?php the_ID(); ?>"  <?php post_class( 'default-page-loop ghostly-wrap' ); ?>>
 	<div class="row">
 		<?php
-		aa_dynamic_sidebar_view( 4 );
-		global $post;
-		$sidebar_position = get_post_meta( $post->ID, 'aa_theme_sidebar_options', true );
+		$page_id =  get_queried_object_id();
+		aa_dynamic_sidebar_view( $page_id, 4 );
+
+		$sidebar_position = get_post_meta( $page_id, 'aa_theme_sidebar_options', true );
 		if ( is_plugin_active( 'generate-meta/generate_meta.php' ) )
 			$class_co_sm = $sidebar_position[ 0 ] === 'aa_nosidebar' ? 12 : 8;
 		else

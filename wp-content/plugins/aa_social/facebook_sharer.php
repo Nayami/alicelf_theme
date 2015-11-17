@@ -4,6 +4,9 @@ add_filter( 'the_excerpt', 'aa_append_share_button' );
 function aa_append_share_button( $excerpt )
 {
 	global $post;
+
+	$access_token = "CAAXdpOeywxcBAPv10LoQU4vF9EgN9ObG91lxrfW5z6tpmufyJbMvUvXbK5wV5amPt1UAv32ZAKdZAhVcW5EjnlmGb2bNketbupGQzzotQ18YXQOZC4MXnFVfETjhUgJXfxkKBfID6LLxDNNh7mOrpfT8hJonAK9bISGv2fEj7tqiLnIBj5RZAr7eKi8YNFAVGAZCKdnEpBGbLNsJdz0qU";
+
 	$fea_image = wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) );
 	$link      = get_permalink( $post->ID );
 
@@ -17,9 +20,11 @@ function aa_append_share_button( $excerpt )
 	$share_count  = $share_like->share_count;
 	$like_count   = $share_like->like_count;
 
+	$uri_id = json_decode( aa_fetch_curl( "https://graph.facebook.com/v2.1/?id=" . $link . "&fields=og_object.fields(id)&access_token=" . $access_token ) );
+
 	$share_btn = "<a {$attributes} class='fb_share btn btn-default'><i class='fa fa-share'></i><i class='fa fa-facebook'></i>{$share_count}</a>";
 
-	$like_btn = "<a class='fb-like btn btn-default aa-btn-like'
+	$like_btn = "<a data-og-object-id='{$uri_id->og_object->id}' class='fb-like btn btn-default aa-btn-like'
 				data-href='{$link}'
         data-action='like'
         data-show-faces='true'><i class='fa fa-thumbs-up'></i><span class='likes-count'>{$like_count}</span></a>";
@@ -89,12 +94,12 @@ function aa_plugin_social_init()
 			 * ==================== Wait For Variable Processor ======================
 			 * 25.10.2015
 			 */
-			var waiterForFBinitial = setInterval(function(){
-				if(isLoaded === true) {
-					clearInterval(waiterForFBinitial);
-					launchLikeprocessor();
-				}
-			},250);
+//			var waiterForFBinitial = setInterval(function(){
+//				if(isLoaded === true) {
+//					clearInterval(waiterForFBinitial);
+//					launchLikeprocessor();
+//				}
+//			},250);
 
 
 			var fbShareBtn = $('.fb_share');
@@ -118,8 +123,8 @@ function aa_plugin_social_init()
 			}
 
 
-
 			var fbLikeBtn = $('.fb-like');
+
 			if (fbLikeBtn.length > 0) {
 				fbLikeBtn.on('click', function(e) {
 					e.preventDefault();
@@ -139,10 +144,30 @@ function aa_plugin_social_init()
 //									console.log(response);
 									switch (response.error.code) {
 										case 2500 :
+											// @Todo: do the redirect
 											console.log("you need to be logget in facebook");
 											break;
 										case 3501 :
-											console.log("you alredy vote for this post");
+
+											//@Todo update like count after unlike
+//											var objectId = that.attr('data-og-object-id');
+//											FB.api(
+//												that.attr('data-og-object-id') + "/likes",
+//												'GET',
+//												function(response) {
+//													var userId = response.data[0].id,
+//														req = userId + "_" + objectId + "/likes";
+//
+//													FB.api(req, "DELETE",
+//														function(r) {
+//															console.log(r);
+//														}
+//													);
+//
+//												}
+//											);
+
+
 											break;
 										default :
 											console.log("unknown error");
@@ -150,7 +175,6 @@ function aa_plugin_social_init()
 
 								} else {
 									thatCountLikes.html(parseInt(thatCountLikes.html()) + 1);
-									that.prepend('<i class="fa fa-remove"></i>');
 								}
 								that.removeClass('in-progress');
 								that.find('.fa-spinner').remove();
@@ -163,37 +187,27 @@ function aa_plugin_social_init()
 				 * ==================== Check Likes ======================
 				 * 24.10.2015
 				 */
-				var launchLikeprocessor = function() {
-					FB.getLoginStatus(function(response) {
-						if (response.status === "connected") {
-
-							$.each(fbLikeBtn, function() {
-								var that = $(this),
-									link = that.attr('data-href');
-								FB.api(
-									"/me/og.likes",
-									{
-										"object": link
-									},
-									function(response) {
-										if (response.data !== undefined)
-											that.prepend('<i class="fa fa-remove"></i>');
-
-										if (response.data !== undefined) {
-										}
-										if (response && !response.error) {
-										}
-									}
-								);
-							});
-
-						}
-					});
-				};
-
+//				var launchLikeprocessor = function() {
+//					FB.getLoginStatus(function(response) {
+//						if (response.status === "connected") {
+//
+//							$.each(fbLikeBtn, function() {
+//								var that = $(this),
+//									link = that.attr('data-href');
+//								FB.api(
+//									"/me/og.likes",{"object" : link},
+//									function(response) {
+//										if (response.data.length > 0){
+//											that.prepend('<i data-object-id="'+response.data[0].id+'" class="fa fa-remove"></i>');
+//											that.addClass('active-like-by-current-user');
+//										}
+//									}
+//								);
+//							});
+//						}
+//					});
+//				};
 			}
-			//@Template Todo: remove like
-
 
 		});
 	</script>

@@ -24,12 +24,11 @@ register_sidebar( array(
  * Output Sidebars
  */
 
-function aa_dynamic_sidebar_view( $col_sm = 3 )
+function aa_dynamic_sidebar_view( $page_id, $col_sm = 3 )
 {
-	global $post;
 	if ( is_page() ) {
-		$sidebar          = get_post_meta( $post->ID, 'aa_select_registred_sidebar', true );
-		$sidebar_position = get_post_meta( $post->ID, 'aa_theme_sidebar_options', true );
+		$sidebar          = get_post_meta( $page_id, 'aa_select_registred_sidebar', true );
+		$sidebar_position = get_post_meta( $page_id, 'aa_theme_sidebar_options', true );
 
 		if ( ! empty( $sidebar_position ) && $sidebar_position[ 0 ] !== 'aa_nosidebar' ) {
 			if ( is_active_sidebar( $sidebar ) ) {

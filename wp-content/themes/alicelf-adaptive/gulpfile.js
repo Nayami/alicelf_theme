@@ -1,3 +1,11 @@
+// npm install --save-dev gulp
+// npm install --save-dev gulp-concat
+// npm install --save-dev gulp-rename
+// npm install --save-dev gulp-uglify
+// npm install --save-dev gulp-sourcemaps
+
+// rimraf node_modules
+
 var gulp = require('gulp'),
 	aa_concat = require('gulp-concat'),
 	aa_rename = require('gulp-rename'),
@@ -13,21 +21,15 @@ gulp.task('aa-concat', function(){
 		'js_dev/_bootstrap/collapse.js',
 		'js_dev/_bootstrap/dropdown.js',
 		//'js_dev/_bootstrap/modal.js',
+		//'js_dev/_bootstrap/tooltip.js',
 		//'js_dev/_bootstrap/popover.js',
 		//'js_dev/_bootstrap/scrollspy.js',
 		//'js_dev/_bootstrap/tab.js',
-		//'js_dev/_bootstrap/tooltip.js',
 		'js_dev/_bootstrap/transition.js',
 
 		// Third Party Scripts
 		'js_dev/_js/smooth-scroll.js',
 		'js_dev/_js/progressjs/progress.min.js',
-
-		// ScrollMagic
-		//'js_dev/_scrollmagic/tween-max.1.14.2.js',
-		//'js_dev/_scrollmagic/scrollmagic.2.0.5.js',
-		//'js_dev/_scrollmagic/indications.js',
-		//'js_dev/_scrollmagic/animation.gsap.js',
 
 		// Ajax
 		'js_dev/_js/ajax.js',
@@ -43,6 +45,20 @@ gulp.task('aa-concat', function(){
 		.pipe(aa_sourcemaps.write('./'))
 		.pipe(gulp.dest('js_prod'));
 });
+
+gulp.task('scrollmagic', function(){
+	return gulp.src([
+		// ScrollMagic
+		'js_dev/_scrollmagic/tween-max.1.14.2.js',
+		'js_dev/_scrollmagic/scrollmagic.2.0.5.js',
+		//'js_dev/_scrollmagic/indications.js',
+		'js_dev/_scrollmagic/animation.gsap.js'
+	])
+		.pipe(aa_sourcemaps.init())
+		.pipe(aa_concat('parallax.js'))
+		.pipe(gulp.dest('js_prod'));
+});
+
 
 gulp.task('watch', function() {
 	gulp.watch(['js_dev/_js/ajax.js', 'js_dev/_js/script.js'], ['aa-concat']);
