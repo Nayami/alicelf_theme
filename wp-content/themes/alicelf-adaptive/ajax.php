@@ -50,13 +50,14 @@ function aa_func_20150827030852()
 {
 	if ( isset( $_POST[ 'do_the_conversion' ] ) ) {
 		global $wpdb;
+		$set_encoding = $_POST['set_encoding'];
 		$tables   = $wpdb->get_results( "SHOW TABLES" );
 		$method   = "Tables_in_" . $wpdb->dbname;
 		$messages = "";
 		foreach ( $tables as $table ) {
-			$wpdb->query( "ALTER TABLE {$table->$method} DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;" );
-			$wpdb->query( "ALTER TABLE {$table->$method} CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;" );
-			$messages .= "Table " . $table->$method . " has been updated<br>";
+			$wpdb->query( "ALTER TABLE {$table->$method} DEFAULT CHARACTER SET utf8 COLLATE {$set_encoding};" );
+			$wpdb->query( "ALTER TABLE {$table->$method} CONVERT TO CHARACTER SET utf8 COLLATE {$set_encoding};" );
+			$messages .= "Table " . $table->$method . " has been converted to {$set_encoding}<br>";
 		}
 		$messages .= "<hr><div class='alert alert-success'>Conversion complete.</div>";
 		echo $messages;

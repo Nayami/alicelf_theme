@@ -76,7 +76,9 @@ jQuery(document).ready(function($) {
 
 	$('.invoke-conversion').on('click', function(e) {
 
-		var that = $(this), container = $('#convert-tables-section');
+		var that = $(this),
+			container = $('#convert-tables-section'),
+			selectEncoding = $('#select-encoding-conversion').val();
 
 		if (confirm("Are you sure? (This can take a while)") !== false) {
 			container.append(Loaders.bouncingStatic);
@@ -85,7 +87,8 @@ jQuery(document).ready(function($) {
 				type   : "POST",
 				data   : {
 					do_the_conversion: true,
-					action           : 'aa_func_20150827030852'
+					action           : 'aa_func_20150827030852',
+					set_encoding : selectEncoding
 				},
 				success: function(data) {
 					container.empty();

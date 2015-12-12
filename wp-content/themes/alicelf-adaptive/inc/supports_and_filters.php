@@ -77,6 +77,7 @@ function add_image_insert_override( $sizes )
 	return $sizes;
 }
 
+
 add_filter( 'wp_revisions_to_keep', 'custom_revisions_number', 10, 2 );
 function custom_revisions_number( $num, $post )
 {
