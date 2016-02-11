@@ -1,0 +1,27 @@
+.alert-backdrop {
+	background-color : rgba(0, 0, 0, 0.53);
+	position         : fixed;
+	display          : block;
+	width            : 100%;
+	height           : 100%;
+	z-index: 200;
+	.alert {
+		position    : absolute;
+		top         : 100px;
+		left        : 50%;
+		width       : 100%;
+		max-width   : 500px;
+		margin-left : -250px;
+		z-index: 5;
+		text-align : center;
+	}
+	/*Mobile*/
+	@media (max-width : 767px) {
+		.alert {
+			display: block;
+			width : 100%;
+			left : auto;
+			margin-left : auto;
+		}
+	}
+}

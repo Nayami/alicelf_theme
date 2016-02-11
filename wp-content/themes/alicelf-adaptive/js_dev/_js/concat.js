@@ -723,27 +723,76 @@ var SITE_URL = aa_ajax_var.site_url,
 
 jQuery(document).ready(function($) {
 
-	var Loaders = {
-		bouncingAbsolute : '<div id="loader-absolute" class="loader-absolute"><div class="preview-area"><div class="spinner-jx"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div></div>',
-		bouncingStatic : '<div id="loader-static" class="loader-static"><div class="preview-area"><div class="spinner-jx"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div></div>',
-		infiniteSpinner : '<div class="loader-backdrop"><div class="loader-infinite-spinner"><div class="lt"></div><div class="rt"></div><div class="lb"></div><div class="rb"></div></div></div>',
-		svgLoader : '<img id="svg-loader-process" src="' + THEME_URI + '/svg/loader_svg.svg" width="40" alt="loadersvg"/>'
+	/**
+	 * ==================== waitUntilExists ======================
+	 * 2/11/2016
+	 */
+	$.fn.waitUntilExists = function(handler, shouldRunHandlerOnce, isChild) {
+		var found = 'found';
+		var $this = $(this.selector);
+		var $elements = $this.not(function() {
+			return $(this).data(found);
+		}).each(handler).data(found, true);
 
+		if (!isChild) {
+			(window.waitUntilExists_Intervals = window.waitUntilExists_Intervals || {})[this.selector] =
+				window.setInterval(function() {
+					$this.waitUntilExists(handler, shouldRunHandlerOnce, true);
+				}, 500)
+			;
+		}
+		else
+			if (shouldRunHandlerOnce && $elements.length) {
+				window.clearInterval(window.waitUntilExists_Intervals[this.selector]);
+			}
+
+		return $this;
 	};
+	/**
+	 * ==================== Helpers ======================
+	 * 2/11/2016
+	 */
+	var alertHolder = function(itemClass, sendedMessage) {
+		return "<div class='alert alert-" + itemClass + "'>" +
+			"<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+			"<span aria-hidden='true'>&times;</span>" +
+			"</button><h3 class='text-center'>" + sendedMessage + "</h3></div>"
+	},
+		modalAlert = function(itemClass, msg) {
+		return "<div class='alert-backdrop'><div class='alert alert-" + itemClass + "'>" +
+			"<p>" + msg + "</p></div></div>"
+	},
+		elemHasClass = function(el, cls) {
+		return el.className && new RegExp("(\\s|^)" + cls + "(\\s|$)").test(el.className);
+	},
+		capitalize = function (string) {
+		return string.charAt(0).toUpperCase() + string.slice(1);
+	};
+
+	$('.alert-backdrop').waitUntilExists(function() {
+		var that = $(this);
+		that.on('click', function(e) {
+			e.stopPropagation();
+			if (elemHasClass(e.target, 'alert-backdrop')) {
+				that.fadeOut(500, function() {
+					that.remove();
+				});
+			}
+		});
+	});
+
+	/**
+	 * ==================== Defaults End ======================
+	 * 2/11/2016
+	 */
+
 
 	(function mainThemeAjaxScope() {
 
 		var successMessage ="Your message has been successfully sended",
 				errorMessage = "Fill Correct all required fields!",
 				wrongCaptcha = "Fill Correct Captha",
-				unknownError ="Something Wrong, try again later",
-				alertHolder = function(itemClass, sendedMessage) {
-					return "<div class='alert alert-" + itemClass + "'>" +
-						"<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
-						"<span aria-hidden='true'>&times;</span>" +
-						"</button><h3 class='text-center'>" + sendedMessage + "</h3></div>"
-				};
-
+				unknownError ="Something Wrong, try again later";
 
 		var formContactProcess = function(act) {
 

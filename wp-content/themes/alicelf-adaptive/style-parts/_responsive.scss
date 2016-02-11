@@ -2,23 +2,35 @@
  * Responsive Rules
  */
 
-//Desktop
-@media (min-width : 768px) {
-  .phone-visible {
-    display : none;
-  }
 
-  .phone-hidden {
-    display : block;
-  }
+.visible-on-desktop-only {
+	/*Tablet*/
+	@media (max-width : 951px) {
+		display : none;
+	}
 }
 
-//Mobile
-@media (max-width : 767px) {
-  .phone-visible {
-    display : block;
-  }
-  .phone-hidden {
-    display : none;
-  }
+.visible-on-tablet-only {
+	/*Desktop*/
+	@media (min-width : 952px) {
+		display : none;
+	}
+	/*Mobile*/
+	@media (max-width : 767px) {
+		display : none;
+	}
+}
+
+.visible-on-phones-only {
+	/*To tablet and desktop*/
+	@media (min-width : 768px) {
+		display : none;
+	}
+}
+
+.hidden-on-phones {
+	/*Mobile*/
+	@media (max-width : 767px) {
+		display : none;
+	}
 }
