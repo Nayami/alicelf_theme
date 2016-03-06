@@ -25,7 +25,11 @@ function invoke_scripts()
 	wp_register_script( 'jquery', $theme_path . '/js_prod/jquery2.1.js', array(), false, true );
 	wp_enqueue_script( 'jquery' );
 
-	wp_enqueue_script( 'aa-compiled-scripts', $theme_path . '/js_prod/uglify.js', array(), false, true );
+	// ================== Plugins and Libs ==================
+	wp_enqueue_script( 'aa-tp-scripts', $theme_path . '/js_prod/compiled-plugins-script.js', array('jquery'), false, true );
+
+	// ================== Main working scope ==================
+	wp_enqueue_script( 'aa-compiled-scripts', $theme_path . '/js_prod/uglify.js', array('jquery'), false, true );
 	$data = array(
 		'site_url'     => get_site_url(),
 		'ajax_url'     => admin_url( 'admin-ajax.php' ),

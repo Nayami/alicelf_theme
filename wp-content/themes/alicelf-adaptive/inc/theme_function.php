@@ -13,6 +13,8 @@
  * Detect Mobile device aa_is_mobile_platform()
  */
 
+use Alicelf\Platform\MobileDetect;
+
 if ( ! function_exists( 'is_localhost' ) ) {
 	function is_localhost()
 	{
@@ -335,7 +337,7 @@ if ( ! function_exists( 'aa_is_mobile_platform' ) ) {
 	 */
 	function aa_is_mobile_platform()
 	{
-		$detect = new Mobile_Detect;
+		$detect = new MobileDetect;
 		if ( $detect->isMobile() )
 			return true;
 

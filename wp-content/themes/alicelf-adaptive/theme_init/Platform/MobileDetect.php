@@ -1,4 +1,5 @@
 <?php
+namespace Alicelf\Platform;
 /**
  * Mobile Detect Library
  * =====================
@@ -25,7 +26,7 @@
  * @version     2.8.17
  */
 
-class Mobile_Detect
+class MobileDetect
 {
     /**
      * Mobile detection type.

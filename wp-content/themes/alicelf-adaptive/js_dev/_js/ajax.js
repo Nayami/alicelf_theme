@@ -7,6 +7,13 @@ var SITE_URL = aa_ajax_var.site_url,
 		THEME_URI = aa_ajax_var.template_uri,
 		IMG_DIR = THEME_URI + '/img/';
 
+var Loaders = {
+	bouncingAbsolute: '<div id="loader-absolute" class="labsolut"><div class="preview-area"><div class="spinner-jx"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div></div>',
+	bouncingStatic  : '<div id="loader-static"><div class="preview-area"><div class="spinner-jx"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div></div>',
+	infiniteSpinner : '<div class="loader-backdrop"><div class="loader-infinite-spinner"><div class="lt"></div><div class="rt"></div><div class="lb"></div><div class="rb"></div></div></div>',
+	svgLoader       : '<img id="svg-loader-process" src="' + THEME_URI + '/svg/loader_svg.svg" width="40" alt="loadersvg"/>'
+};
+
 jQuery(document).ready(function($) {
 
 	/**
@@ -149,6 +156,7 @@ jQuery(document).ready(function($) {
 		};
 		formContactProcess('aa_contact_form');
 
+
 		var ajaxLoadPosts = function() {
 			var page = 1,
 				loading = true,
@@ -156,6 +164,7 @@ jQuery(document).ready(function($) {
 				$content = $('#ajax-posts-loop');
 
 			page === 1 && progressJs().start();
+
 
 			var loadPosts = function() {
 				$.ajax({

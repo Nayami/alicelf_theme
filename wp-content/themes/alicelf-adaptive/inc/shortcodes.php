@@ -13,6 +13,8 @@ function custom_posts_shortcode( $atts )
 	$columns      = null;
 	$ignoresticky = null;
 
+	$layout = null;
+
 	extract( shortcode_atts( array(
 		'type'         => '',
 		'order'        => 'DESC',
@@ -23,11 +25,13 @@ function custom_posts_shortcode( $atts )
 		'columns'      => '',
 		'ignoresticky' => '1',
 		'cat'          => '',
-		'tag'          => ''
+		'tag'          => '',
+
+		'layout' => ''
 
 	), $atts ) );
 
-	global $wpdb, $post, $table_prefix;
+//	global $wpdb, $post, $table_prefix;
 
 	$excludearray = array();
 	if ( ! empty( $exclude ) ) {
@@ -77,17 +81,29 @@ function custom_posts_shortcode( $atts )
 	$my_query = null;
 	$my_query = new WP_Query( $args );
 
-	if ( $my_query->have_posts() ) { ?>
-		<div class="row posts-shortcode-<?php echo $type ?>">
-			<?php while ( $my_query->have_posts() ) : $my_query->the_post(); ?>
-				<article id="post-<?php the_ID(); ?>" class="col-sm-<?php echo $modulo ?> shortcode-single-<?php echo $type ?>">
-					<?php get_template_part( 'templates/tpl-shortcode-single' ); ?>
-				</article>
-			<?php endwhile; ?>
-		</div>
-	<?php } else {
+	if ( $my_query->have_posts() ) {
+
+		echo "<div class='row posts-shortcode-{$type}'>";
+		while ( $my_query->have_posts() ) : $my_query->the_post();
+			$post_id = get_the_ID();
+			echo "<article id='post-{$post_id}' class='col-sm-{$modulo} shortcode-single-{$type}'>";
+
+			switch ( $layout ) {
+				case "@TODO: cases" :
+					echo "lorem ipsum";
+					break;
+				default :
+					get_template_part( 'templates/tpl-shortcode-single' );
+			}
+
+			echo "</article>";
+		endwhile;
+		echo "</div>";
+
+	} else {
 		echo "no posts found on post type : " . $type;
 	}
+
 	wp_reset_query();
 
 	return ob_get_clean();

@@ -1,0 +1,29 @@
+{
+  "autoload": {
+    "files" : [
+      "theme_init/plugins_dependences.php",
+      "theme_init/ReduxCore/framework.php",
+      "theme_init/config.php",
+
+      "walkers/AliceNavigator.php",
+      "walkers/BootstrapWalker.php",
+
+      "inc/custom_posts_config.php",
+      "inc/dynamic_styles.php",
+      "inc/menus.php",
+      "inc/shortcodes.php",
+      "inc/style_and_script.php",
+      "inc/supports_and_filters.php",
+      "inc/theme_function.php",
+      "inc/theme_metaboxes.php",
+      "inc/thumbnails.php",
+      "inc/widget_sidebars.php",
+
+      "ajax.php"
+
+    ],
+    "psr-4": {
+      "Alicelf\\": "theme_init"
+    }
+  }
+}

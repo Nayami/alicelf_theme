@@ -70,3 +70,20 @@ function aa_alternative_wiget_sidebar( $col_sm = 3 )
 		</aside>
 	<?php }
 }
+
+/**
+ * ==================== Sidebar func ======================
+ * @param $sidebar
+ * @param $column
+ * 2/24/2016
+ */
+if ( ! function_exists( 'aa_sidebar_fn' ) ) {
+	function aa_sidebar_fn( $sidebar = 'default-widgetize-sidebar', $column = 3 )
+	{
+		if ( is_active_sidebar( $sidebar ) ) { ?>
+			<aside class="col-sm-<?php echo $column ?> <?php echo $sidebar ?>-sidebar">
+				<?php dynamic_sidebar( $sidebar ); ?>
+			</aside>
+		<?php }
+	}
+}
