@@ -215,4 +215,8 @@ jQuery(document).ready(function($) {
 			ajaxLoadPosts();
 
 	})();
+
+	
+
+
 });

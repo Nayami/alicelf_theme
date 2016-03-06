@@ -28,6 +28,9 @@ function invoke_scripts()
 	// ================== Plugins and Libs ==================
 	wp_enqueue_script( 'aa-tp-scripts', $theme_path . '/js_prod/compiled-plugins-script.js', array('jquery'), false, true );
 
+	// ============= Non Uglified =============
+//	wp_enqueue_script( 'non-uglified', $theme_path . '/js_prod/non-uglified.js', array('jquery'), false, true );
+
 	// ================== Main working scope ==================
 	wp_enqueue_script( 'aa-compiled-scripts', $theme_path . '/js_prod/uglify.js', array('jquery'), false, true );
 	$data = array(

@@ -53,15 +53,28 @@ gulp.task('plugins', function() {
 			'js_dev/_js/smooth-scroll.js',
 			'js_dev/_js/progressjs/progress.min.js',
 
-			// ScrollMagic
-			//'js_dev/_scrollmagic/tween-max.1.14.2.js',
-			//'js_dev/_scrollmagic/scrollmagic.2.0.5.js',
-			//'js_dev/_scrollmagic/indications.js', // commented
-			//'js_dev/_scrollmagic/animation.gsap.js'
 		])
 		.pipe(aa_sourcemaps.init())
 		.pipe(aa_concat('compiled-plugins-script.js'))
 		.pipe(aa_uglify())
+		.pipe(aa_sourcemaps.write('./'))
+		.pipe(gulp.dest('js_prod'));
+});
+
+
+gulp.task('nonuglified-scripts', function() {
+	return gulp.src([
+
+			// ScrollMagic
+			'js_dev/_scrollmagic/tween-max.1.14.2.js',
+			'js_dev/_scrollmagic/scrollmagic.2.0.5.js',
+			'js_dev/_scrollmagic/indications.js', // commented
+			'js_dev/_scrollmagic/animation.gsap.js'
+
+		])
+		.pipe(aa_sourcemaps.init())
+		.pipe(aa_concat('nonuglify-concat.js'))
+		.pipe(aa_rename('non-uglified.js'))
 		.pipe(aa_sourcemaps.write('./'))
 		.pipe(gulp.dest('js_prod'));
 });
