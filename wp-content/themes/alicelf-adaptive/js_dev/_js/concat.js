@@ -437,18 +437,31 @@ jQuery(document).ready(function($) {
 
 	transformicons.add('.tcon');
 	;(function() {
-		var launcher = $('#mobile-menu-trigger').find('> button'),
-			menuContainer = $('#main-alicelf-nav');
-		launcher.on('click', function(){
 
-			var that = $(this);
-			if (that.hasClass('tcon-transform')) {
-				menuContainer.addClass('open-menu');
+		var openCloseMenu = function(selector) {
+			if (selector.hasClass('tcon-transform')) {
+				menuContainer.css('display', 'block');
+				setTimeout(function(){
+					menuContainer.addClass('open-menu');
+				}, 10);
 			} else {
 				menuContainer.removeClass('open-menu');
+				setTimeout(function(){
+					menuContainer.css('display', 'none');
+				}, 300);
 			}
+		};
 
+
+		var launcher = $('#mobile-menu-trigger').find('> button'),
+			menuContainer = $('#main-alicelf-nav');
+
+		openCloseMenu(launcher);
+
+		launcher.on('click', function(){
+			openCloseMenu($(this));
 		});
+
 
 	})();
 
