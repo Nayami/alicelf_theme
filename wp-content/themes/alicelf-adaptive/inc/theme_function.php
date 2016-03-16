@@ -187,10 +187,7 @@ function get_header_first()
 {
 	?>
 	<div class='clearfix top-line header-type-1'>
-		<div class="ghostly-wrap social-list">
-			<div class="col-sm-12"><?php echo aa_social_list( 'list-inline pull-right' ) ?></div>
-		</div>
-		<div class='ghostly-wrap hidden-on-phones'><?php echo get_brand() ?></div>
+		<div class='ghostly-wrap'><?php echo get_brand() ?></div>
 	</div>
 	<div class='navigator-wrapper clearfix header-type-1'>
 		<div class='ghostly-wrap'><?php get_template_part( 'main-navigator' ) ?></div>
@@ -203,12 +200,11 @@ function get_header_second()
 {
 	?>
 	<div class="ghostly-wrap header-type-2">
-		<div class='col-sm-3 hidden-on-phones top-line'>
+		<div class='col-sm-3 top-line'>
 			<div class='row'><?php echo get_brand() ?></div>
 		</div>
-		<div class='col-sm-9'>
+		<div class='col-sm-9 pos-static-tablet'>
 			<div class="row">
-				<div class="ghostly-wrap social-list"><?php echo aa_social_list( 'list-inline pull-right' ) ?></div>
 				<div class="navigator-wrapper"><?php get_template_part( 'main-navigator' ) ?></div>
 			</div>
 		</div>

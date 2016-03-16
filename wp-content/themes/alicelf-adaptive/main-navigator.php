@@ -17,38 +17,17 @@ if ( !has_nav_menu('primary') ) {
 } else {
 ?>
 
-<nav class="navbar navbar-default alicelf-primary-navbar" role="navigation">
-	<div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex1-collapse">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<h1 class="visible-xs mobile-logo-title">
-				<?php echo get_brand (); ?>
-				<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" class="mobile-logo navbar-brand" rel="home">
-					<?php bloginfo( 'name' ); ?>
-				</a>
-			</h1>
-		</div>
+	<nav id="main-alicelf-nav" class="main-navigation" role="navigation">
+		<?php
+		$args = array(
+			'show_home'      => true,
+			'menu_class'     => 'nav navbar-nav',
+			'theme_location' => 'primary',
+			'container'      => false,
+			'walker'         => new AliceNavigator()
+		);
+		wp_nav_menu( $args );
+		?>
+	</nav>
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="main-navigation collapse navbar-collapse" id="navbar-ex1-collapse">
-			<?php
-			$args = array(
-					'show_home'      => true,
-					'menu_class'     => 'nav navbar-nav',
-					'theme_location' => 'primary',
-					'container'      => false,
-					'walker'         => new AliceNavigator()
-			);
-			wp_nav_menu( $args );
-			?>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-</nav>
 <?php } ?>

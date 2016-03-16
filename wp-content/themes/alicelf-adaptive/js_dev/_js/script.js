@@ -213,4 +213,21 @@ jQuery(document).ready(function($) {
 	};
 	stickNavbar();
 
+	transformicons.add('.tcon');
+	;(function() {
+		var launcher = $('#mobile-menu-trigger').find('> button'),
+			menuContainer = $('#main-alicelf-nav');
+		launcher.on('click', function(){
+
+			var that = $(this);
+			if (that.hasClass('tcon-transform')) {
+				menuContainer.addClass('open-menu');
+			} else {
+				menuContainer.removeClass('open-menu');
+			}
+
+		});
+
+	})();
+
 });

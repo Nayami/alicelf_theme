@@ -41,37 +41,7 @@ body {
   font-family : $baseFont;
 }
 
-.site-logo {
-  display       : block;
-  margin-top    : 15px;
-  margin-bottom : 15px;
-	/*Mobile*/
-	@media (max-width : 767px) {
-	    >img {
-				display: block;
-				width : 90%;
-				height : auto;
-				margin-left : auto;
-				margin-right : auto;
-			}
-	}
-}
 
-.default-alicelf-navbar {
-  .current-menu-item {
-    a {
-      color      : white;
-      background : transparentize($mainColor, 0.2);
-      &:hover {
-        background : transparentize($mainColor, 0.5);
-      }
-    }
-  }
-}
-
-.navbar {
-  z-index : 100;
-}
 
 .widget.list-group {
   ul {
@@ -104,10 +74,6 @@ body {
   }
 }
 
-.pagination {
-  margin : 0;
-}
-
 .navigator-wrapper {
   margin-bottom : 20px;
 }
@@ -119,25 +85,7 @@ body {
   }
 }
 
-.alicelf-primary-navbar {
-  min-height    : 0;
-  margin-bottom : 0;
-  .navbar-collapse.in {
-    overflow-y : visible;
-  }
-  /*Desktop*/
-  @media (min-width : 768px) {
-    .container-fluid {
-      padding : 0;
-    }
-    .main-navigation {
-      padding : 0;
-    }
-  }
-}
-
 .right-caret {
-
   float      : right;
   margin-top : 8px;
   border-top : 4px solid #888;
@@ -147,13 +95,6 @@ body {
   }
 }
 
-.main-navigation {
-  .navbar-nav > li a {
-    &:hover {
-      background-color : #e7e7e7;
-    }
-  }
-}
 
 .title-icons {
   position : absolute;
@@ -173,9 +114,7 @@ body {
 .left-sidebar,
 .default-widgetize-sidebar,
 .alternative-widgetize-sidebar {
-  .wdg_title {
 
-  }
   .widget {
     li {
       background    : white;
@@ -231,25 +170,6 @@ body {
   background : #f4f4f4;
 }
 
-#footer {
-  padding-top   : 10px;
-  background    : #e4e4e4;
-  color         : #7f7f7f;
-  margin-bottom : 0;
-
-  a {
-    color     : #7f7f7f;
-    font-size : 18px;
-    &:hover {
-      color : #525252;
-    }
-  }
-
-}
-
-.mobile-logo-title {
-  margin : 0;
-}
 
 #footer-angle-arrow {
   width           : 0;

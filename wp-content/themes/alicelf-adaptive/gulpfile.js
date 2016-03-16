@@ -52,6 +52,7 @@ gulp.task('plugins', function() {
 
 			'js_dev/_js/smooth-scroll.js',
 			'js_dev/_js/progressjs/progress.min.js',
+			'style-parts/transformicons/transformicons.js',
 
 		])
 		.pipe(aa_sourcemaps.init())

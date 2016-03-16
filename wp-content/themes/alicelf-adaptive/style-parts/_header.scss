@@ -1,3 +1,99 @@
 .site-header {
-	background-color: #fff;
+	background-color : #fff;
+}
+
+.site-logo {
+	display       : block;
+	margin-top    : 15px;
+	margin-bottom : 15px;
+	> img {
+		display : block;
+		width   : 100%;
+		height  : auto;
+	}
+	/*Mobile*/
+	@media (max-width : 767px) {
+		> img {
+			display      : block;
+			width        : 90%;
+			height       : auto;
+			margin-left  : auto;
+			margin-right : auto;
+		}
+	}
+}
+
+.default-alicelf-navbar {
+	.current-menu-item {
+		a {
+			color      : white;
+			background : transparentize($mainColor, 0.2);
+			&:hover {
+				background : transparentize($mainColor, 0.5);
+			}
+		}
+	}
+}
+
+#mobile-menu-trigger {
+	position : relative;
+	> button {
+		position : absolute;
+		z-index  : 99;
+		right    : 5px;
+		top      : 5px;
+	}
+}
+
+.pos-static-tablet {
+	/*Tablet*/
+	@media (max-width : 951px) {
+		position : static;
+	}
+}
+
+.main-navigation {
+	@include transition();
+	/*Tablet*/
+	@media (max-width : 951px) {
+		background-color : transparentize($mainColor, .1);
+		position         : absolute;
+		top              : 0;
+		left             : 0;
+		width            : 100%;
+		height           : 100%;
+		z-index          : 98;
+		ul {
+			display : block;
+			width   : 90%;
+			float   : none;
+			margin  : 50px auto 0;
+			padding : 15px;
+			border :1px solid rgba(255, 255, 255, 0.3);
+			max-width : 500px;
+		}
+		li {
+			display : block;
+			float   : none;
+			a {
+				color : #fff;
+				&:hover{
+					background-color: rgba(255, 255, 255, 0.35);
+				}
+			}
+		}
+	}
+
+	-ms-transform: scale(2); /* IE 9 */
+	-webkit-transform: scale(2); /* Safari */
+	transform: scale(2);
+	opacity: 0;
+
+	&.open-menu {
+		-ms-transform: scale(1); /* IE 9 */
+		-webkit-transform: scale(1); /* Safari */
+		transform: scale(1);
+		opacity: 1;
+	}
+
 }

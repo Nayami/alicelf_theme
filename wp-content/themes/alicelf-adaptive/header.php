@@ -23,7 +23,15 @@
 <div id="scroll-trigger-top"></div>
 <div class="<?php echo $site_content_class ?>">
 	<div class="container">
-		<header class="site-header row"><?php header_type() ?></header>
+		<header class="site-header row">
+			<div id="mobile-menu-trigger" class="hidden-on-desktop">
+				<button type="button" class="tcon tcon-menu--xcross" aria-label="toggle menu">
+			<span class="tcon-menu__lines" aria-hidden="true">
+			</span> <span class="tcon-visuallyhidden">toggle menu</span>
+				</button>
+			</div>
+			<?php header_type() ?>
+		</header>
 		<div id="shock-absorber"></div>
 		<div class="row">
 			<nav class="ghostly-wrap"><?php do_the_breadcrumb() ?></nav>
