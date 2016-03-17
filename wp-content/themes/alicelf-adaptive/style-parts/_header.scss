@@ -52,27 +52,32 @@
 	}
 }
 
-
-body {
-	/*Tablet*/
-	@media (max-width : 951px) {
-		overflow-x : hidden;
-	}
-}
-
+/**
+ * ==================== Navbar ======================
+ * 17.03.2016
+ */
 .main-navigation {
 	@include transition();
+
+	/*Desktop*/
+	@media (min-width : 952px) {
+		display : block !important;
+		ul.nav {
+			margin-top : 50px;
+		}
+	}
+
 	/*Tablet*/
 	@media (max-width : 951px) {
-		background-color : transparentize($mainColor, .1);
-		position         : absolute;
-		top              : 0;
-		left             : 0;
-		width            : 100%;
-		height           : 100%;
-		min-height       : 1000px;
-		z-index          : 98;
-		ul {
+		background-color  : transparentize($mainColor, .1);
+		position          : absolute;
+		top               : 0;
+		left              : 0;
+		width             : 100%;
+		height            : 100%;
+		min-height        : 1000px;
+		z-index           : 98;
+		ul.nav {
 			display   : block;
 			width     : 90%;
 			float     : none;
@@ -105,4 +110,20 @@ body {
 		}
 	}
 
+}
+
+body {
+	/*Tablet*/
+	@media (max-width : 951px) {
+		overflow-x : hidden;
+	}
+
+	&.admin-bar {
+		/*Mobile*/
+		@media (max-width : 768px) {
+			ul.nav {
+				margin-top : 100px;
+			}
+		}
+	}
 }

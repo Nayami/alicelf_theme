@@ -438,28 +438,27 @@ jQuery(document).ready(function($) {
 	transformicons.add('.tcon');
 	;(function() {
 
-		var openCloseMenu = function(selector) {
+		var openCloseMenu = function(selector, menu) {
 			if (selector.hasClass('tcon-transform')) {
-				menuContainer.css('display', 'block');
+				menu.css('display', 'block');
 				setTimeout(function(){
-					menuContainer.addClass('open-menu');
+					menu.addClass('open-menu');
 				}, 10);
 			} else {
-				menuContainer.removeClass('open-menu');
+				menu.removeClass('open-menu');
 				setTimeout(function(){
-					menuContainer.css('display', 'none');
+					menu.css('display', 'none');
 				}, 300);
 			}
 		};
 
-
 		var launcher = $('#mobile-menu-trigger').find('> button'),
 			menuContainer = $('#main-alicelf-nav');
 
-		openCloseMenu(launcher);
+		openCloseMenu(launcher, menuContainer);
 
 		launcher.on('click', function(){
-			openCloseMenu($(this));
+			openCloseMenu($(this), menuContainer);
 		});
 
 
