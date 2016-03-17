@@ -42,6 +42,14 @@
 		z-index  : 99;
 		right    : 5px;
 		top      : 5px;
+		&.tcon-transform {
+			.tcon-menu__lines {
+				&:after,
+				&:before {
+					background-color: #fff;
+				}
+			}
+		}
 	}
 }
 
