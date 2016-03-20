@@ -1,17 +1,19 @@
 <?php
 /*
 Plugin Name: AA Payment
-Plugin URI: http://vzazerkalie.com/portf/
-Description: AA Payment plugin - Upload and Activate.
+Plugin URI: https://www.upwork.com/freelancers/~0171355a1c2fd95935
+Description: AA Payment plugin - Upload and Activate. PHP version 5.4+ required
 Author: Alicelf
 Version: 0.0.1
-Author URI: http://vzazerkalie.com/portf/
+Author URI: https://www.upwork.com/freelancers/~0171355a1c2fd95935
 */
 
 require_once( 'AAPaymentInitial.php' );
 include( 'ajax.php' );
 
 $aa_payment = new AAPaymentInitial( "AA Payment" );
+// Subpage
+$aa_payment->addSubpage( 'Some SUb Page' );
 
 // Wrap to wp_loaded for get user and set him notice
 add_action( 'plugins_loaded', 'aa_func_20150406060442', 1 );
@@ -22,11 +24,11 @@ function aa_func_20150406060442()
 	$aa_payment->setPluginNotice( 'aa_payment_welcome', "Plugin {$aa_payment->_plugin_name} is enabled" );
 
 	$aa_payment->setOption( 'paypa_credentials',
-		array(
+		[
 			'email'     => '',
 			'client_id' => '',
 			'secret'    => '',
-		)
+		]
 	);
 }
 
@@ -34,9 +36,7 @@ function aa_func_20150406060442()
 add_filter( 'aa_payment_basetitle', 'aa_func_20150506060501', 10, 1 );
 function aa_func_20150506060501( $title )
 {
-	$title = $title .= " (test mode)";
-
-	return $title;
+	return $title .= " (test mode)";
 }
 
 /**

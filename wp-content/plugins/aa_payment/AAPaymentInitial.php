@@ -13,7 +13,7 @@ class AAPaymentInitial {
 	protected $_menu_slug;
 	protected $_positon;
 	protected $_notices_option;
-	public $_plugin_options;
+	public    $_plugin_options;
 
 	/**
 	 * @param string $name
@@ -33,21 +33,26 @@ class AAPaymentInitial {
 		$this->_plugin_options = "aa_" . $this->_menu_slug . "_plugin_options";
 
 		// Admin Script
-		add_action( 'admin_enqueue_scripts', array( $this, 'registerPluginEnqueScript' ) );
+		add_action( 'admin_enqueue_scripts', [ $this, 'registerPluginEnqueScript' ] );
 		// Front Script
-		add_action( 'wp_enqueue_scripts', array( $this, 'registerPluginEnqueScript' ) );
-		add_action( 'admin_menu', array( $this, 'createAdminPage' ) );
+		add_action( 'wp_enqueue_scripts', [ $this, 'registerPluginEnqueScript' ] );
+		add_action( 'admin_menu', [ $this, 'createAdminPage' ] );
 
 		// Set plugin notices
 		$notices = get_option( $this->_notices_option );
 		if ( ! $notices )
-			add_option( $this->_notices_option, array() );
+			add_option( $this->_notices_option, [ ] );
 
 		$plugin_options = get_option( $this->_plugin_options );
 		if ( ! $plugin_options )
-			add_option( $this->_plugin_options, array() );
+			add_option( $this->_plugin_options, [ ] );
 	}
 
+	/**
+	 * ==================== Get Options ======================
+	 * if $option - get particular option elem of array
+	 * 20.03.2016
+	 */
 	public function getOptions( $option = null )
 	{
 		if ( get_option( $this->_plugin_options ) ) {
@@ -87,6 +92,11 @@ class AAPaymentInitial {
 		}
 	}
 
+	/**
+	 * ==================== Get Notices ======================
+	 * If $notice - get particular notice
+	 * 20.03.2016
+	 */
 	public function getNotices( $notice = null )
 	{
 		if ( get_option( $this->_notices_option ) ) {
@@ -109,21 +119,21 @@ class AAPaymentInitial {
 	public function setPluginNotice( $notice = 'some_notice', $message = 'Some message', $type = 'updated' )
 	{
 		$get_noticesinfo = get_option( $this->_notices_option );
-		$new_option      = array();
+		$new_option      = [ ];
 
 		// If notice not exists set it for all users
 		if ( ! array_key_exists( $notice, $get_noticesinfo ) ) {
-			$new_option[ $notice ] = array(
+			$new_option[ $notice ] = [
 				'message'        => $message,
-				'excluded_users' => array(),
+				'excluded_users' => [ ],
 				'type'           => $type
-			);
+			];
 
 			$get_noticesinfo = array_merge( $get_noticesinfo, $new_option );
 			update_option( $this->_notices_option, $get_noticesinfo );
 		}
 
-		add_action( 'admin_notices', array( $this, 'renderNotices' ), 2 );
+		add_action( 'admin_notices', [ $this, 'renderNotices' ], 2 );
 	}
 
 	/**
@@ -159,13 +169,13 @@ class AAPaymentInitial {
 	{
 		$plugindir = plugin_dir_url( __DIR__ ) . basename( __DIR__ );
 		wp_enqueue_style( 'AAPluginStyle' . $this->_menu_slug, $plugindir . '/style/style.css' );
-		wp_enqueue_script( 'AAPluginScript' . $this->_menu_slug, $plugindir . '/js/script.js', array( 'jquery' ), false, true );
+		wp_enqueue_script( 'AAPluginScript' . $this->_menu_slug, $plugindir . '/js/script.js', [ 'jquery' ], false, true );
 
-		$data = array(
+		$data = [
 			'site_url'     => get_site_url(),
 			'ajax_url'     => admin_url( 'admin-ajax.php' ),
 			'template_uri' => get_template_directory_uri(),
-		);
+		];
 		wp_localize_script( 'AAPluginScript' . $this->_menu_slug, 'aa_ajax_var', $data );
 	}
 
@@ -178,32 +188,47 @@ class AAPaymentInitial {
 			$this->_page_title,
 			$this->_menu_title,
 			$this->_capability,
-			$this->_menu_slug,
-			array( $this, 'renderListing' ), '', $this->_positon
+			$this->_menu_slug, // file in views should be same
+			[ $this, 'renderListing' ], '', $this->_positon
 		);
 		do_action( 'do_the_creation_page' );
 	}
 
-	//@Template Todo: Think about connect subpage to exemplar object of class
+	/**
+	 * ==================== Sub Page ======================
+	 * 20.03.2016
+	 */
 	public function addSubpage( $page_title )
 	{
-		$filtered_title = str_replace( " ", "_", strtolower( $page_title ) );
-		add_submenu_page(
-			$this->_menu_slug,
-			$page_title,
-			$page_title,
-			$this->_capability,
-			$filtered_title,
-			array( $this, 'renderListing' )
-		);
+		$values = [
+			'slug'       => $this->_menu_slug,
+			'tittle'     => $page_title,
+			'capability' => $this->_capability,
+			'menu_slug'  => str_replace( " ", "_", strtolower( $page_title ) ), // file in views should be same
+			'action'     => [ $this, 'renderListing' ]
+		];
+
+		add_action( 'admin_menu', function () use ( &$values ) {
+			add_submenu_page(
+				$values[ 'slug' ],
+				$values[ 'tittle' ],
+				$values[ 'tittle' ],
+				$values[ 'capability' ],
+				$values[ 'menu_slug' ],
+				$values[ 'action' ]
+			);
+		} );
+
 	}
 
 	/**
-	 * Render base page
+	 * ==================== All Views ======================
+	 * 20.03.2016
 	 */
 	public function renderListing()
 	{
-		include( 'views/default_view.php' );
+		$path = "views/{$_GET['page']}.php";
+		include( $path );
 	}
 
 	/**
@@ -257,7 +282,7 @@ class AAPaymentInitial {
 		}
 
 		$q = "CREATE TABLE IF NOT EXISTS $table_name ( " . $primary_key_exists . substr( $combine_query, 0, - 2 ) . ")
-			ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
+			ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_unicode_ci;";
 
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $q );
