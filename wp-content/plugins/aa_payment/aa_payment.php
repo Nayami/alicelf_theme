@@ -8,10 +8,10 @@ Version: 0.0.1
 Author URI: https://www.upwork.com/freelancers/~0171355a1c2fd95935
 */
 
-require_once( 'AAPaymentInitial.php' );
+require_once( 'AAPluginInitial.php' );
 include( 'ajax.php' );
 
-$aa_payment = new AAPaymentInitial( "AA Payment" );
+$aa_payment = new AAPluginInitial( "AA Payment" );
 // Subpage
 $aa_payment->addSubpage( 'Some SUb Page' );
 

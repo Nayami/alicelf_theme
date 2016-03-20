@@ -3,7 +3,7 @@
 /**
  * Class AAPaymentInitial
  */
-class AAPaymentInitial {
+class AAPluginInitial {
 
 	public $_plugin_name;
 
