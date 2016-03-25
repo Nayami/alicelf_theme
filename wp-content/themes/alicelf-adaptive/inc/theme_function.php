@@ -1,81 +1,126 @@
 <?php
-/**
- * is_localhost
- * Content cutter
- * Fetch CUrl
- * Paged Navigation
- * Tags template
- * Custom Search Form
- * Check Plugin aa_check_plugin( $plugin ) aa_check_plugin( 'custom_captcha/custom_captcha.php' );
- * Dump and die _dd($data)
- * Get browser info aa_browser_info()
- * Unset All Cookies aa_unset_cookies()
- * Detect Mobile device aa_is_mobile_platform()
- */
 
 use Alicelf\Platform\MobileDetect;
+use Alicelf\Helpers\Helper;
 
 if ( ! function_exists( 'is_localhost' ) ) {
+	/**
+	 * @return bool
+	 */
 	function is_localhost()
 	{
-		return ( $_SERVER[ 'REMOTE_ADDR' ] === '127.0.0.1'
-		         || $_SERVER[ 'REMOTE_ADDR' ] === 'localhost' )
-		       || $_SERVER[ 'REMOTE_ADDR' ] === "::1"
-			? true : false;
+		return Helper::isLocalhost();
 	}
 }
 
 if ( ! function_exists( 'content_cutter' ) ) {
+	/**
+	 * Returns number of words
+	 *
+	 * @param $string
+	 * @param null $num_start
+	 * @param null $num_end
+	 *
+	 * @return null|string
+	 */
 	function content_cutter( $string, $num_start = null, $num_end = null )
 	{
-		settype( $string, "string" );
-		if ( is_int( $num_start ) && is_int( $num_end ) ) {
-			$array_of_strings = explode( " ", $string );
-			$sliced           = array_slice( $array_of_strings, $num_start, $num_end );
-			$new_string       = implode( " ", $sliced );
-
-			return $new_string;
-		}
-
-		return "num_start or num_end must be Integer";
+		return Helper::contentCutter( $string, $num_start, $num_end );
 	}
 }
 
-// Simple trim
-function trimData( $data )
-{
-	return trim( strip_tags( $data ) );
+if ( ! function_exists( 'dd' ) ) {
+	/**
+	 * Simply Output Data
+	 *
+	 * @param $data
+	 */
+	function dd( $data )
+	{
+		Helper::dumpAndDie( $data );
+	}
+}
+
+if ( ! function_exists( 'trimData' ) ) {
+	/**
+	 * Simple trim data
+	 *
+	 * @param $data
+	 *
+	 * @return string
+	 */
+	function trimData( $data )
+	{
+		return trim( strip_tags( $data ) );
+	}
 }
 
 if ( ! function_exists( 'aa_fetch_curl' ) ) {
-	/* cURL fetch*/
-	function aa_fetch_curl( $url )
+	/**
+	 * Regular curl or Wp curl
+	 *
+	 * @param $url
+	 * @param int $timeout
+	 *
+	 * @return mixed|string
+	 */
+	function aa_fetch_curl( $url, $timeout = 20 )
 	{
-		if ( is_callable( 'curl_init' ) ) {
-			$ch = curl_init();
-			curl_setopt( $ch, CURLOPT_URL, $url );
-			curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-			curl_setopt( $ch, CURLOPT_TIMEOUT, 20 );
-			curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
-//		set headers if need
-//		curl_setopt( $ch, CURLOPT_HTTPHEADER, array(
-//			'Content-type: text/xml'
-//		) );
-			$feedData = curl_exec( $ch );
-			curl_close( $ch );
-			//If not then use file_get_contents
-		} elseif ( ini_get( 'allow_url_fopen' ) == 1 || ini_get( 'allow_url_fopen' ) === true ) {
-			$feedData = file_get_contents( $url );
-			//Or else use the WP HTTP AP
-		} else {
-			if ( ! class_exists( 'WP_Http' ) )
-				include_once( ABSPATH . WPINC . '/class-http.php' );
-			$request  = new WP_Http;
-			$result   = $request->request( $url );
-			$feedData = $result[ 'body' ];
-		}
+		return Helper::fetchCurl( $url, $timeout );
+	}
+}
 
-		return $feedData;
+if ( ! function_exists( 'aa_check_plugin' ) ) {
+	/**
+	 * Check enabled plugins
+	 *
+	 * @param $plugin
+	 *
+	 * @return bool
+	 */
+	function aa_check_plugin( $plugin )
+	{
+		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+
+		return is_plugin_active( $plugin );
+	}
+}
+
+if ( ! function_exists( 'is_mobile_platform' ) ) {
+	/**
+	 * Check current platform is phone
+	 *
+	 * @return bool
+	 */
+	function is_mobile_platform()
+	{
+		$detect = new MobileDetect;
+		if ( $detect->isMobile() )
+			return true;
+
+		return false;
+	}
+}
+
+if ( ! function_exists( 'browser_info' ) ) {
+	/**
+	 * Get Browser Info
+	 *
+	 * @return string
+	 */
+	function browser_info()
+	{
+		return Helper::browser();
+	}
+}
+
+if ( ! function_exists( 'aa_unset_cookies' ) ) {
+	/**
+	 * Unset All Cookies
+	 */
+	function aa_unset_cookies()
+	{
+		Helper::flushCookies();
 	}
 }
 
@@ -138,34 +183,8 @@ function al_search_form( $echo = true )
 }
 
 /**
- * Check plugins
- */
-if ( ! function_exists( 'aa_check_plugin' ) ) {
-	function aa_check_plugin( $plugin )
-	{
-		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
-		return is_plugin_active( $plugin );
-	}
-}
-
-/**
- * Show globals
- */
-if ( ! function_exists( 'show_globals' ) ) {
-	function show_globals()
-	{
-		global $alicelf;
-		echo "<pre>";
-		print_r( $alicelf );
-		echo "</pre>";
-	}
-}
-
-/**
  * Get Brand
  */
-
 function get_brand()
 {
 	global $alicelf;
@@ -271,72 +290,5 @@ function form_process_to_send()
 		echo 'success';
 	} else {
 		echo "error";
-	}
-}
-
-if ( ! function_exists( '_dd' ) ) {
-	function _dd( $data )
-	{
-		echo "<pre>";
-		print_r( $data );
-		echo "</pre>";
-		die;
-	}
-}
-
-/**
- * Get Browser Info
- */
-if ( ! function_exists( 'aa_browser_info' ) ) {
-	function aa_browser_info()
-	{
-		if ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'MSIE' ) !== false || strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Trident' ) !== false ) {
-			$browser = 'ugly-iexplorer';
-		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Chrome' ) !== false ) {
-			$browser = 'google-chrome';
-		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Firefox' ) !== false ) {
-			$browser = 'mozilla-firefox';
-		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Opera' ) !== false ) {
-			$browser = 'opera';
-		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Safari' ) !== false ) {
-			$browser = 'apple-safari';
-		} else {
-			$browser = 'unknown-browser';
-		}
-
-		return $browser;
-	}
-}
-
-/**
- * Unset All Cookies
- */
-
-if ( ! function_exists( 'aa_unset_cookies' ) ) {
-	function aa_unset_cookies()
-	{
-		if ( isset( $_SERVER[ 'HTTP_COOKIE' ] ) ) {
-			$cookies = explode( ';', $_SERVER[ 'HTTP_COOKIE' ] );
-			foreach ( $cookies as $cookie ) {
-				$parts = explode( '=', $cookie );
-				$name  = trim( $parts[ 0 ] );
-				setcookie( $name, '', time() - 1000 );
-				setcookie( $name, '', time() - 1000, '/' );
-			}
-		}
-	}
-}
-
-if ( ! function_exists( 'aa_is_mobile_platform' ) ) {
-	/**
-	 * @return bool
-	 */
-	function aa_is_mobile_platform()
-	{
-		$detect = new MobileDetect;
-		if ( $detect->isMobile() )
-			return true;
-
-		return false;
 	}
 }
