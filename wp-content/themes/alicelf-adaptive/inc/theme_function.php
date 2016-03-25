@@ -2,6 +2,21 @@
 
 use Alicelf\Platform\MobileDetect;
 use Alicelf\Helpers\Helper;
+use Alicelf\Helpers\Arr;
+
+if ( ! function_exists( 'forget_array_item' ) ) {
+	/**
+	 * @param $maybe_array
+	 * @param $param
+	 * @param bool $key
+	 *
+	 * @return mixed (new array)
+	 */
+	function forget_array_item( $maybe_array, $param, $key = false )
+	{
+		return Arr::forget( $maybe_array, $param, $key );
+	}
+}
 
 if ( ! function_exists( 'is_localhost' ) ) {
 	/**
@@ -41,7 +56,7 @@ if ( ! function_exists( 'dd' ) ) {
 	}
 }
 
-if ( ! function_exists( 'trimData' ) ) {
+if ( ! function_exists( 'trim_data' ) ) {
 	/**
 	 * Simple trim data
 	 *
@@ -49,7 +64,7 @@ if ( ! function_exists( 'trimData' ) ) {
 	 *
 	 * @return string
 	 */
-	function trimData( $data )
+	function trim_data( $data )
 	{
 		return trim( strip_tags( $data ) );
 	}
@@ -148,13 +163,14 @@ function al_tags_template()
 
 /**
  * Custom Search form
+ *
+ * @param bool $echo
+ *
+ * @return mixed|string|void
  */
 function al_search_form( $echo = true )
 {
 	do_action( 'pre_get_search_form' );
-
-	$format = current_theme_supports( 'html5', 'search-form' ) ? 'html5' : 'xhtml';
-	$format = apply_filters( 'search_form_format', $format );
 
 	$search_form_template = locate_template( 'searchform.php' );
 	if ( '' != $search_form_template ) {
@@ -180,6 +196,7 @@ function al_search_form( $echo = true )
 	} else {
 		return $result;
 	}
+	return false;
 }
 
 /**
@@ -270,12 +287,12 @@ function form_process_to_send()
 		( ! empty( $_POST[ 'visitor_name' ] ) && ! empty( $_POST[ 'visitor_email' ] ) && ! empty( $_POST[ 'visitor_message' ] ) )
 	) {
 
-		$name      = trimData( $_POST[ 'visitor_name' ] );
-		$to        = trimData( $_POST[ 'to_admin' ] );
+		$name      = trim_data( $_POST[ 'visitor_name' ] );
+		$to        = trim_data( $_POST[ 'to_admin' ] );
 		$sitename  = $_POST[ 'bloginfo_name_field' ];
 		$subject   = 'Email From ' . $sitename . ' sended by ' . $name;
-		$email     = trimData( $_POST[ 'visitor_email' ] );
-		$mail_body = trimData( $_POST[ 'visitor_message' ] );
+		$email     = trim_data( $_POST[ 'visitor_email' ] );
+		$mail_body = trim_data( $_POST[ 'visitor_message' ] );
 
 		$headers = 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";

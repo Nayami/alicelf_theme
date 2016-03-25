@@ -112,8 +112,8 @@ class Helper {
 			$browser = 'unknown-browser';
 		}
 
-		return $browser;
-	}
+return $browser;
+}
 
 	/**
 	 * Remove all cookies
