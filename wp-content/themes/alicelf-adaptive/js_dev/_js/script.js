@@ -239,6 +239,25 @@ jQuery(document).ready(function($) {
 			openCloseMenu($(this), menuContainer);
 		});
 
+		menuContainer.find('.caret').on('click', function(event){
+			event.stopPropagation();
+			event.preventDefault();
+			var that = $(this), thatParent = that.parent();
+			that.toggleClass('fa-minus');
+			thatParent.siblings('.sub-menu').toggleClass('shown-submenu');
+		});
+
+		menuContainer.on('click', function(e){
+			e.stopPropagation();
+			if ($(e.target).hasClass('main-navigation')) {
+				menuContainer.removeClass('open-menu');
+				setTimeout(function(){
+					menuContainer.css('display', 'none');
+				}, 300);
+				launcher.removeClass('tcon-transform');
+			}
+		});
+
 
 	})();
 

@@ -46,7 +46,7 @@
 			.tcon-menu__lines {
 				&:after,
 				&:before {
-					background-color: #fff;
+					background-color : #fff;
 				}
 			}
 		}
@@ -65,6 +65,7 @@
  * 17.03.2016
  */
 .main-navigation {
+
 	@include transition();
 
 	/*Desktop*/
@@ -77,7 +78,7 @@
 
 	/*Tablet*/
 	@media (max-width : 951px) {
-		background-color  : transparentize($mainColor, .1);
+		background-color  : transparentize($gray-dark, .1);
 		position          : absolute;
 		top               : 0;
 		left              : 0;
@@ -86,21 +87,47 @@
 		min-height        : 1000px;
 		z-index           : 98;
 		ul.nav {
-			display   : block;
-			width     : 90%;
-			float     : none;
-			margin    : 50px auto 0;
-			padding   : 15px;
-			border    : 1px solid rgba(255, 255, 255, 0.3);
-			max-width : 500px;
+			display    : block;
+			width      : 90%;
+			float      : none;
+			margin     : 50px auto 0;
+			max-width  : 500px;
+			background : url("img/mobile-nav.png");
 		}
 		li {
-			display : block;
-			float   : none;
+			display    : block;
+			float      : none;
+			border-top : 1px solid rgb(83, 83, 83);
+			&:not(:last-of-type) {
+				border-bottom : 1px solid rgb(34, 34, 34);
+			}
 			a {
-				color : #fff;
+				padding-top    : 10px !important;
+				padding-bottom : 10px !important;
+				color          : #fff;
+				&:focus {
+					background-color : transparent !important;
+					color            : #fff !important;
+				}
 				&:hover {
 					background-color : rgba(255, 255, 255, 0.35);
+					color            : #fff !important;
+				}
+			}
+			&.active {
+				> a {
+					background-color : rgba(255, 255, 255, 0.35) !important;
+					color            : #fff !important;
+				}
+			}
+			&.menu-item-has-children {
+				.sub-menu {
+					height     : 0;
+					box-shadow : none;
+					overflow   : hidden;
+					&.shown-submenu {
+						height : auto;
+					}
 				}
 			}
 		}
@@ -116,6 +143,54 @@
 			transform         : scale(1);
 			opacity           : 1;
 		}
+
+		.dropdown-menu {
+			background   : none;
+			padding-left : 0;
+			display      : block;
+			float        : none;
+			position     : static;
+			margin       : 0;
+			> li {
+				> a {
+					padding-left : 25px;
+				}
+			}
+		}
+		.caret {
+			display                 : inline-block;
+			font                    : normal normal normal 17px FontAwesome;
+			font-size               : inherit;
+			text-rendering          : auto;
+			-webkit-font-smoothing  : antialiased;
+			-moz-osx-font-smoothing : grayscale;
+			position                : absolute;
+			z-index                 : 1;
+			right                   : 0;
+			top                     : 0;
+			margin                  : 0;
+			width                   : 40px;
+			height                  : 40px;
+			border                  : none;
+			border-left             : 1px solid transparentize($gray-lighter, .8);
+			text-align              : center;
+			line-height             : 40px;
+			&:before {
+				content : "\f067";
+				color   : rgba(255, 255, 255, 0.36);
+			}
+			&.right-caret {
+				-webkit-transform : rotate(0deg);
+				-moz-transform    : rotate(0deg);
+				transform         : rotate(0deg);
+			}
+			&.fa-minus {
+				&:before {
+					content : "\f068";
+				}
+			}
+		}
+
 	}
 
 }
