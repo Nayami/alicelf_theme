@@ -15,8 +15,9 @@ if ( !has_nav_menu('primary') ) {
 			'walker'         => new AliceNavigator()
 	));
 } else {
-?>
 
+	// @TODO: swith between several menu types
+	?>
 	<nav id="main-alicelf-nav" class="main-navigation" role="navigation">
 		<?php
 		$args = array(

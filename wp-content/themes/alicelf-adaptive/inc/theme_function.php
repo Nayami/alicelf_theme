@@ -253,6 +253,16 @@ function header_type()
 {
 	global $alicelf;
 	$header_type = $alicelf[ 'opt-header-type' ];
+
+	?>
+	<div id="mobile-menu-trigger" class="hidden-on-desktop">
+		<button type="button" class="tcon tcon-menu--xcross" aria-label="toggle menu">
+			<span class="tcon-menu__lines" aria-hidden="true"></span>
+			<span class="tcon-visuallyhidden">toggle menu</span>
+		</button>
+	</div>
+	<?php
+
 	switch ( $header_type ) {
 		case 2 :
 			get_header_second();

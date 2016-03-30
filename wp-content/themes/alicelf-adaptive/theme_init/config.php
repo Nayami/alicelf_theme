@@ -142,6 +142,22 @@ $section = array(
 			'default'    => '1'
 		),
 
+
+//		array(
+//			'id'         => 'mobile-menu-type',
+//			'type'       => 'image_select',
+//			'full_width' => true,
+//			'title'      => __( 'Mobile menu type', 'alicelf-adaptive' ),
+//			'subtitle'   => __( 'Select your mobile menu type', 'alicelf-adaptive' ),
+//			'desc'       => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
+//			//Must provide key => value(array:title|img) pairs for radio options
+//			'options'    => array(
+//				'1' => array( 'title' => 'Type 1', 'img' => $imgdir . 'mobile-menu-type-1.png' ),
+//				'2' => array( 'title' => 'Type 2', 'img' => $imgdir . 'mobile-menu-type-2.jpg' ),
+//			),
+//			'default'    => '1'
+//		),
+
 	)
 );
 Redux::setSection( $opt_name, $section );
