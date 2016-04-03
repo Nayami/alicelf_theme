@@ -139,16 +139,22 @@
 			}
 		}
 
-		-ms-transform     : scale(2); /* IE 9 */
-		-webkit-transform : scale(2); /* Safari */
-		transform         : scale(2);
-		opacity           : 0;
+		opacity : 0;
+		.nav.navbar-nav {
+			@include transition();
+			-ms-transform     : scale(.5); /* IE 9 */
+			-webkit-transform : scale(.5); /* Safari */
+			transform         : scale(.5);
+		}
 
 		&.open-menu {
-			-ms-transform     : scale(1); /* IE 9 */
-			-webkit-transform : scale(1); /* Safari */
-			transform         : scale(1);
-			opacity           : 1;
+
+			opacity : 1;
+			.nav.navbar-nav {
+				-ms-transform     : scale(1); /* IE 9 */
+				-webkit-transform : scale(1); /* Safari */
+				transform         : scale(1);
+			}
 		}
 
 		.dropdown-menu {
