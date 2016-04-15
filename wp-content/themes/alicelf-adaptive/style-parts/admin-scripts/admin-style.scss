@@ -3,13 +3,11 @@
  */
 @import "../vars";
 @import "../mix";
-
 // Components
 @import "admin-menu-icons";
 @import "admin-bootstrap/bootstrap-min.css";
 @import "../animate";
 @import "../loaderanimation";
-
 
 body.login {
 	@include gradient($azure, $brand-color);
@@ -75,7 +73,7 @@ body {
 
 	&.post-type-acf-field-group {
 		#wpbody {
-			.acf-hl{
+			.acf-hl {
 				[class*="acf-input"] {
 					@extend .content-box;
 				}
@@ -84,6 +82,7 @@ body {
 	}
 
 }
+
 .acf-gallery .acf-gallery-toolbar {
 	height : auto;
 }
@@ -128,4 +127,45 @@ body {
 	color     : #fff;
 	opacity   : .5;
 	font-size : 13px;
+}
+
+/**
+ * ==================== User Profile ======================
+ * 15.04.2016
+ */
+#user-profile-additional-meta {
+	th {
+		vertical-align : middle;
+		text-align     : center;
+	}
+}
+
+.img-wrap {
+	padding          : 5px;
+	border           : 1px solid #ccc;
+	border-radius    : 3px;
+	background-color : #fff;
+	position         : relative;
+	display          : inline-block;
+	margin-bottom    : 10px;
+	max-width        : 400px;
+	img {
+		width  : 100%;
+		height : auto;
+	}
+	i {
+		position         : absolute;
+		right            : 5px;
+		top              : 5px;
+		width            : 15px;
+		height           : 15px;
+		text-align       : center;
+		color            : #fff;
+		line-height      : 15px;
+		background-color : $dangerColor;
+		cursor : pointer;
+	}
+	&.hidden {
+		display: none;
+	}
 }

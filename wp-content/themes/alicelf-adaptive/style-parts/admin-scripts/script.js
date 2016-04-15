@@ -74,6 +74,116 @@ jQuery(document).ready(function($) {
 	});
 
 
+	/**
+	 * ==================================================================
+	 * ==================================================================
+	 * ==================== Backend global uploads ======================
+	 * ==================================================================
+	 * ==================================================================
+	 * 15.04.2016
+	 */
+	$('button[data-fragment="aa-upload-backend"]').on('click', function(e) {
+
+		e.preventDefault();
+		var that = $(this),
+			thatParent = that.parents('.backend-uploader-handler'),
+			uploadMultiple = thatParent.attr('data-type') === 'multiple',
+			imageContainer = thatParent.find('.image-holder'),
+			textInput = thatParent.find(':hidden'),
+			inputValues = [],
+			newHtmlValues = "";
+
+		if (textInput.attr('value') !== undefined && textInput.attr('value') !=="")
+			inputValues = textInput.attr('value').split(',');
+
+		var frame = wp.media({
+			title   : 'Add your title here',
+			frame   : 'post',
+			multiple: uploadMultiple,
+			library : {type: 'image'},
+			button  : {text: 'Add Image'}
+		});
+		frame.on('close', function(data) {
+			var imageArray = [],
+				images = frame.state().get('selection');
+			images.each(function(image) {
+				imageArray.push(image.attributes.url);
+			});
+
+			if (imageArray.length > 0) {
+				imageContainer.empty();
+
+				if (uploadMultiple) {
+					var newArrayCombine;
+
+					console.log(inputValues.length);
+					if (inputValues.length > 0)
+						newArrayCombine = imageArray.concat(inputValues);
+					else
+						newArrayCombine = imageArray;
+
+					newArrayCombine.forEach(function(elemIndex) {
+						newHtmlValues += "<div class='img-wrap'>";
+						newHtmlValues += "<img src='" + elemIndex + "'>";
+						newHtmlValues += "<i data-src='" + elemIndex + "' class='fa fa-remove'></i>";
+						newHtmlValues += "</div>";
+					});
+					imageContainer.append(newHtmlValues);
+					textInput.attr('value', newArrayCombine);
+
+				} else {
+					newHtmlValues = "<div class='img-wrap'>";
+					newHtmlValues += "<img src='" + imageArray[0] + "'>";
+					newHtmlValues += "<i data-src='" + imageArray[0] + "' class='fa fa-remove'></i>";
+					newHtmlValues += "</div>";
+
+					textInput.attr('value', imageArray[0]);
+					imageContainer.append(newHtmlValues);
+				}
+
+			}
+		});
+		frame.open();
+	});
+	/**
+	 * ==================== Remove Image from input ======================
+	 * 15.04.2016
+	 */
+
+	$('.backend-uploader-handler').find('i.fa-remove').waitUntilExists(function() {
+		var that = $(this);
+		that.on('click', function(e) {
+
+			var parent = that.parents('.backend-uploader-handler'),
+				relatedSrc = that.attr('data-src'),
+				wrapper = that.parents('.img-wrap'),
+				input = parent.find(':hidden'),
+				parentType = parent.attr('data-type'),
+				inputValues = input.attr('value').split(','),
+				index = inputValues.indexOf(relatedSrc);
+
+			if (parentType === 'single') {
+				input.attr('value', '');
+				wrapper.fadeOut();
+			} else {
+				// Multiple removements
+				if (index !== -1) {
+					inputValues.splice(index, 1);
+					input.attr('value', inputValues);
+					wrapper.fadeOut(200, function() {
+						wrapper.remove();
+					})
+				}
+			}
+			// End ifelse
+
+		});
+	});
+
+
+	// ! Backend global uploads END
+
+
 	$('.invoke-conversion').on('click', function(e) {
 
 		var that = $(this),
@@ -88,7 +198,7 @@ jQuery(document).ready(function($) {
 				data   : {
 					do_the_conversion: true,
 					action           : 'aa_func_20150827030852',
-					set_encoding : selectEncoding
+					set_encoding     : selectEncoding
 				},
 				success: function(data) {
 					container.empty();
