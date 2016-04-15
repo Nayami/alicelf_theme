@@ -19,6 +19,9 @@ $gray : lighten($gray-base, 33.5%) !default; // #555
 $gray-light : lighten($gray-base, 46.7%) !default; // #777
 $gray-lighter : lighten($gray-base, 93.5%) !default; // #eee
 
+$light-brand : #A177FF;
+$azure : #02CEFF;
+
 $state-success-text : #3c763d !default;
 $state-success-bg : #dff0d8 !default;
 $state-success-border : darken(adjust-hue($state-success-bg, -10), 5%) !default;

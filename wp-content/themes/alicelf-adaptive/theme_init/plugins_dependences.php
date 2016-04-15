@@ -44,17 +44,17 @@ function alicelf_theme_register_dependences()
 	$plugins_uri = get_template_directory_uri() . '/theme_init/plugins/';
 	$plugins     = array(
 
-		// Alicelf Styles pre-packaged with a theme.
-//		array(
-//			'name'               => 'Alicelf Styles', // The plugin name.
-//			'slug'               => 'alicelf-styles', // The plugin slug (typically the folder name).
-//			'source'             => $plugins_uri . 'alicelf-styles.zip', // The plugin source.
-//			'required'           => true,
-//			'version'            => '0.3', // the active plugin must be this version or higher.
-//			'force_activation'   => false, // Plugin is activated upon theme activation and cannot be deactivated until theme switch.
-//			'force_deactivation' => false, // Plugin is deactivated upon theme switch, useful for theme-specific plugins.
-//			'external_url'       => '',
-//		),
+		// ACF PRo
+		array(
+			'name'               => 'ACF Pro',
+			'slug'               => 'Advanced_Custom_Fields_Pro',
+			'source'             => $plugins_uri . 'Advanced_Custom_Fields_Pro.zip',
+			'required'           => true,
+			'version'            => '5.3.1',
+			'force_activation'   => false,
+			'force_deactivation' => false,
+			'external_url'       => '',
+		),
 		array(
 			'name'               => 'Custom Captcha',
 			'slug'               => 'custom_captcha',

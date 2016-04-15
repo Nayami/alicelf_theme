@@ -22,10 +22,7 @@
   float   : none;
 }
 
-input[type=submit],
-button[type=submit] {
-  @include primButton;
-}
+
 
 input[type="text"],
 input[type="email"],

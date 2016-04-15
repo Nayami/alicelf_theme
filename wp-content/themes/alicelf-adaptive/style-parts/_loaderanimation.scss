@@ -293,14 +293,12 @@ input[type="checkbox"]#spin:checked ~ .loader-infinite-spinner {
 body {
 	&.wp-admin {
 		.loader-backdrop {
-			.lb,.rb {
+			.lb, .rb {
 				margin-top : -10px;
 			}
 		}
 	}
 }
-
-
 
 /**
  * Date:  13.08.2015
@@ -377,5 +375,16 @@ body {
 	40% {
 		transform         : scale(1.0);
 		-webkit-transform : scale(1.0);
+	}
+}
+
+#global-load-line {
+	@include gradientH();
+	position         : fixed;
+	top              : 0;
+	width            : 100%;
+	z-index          : 999999;
+	> svg {
+		height : 5px;
 	}
 }

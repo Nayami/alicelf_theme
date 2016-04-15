@@ -21,5 +21,7 @@ return array(
     '388fe5cc0efccb52fa7199c4c30349c5' => $baseDir . '/inc/theme_metaboxes.php',
     '31ba488d7c4ceddbec93d58fead0a632' => $baseDir . '/inc/thumbnails.php',
     'ff10a56fe75890e7422a0a3d7e17de68' => $baseDir . '/inc/widget_sidebars.php',
+    '1d36fd2c68f3e45a5b5c2c9736fcd8e9' => $baseDir . '/inc/user.php',
+    'c80b0348ba6b6b0636d4f9afc6d1ef62' => $baseDir . '/inc/form-processors.php',
     '3c417106c7943eb210429eeb706634a8' => $baseDir . '/ajax.php',
 );

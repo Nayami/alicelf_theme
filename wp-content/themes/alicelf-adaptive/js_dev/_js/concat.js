@@ -3,9 +3,14 @@
  */
 
 var SITE_URL = aa_ajax_var.site_url,
-		AJAXURL = aa_ajax_var.ajax_url,
-		THEME_URI = aa_ajax_var.template_uri,
-		IMG_DIR = THEME_URI + '/img/';
+	AJAXURL = aa_ajax_var.ajax_url,
+	THEME_URI = aa_ajax_var.template_uri,
+	IMG_DIR = THEME_URI + '/img/',
+	LOAD_LINE = "#global-load-line",
+	_COLORS = {
+		purple: "#684fb6",
+		red   : "#d9534f"
+	};
 
 var Loaders = {
 	bouncingAbsolute: '<div id="loader-absolute" class="labsolut"><div class="preview-area"><div class="spinner-jx"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div></div>',
@@ -46,46 +51,56 @@ jQuery(document).ready(function($) {
 	 * 2/11/2016
 	 */
 	var alertHolder = function(itemClass, sendedMessage) {
-		return "<div class='alert alert-" + itemClass + "'>" +
-			"<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
-			"<span aria-hidden='true'>&times;</span>" +
-			"</button><h3 class='text-center'>" + sendedMessage + "</h3></div>"
-	},
+			return "<div class='alert alert-" + itemClass + "'>" +
+				"<button type='button' class='close' data-dismiss='alert' aria-label='Close'>" +
+				"<span aria-hidden='true'>&times;</span>" +
+				"</button><h3 class='text-center'>" + sendedMessage + "</h3></div>"
+		},
 		modalAlert = function(itemClass, msg) {
-		return "<div class='alert-backdrop'><div class='alert alert-" + itemClass + "'>" +
-			"<p>" + msg + "</p></div></div>"
-	},
+			return "<div class='alert-backdrop'><div class='alert alert-" + itemClass + "'>" +
+				"<p>" + msg + "</p></div></div>"
+		},
+		launchModalAlert = function(itemClass, msg){
+			var bodyselector = $('body');
+			bodyselector.prepend(modalAlert(itemClass, msg));
+			setTimeout(function(){
+				bodyselector.find('.alert-backdrop').addClass('show');
+			}, 100);
+		},
 		elemHasClass = function(el, cls) {
-		return el.className && new RegExp("(\\s|^)" + cls + "(\\s|$)").test(el.className);
-	},
+			return el.className && new RegExp("(\\s|^)" + cls + "(\\s|$)").test(el.className);
+		},
 		capitalize = function (string) {
-		return string.charAt(0).toUpperCase() + string.slice(1);
-	};
+			return string.charAt(0).toUpperCase() + string.slice(1);
+		};
+
 
 	$('.alert-backdrop').waitUntilExists(function() {
 		var that = $(this);
 		that.on('click', function(e) {
 			e.stopPropagation();
 			if (elemHasClass(e.target, 'alert-backdrop')) {
-				that.fadeOut(500, function() {
+				that.removeClass('show');
+				setTimeout(function() {
 					that.remove();
-				});
+				}, 300);
 			}
 		});
 	});
+
+
 
 	/**
 	 * ==================== Defaults End ======================
 	 * 2/11/2016
 	 */
 
-
 	(function mainThemeAjaxScope() {
 
 		var successMessage ="Your message has been successfully sended",
-				errorMessage = "Fill Correct all required fields!",
-				wrongCaptcha = "Fill Correct Captha",
-				unknownError ="Something Wrong, try again later";
+			errorMessage = "Fill Correct all required fields!",
+			wrongCaptcha = "Fill Correct Captha",
+			unknownError ="Something Wrong, try again later";
 
 		var formContactProcess = function(act) {
 
@@ -163,10 +178,13 @@ jQuery(document).ready(function($) {
 				$window = $(window),
 				$content = $('#ajax-posts-loop');
 
-			page === 1 && progressJs().start();
-
-
 			var loadPosts = function() {
+				$(LOAD_LINE).empty();
+				$(LOAD_LINE).fadeIn();
+				var line = new ProgressBar.Line(LOAD_LINE, {color: _COLORS.purple});
+
+				line.animate(0.2);
+
 				$.ajax({
 					url       : AJAXURL,
 					type      : "POST",
@@ -180,7 +198,7 @@ jQuery(document).ready(function($) {
 						if (page !== 1)
 							$content.append(Loaders.bouncingStatic);
 
-						page === 1 && progressJs().set(50);
+						line.animate(0.5);
 					},
 					success   : function(data) {
 						var $data = $(data);
@@ -193,7 +211,12 @@ jQuery(document).ready(function($) {
 						} else {
 							$('#loader-static').remove();
 						}
-						page === 1 && progressJs().end();
+						line.animate(1);
+
+						setTimeout(function() {
+							$(LOAD_LINE).fadeOut();
+						}, 500);
+
 					},
 					error     : function(jqXHR, textStatus, errorThrown) {
 						$('#loader-static').remove();
@@ -216,7 +239,6 @@ jQuery(document).ready(function($) {
 
 	})();
 
-	
 
 
 });

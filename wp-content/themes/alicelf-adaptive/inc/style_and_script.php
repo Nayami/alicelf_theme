@@ -13,9 +13,6 @@ function invoke_scripts()
 	wp_enqueue_style( 'alice-font_awesome', $t_dir . '/font-awesome/css/font-awesome.min.css' );
 	wp_enqueue_style( 'alice-icons', $t_dir . '/alicelf-font-icons/styles.css' );
 
-	// Plugins Css
-	wp_enqueue_style( 'progressjs-css', $theme_path . '/partials/progressjs.min.css' );
-
 	// Styles
 	wp_enqueue_style( 'bootstrap-base-styles', $theme_path . '/bootstrap/bootstrap.css' );
 	wp_enqueue_style( 'template-base-styles', get_bloginfo( 'stylesheet_url' ) );
@@ -63,4 +60,25 @@ function theme_alicelf_admin_styles_restore_scripts()
 		'template_uri' => get_template_directory_uri(),
 	);
 	wp_localize_script( 'alice_script_admin', 'aa_admin_ajax_var', $data );
+}
+
+
+// Login Scripts
+add_action('login_enqueue_scripts', 'aa_func_20165515055520');
+function aa_func_20165515055520()
+{
+	global $alicelf;
+	$t_dir = get_template_directory_uri() . '/style-parts';
+	wp_enqueue_style( 'alice_font_awesome', $t_dir . '/font-awesome/css/font-awesome.min.css' );
+	wp_enqueue_style( 'alice_icons', $t_dir . '/alicelf-font-icons/styles.css' );
+	wp_enqueue_style( 'alice_style_admin', $t_dir . '/admin-scripts/admin-style.css' );
+	?>
+	<style type="text/css">
+		#login > h1 a {
+			background: url("<?php echo $alicelf['opt-logo']['url'] ?>");
+			width: <?php echo $alicelf['opt-logo']['width'] ?>px;
+			height: <?php echo $alicelf['opt-logo']['height'] ?>px;
+		}
+	</style>
+	<?php
 }

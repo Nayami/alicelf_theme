@@ -1,27 +1,41 @@
 .alert-backdrop {
-	background-color : rgba(0, 0, 0, 0.53);
+	background-color : rgba(255, 255, 255, 0.67);
 	position         : fixed;
 	display          : block;
 	width            : 100%;
 	height           : 100%;
-	z-index: 200;
+	z-index          : 200;
+	opacity          : 0;
+	@include transition();
 	.alert {
-		position    : absolute;
-		top         : 100px;
-		left        : 50%;
-		width       : 100%;
-		max-width   : 500px;
-		margin-left : -250px;
-		z-index: 5;
-		text-align : center;
+		position          : absolute;
+		top               : 100px;
+		left              : 50%;
+		width             : 100%;
+		max-width         : 500px;
+		margin-left       : -250px;
+		z-index           : 5;
+		text-align        : center;
+		-ms-transform     : scale(.5); /* IE 9 */
+		-webkit-transform : scale(.5); /* Safari */
+		transform         : scale(.5);
+		@include transition();
 	}
 	/*Mobile*/
 	@media (max-width : 767px) {
 		.alert {
-			display: block;
-			width : 100%;
-			left : auto;
+			display     : block;
+			width       : 100%;
+			left        : auto;
 			margin-left : auto;
+		}
+	}
+	&.show {
+		opacity : 1;
+		.alert {
+			-ms-transform     : scale(1); /* IE 9 */
+			-webkit-transform : scale(1); /* Safari */
+			transform         : scale(1);
 		}
 	}
 }

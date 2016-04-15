@@ -48,7 +48,7 @@ function aa_func_20161003111058()
 					that.find('i').addClass('fa-spin fa-spinner');
 
 					$.ajax({
-						url       : AJAXURL,
+						url       : AJAXURL, // must be existing
 						type      : "POST",
 						data      : {
 							action : 'ajx20161216111200',

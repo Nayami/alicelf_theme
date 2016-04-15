@@ -12,13 +12,14 @@
 	<?php wp_head(); ?>
 </head>
 
-<body id="site-content" <?php body_class(); ?>>
+<body id="site-content" <?php body_class(browser_info()); ?>>
 <?php
 	global $alicelf;
 	do_action('aa_afterbodystart');
 	$site_content_class = $alicelf['opt-sticky-header'] === '2' ?
 		'main-content-site stick-to-top' :
 		'main-content-site' ;
+	do_action("render_system_messages");
 ?>
 <div id="scroll-trigger-top"></div>
 <div class="<?php echo $site_content_class ?>">

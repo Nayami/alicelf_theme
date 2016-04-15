@@ -98,22 +98,28 @@ class Helper {
 	 */
 	public static function browser()
 	{
-		if ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'MSIE' ) !== false || strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Trident' ) !== false ) {
+		if ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'MSIE' ) !== false
+		     || strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Trident' ) !== false ) {
 			$browser = 'ugly-iexplorer';
+
 		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Chrome' ) !== false ) {
 			$browser = 'google-chrome';
+
 		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Firefox' ) !== false ) {
 			$browser = 'mozilla-firefox';
+
 		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Opera' ) !== false ) {
 			$browser = 'opera';
+
 		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Safari' ) !== false ) {
 			$browser = 'apple-safari';
+
 		} else {
 			$browser = 'unknown-browser';
 		}
 
-return $browser;
-}
+		return $browser;
+	}
 
 	/**
 	 * Remove all cookies

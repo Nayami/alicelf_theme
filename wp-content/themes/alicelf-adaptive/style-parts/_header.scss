@@ -17,6 +17,8 @@
 		display : block;
 		width   : 100%;
 		height  : auto;
+		max-width : 300px;
+
 	}
 	/*Mobile*/
 	@media (max-width : 767px) {
@@ -71,6 +73,17 @@
  * ==================== Navbar ======================
  * 17.03.2016
  */
+.header-type-2 {
+	.main-navigation {
+		/*Desktop*/
+		@media (min-width : 952px) {
+			display : block !important;
+			ul.nav {
+				margin-top : 50px;
+			}
+		}
+	}
+}
 .main-navigation {
 
 	@include transition();
@@ -78,9 +91,6 @@
 	/*Desktop*/
 	@media (min-width : 952px) {
 		display : block !important;
-		ul.nav {
-			margin-top : 50px;
-		}
 	}
 
 	/*Tablet*/
