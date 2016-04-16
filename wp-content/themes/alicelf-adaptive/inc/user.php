@@ -1,4 +1,26 @@
 <?php
+
+//add_action('admin_bar_menu', 'aa_func_20162016102013');
+function aa_func_20162016102013( $wp_admin_bar )
+{
+	global $user_identity;
+	$user_id     = get_current_user_id();
+	$avatar_meta = get_user_meta( $user_id, '_aa_user_avatar', true );
+	$avatar      = ! empty( $avatar_meta ) ? $avatar_meta : null;
+
+	$args = array(
+		'id'     => 'custom_adminbar_useridenity',
+		'title'  => "{$user_identity}",
+		'parent' => 'top-secondary',
+		'href'   => get_edit_user_link( $user_id ), //@TODO: change link to frontend
+		'meta'   => array( 'class' => 'my-toolbar-page' )
+	);
+	if ( $avatar )
+		$args[ 'title' ] = "<img id='custom-adminbar-userpic' src='{$avatar}'>{$user_identity}";
+
+	$wp_admin_bar->add_node( $args );
+}
+
 /**
  * ==================== Add and handle User Meta ======================
  * 15.04.2016
@@ -71,9 +93,15 @@ function aa_func_20161315081350( $profileuser )
 						switch ( $value[ 'type' ] ) {
 
 							case "upload_single":
-								$image = empty( $v )
-									? null :
-									"<div class='img-wrap'><img src='{$v}'><i data-id-src='{$v}' class='fa fa-remove'></i></div>";
+
+								$image = null;
+
+								if ( ! empty( $v ) ) {
+									$item = json_decode( $v );
+									$image .= "<div class='img-wrap'>";
+									$image .= "<img src='{$item->url}'><i data-id-src='{$item->id}' class='fa fa-remove'></i>";
+									$image .= "</div>";
+								}
 								echo "<div class='backend-uploader-handler' data-type='single'>";
 								echo "<div class='image-holder'>{$image}</div>";
 								echo "<button data-fragment='aa-upload-backend' class='button button-small'>Change Image</button>";
@@ -85,7 +113,7 @@ function aa_func_20161315081350( $profileuser )
 								$image = null;
 
 								if ( ! empty( $v ) ) {
-									foreach ( json_decode($v) as $item ) {
+									foreach ( json_decode( $v ) as $item ) {
 										$image .= "<div class='img-wrap'>";
 										$image .= "<img src='{$item->url}'><i data-id-src='{$item->id}' class='fa fa-remove'></i>";
 										$image .= "</div>";
@@ -120,10 +148,45 @@ function aa_func_20161315081350( $profileuser )
  * ==================== Frontend User Profile view ======================
  * 15.04.2016
  */
-add_action( 'aa_userprofile_action', 'aa_func_20161815081848', 10, 2 );
-function aa_func_20161815081848( $user, $user_meta )
+add_action( 'aa_userprofile_action', 'aa_func_20161815081848' );
+function aa_func_20161815081848()
 {
-	echo "<pre>";
-	print_r( $user_meta );
-	echo "</pre>";
+	$current_viewer = get_current_user_id();
+	$user_id        = isset( $_GET[ 'profile_id' ] ) ? (int)$_GET[ 'profile_id' ] : $current_viewer;
+	$user           = new WP_User( $user_id );
+
+	$avatar_meta = get_user_meta( $user_id, '_aa_user_avatar', true );
+	$avatar      = [
+		'id'  => null,
+		'url' => get_template_directory_uri() . "/img/user-placeholder.png"
+	];
+	if ( ! empty( $avatar_meta ) ) {
+		$ava             = json_decode( $avatar_meta );
+		$avatar[ 'id' ]  = $ava->id;
+		$avatar[ 'url' ] = $ava->url;
+	}
+
+	?>
+	<div class="ghostly-wrap" id="user-idenity-<?php echo $user_id ?>">
+		<div class="row">
+			<div class="col-sm-3">
+
+				<?php if($current_viewer === $user_id): ?>
+				<a href="#" class="thumbnail" data-edit-image="<?php echo $avatar[ 'id' ] ?>">
+					<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
+				</a>
+				<?php else: ?>
+					<div class="thumbnail">
+						<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
+					</div>
+				<?php endif; ?>
+
+			</div>
+			<div class="col-sm-9">
+				<h2><?php echo $user->data->user_email ?></h2>
+			</div>
+		</div>
+
+	</div>
+	<?php
 }

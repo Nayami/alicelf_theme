@@ -111,10 +111,15 @@ jQuery(document).ready(function($) {
 			images.each(function(image) {
 				var singleImage = image.attributes;
 				imageArray.push(singleImage.url);
-				imagesObj.push({id:singleImage.id,url:singleImage.url});
+				imagesObj.push(
+					{
+						id : singleImage.id,
+						url: singleImage.url
+					}
+				);
 			});
 
-			if(imagesObj.length > 0) {
+			if (imagesObj.length > 0) {
 				imageContainer.empty();
 				if (uploadMultiple) {
 					var newArrayCombine;
@@ -136,11 +141,11 @@ jQuery(document).ready(function($) {
 
 				} else {
 					newHtmlValues = "<div class='img-wrap'>";
-					newHtmlValues += "<img src='" + imageArray[0] + "'>";
-					newHtmlValues += "<i data-id-src='" + imageArray[0] + "' class='fa fa-remove'></i>";
+					newHtmlValues += "<img src='" + imagesObj[0].url + "'>";
+					newHtmlValues += "<i data-id-src='" + imagesObj[0].id + "' class='fa fa-remove'></i>";
 					newHtmlValues += "</div>";
 
-					textInput.attr('value', imageArray[0]);
+					textInput.attr('value', JSON.stringify(imagesObj[0]));
 					imageContainer.append(newHtmlValues);
 				}
 
@@ -174,9 +179,9 @@ jQuery(document).ready(function($) {
 				// Multiple removements
 				var inputValues = JSON.parse(input.attr('value'));
 
-				if(inputValues.length > 0) {
+				if (inputValues.length > 0) {
 					for (var obj in inputValues) {
-						if(parseInt(relaredIdSrc) === inputValues[obj].id) {
+						if (parseInt(relaredIdSrc) === inputValues[obj].id) {
 							inputValues.splice(obj, 1);
 						}
 					}

@@ -9,7 +9,7 @@ if ( is_user_logged_in() ) {
 	$user      = new WP_User( get_current_user_id() );
 	$user_meta = get_user_meta( $user->ID );
 	// @TODO: check if user activation key is acceptable and make else
-	do_action('aa_userprofile_action', $user, $user_meta);
+	do_action('aa_userprofile_action');
 
 	// @TODO: render user stuff
 
