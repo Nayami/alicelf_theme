@@ -99,7 +99,8 @@ class Helper {
 	public static function browser()
 	{
 		if ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'MSIE' ) !== false
-		     || strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Trident' ) !== false ) {
+		     || strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Trident' ) !== false
+		) {
 			$browser = 'ugly-iexplorer';
 
 		} elseif ( strpos( $_SERVER[ 'HTTP_USER_AGENT' ], 'Chrome' ) !== false ) {
@@ -135,6 +136,33 @@ class Helper {
 				setcookie( $name, '', time() - 1000, '/' );
 			}
 		}
+	}
+
+	/**
+	 * @param $attachment_id
+	 *
+	 * @return bool
+	 */
+	public static function deleteAttachment( $attachment_id )
+	{
+		if ( ! $attachment_id && ! is_numeric( $attachment_id ) )
+			return false;
+
+		if ( wp_get_attachment_image_src( $attachment_id ) ) {
+			unlink( get_attached_file( $attachment_id ) );
+
+			foreach ( wp_get_attachment_metadata( $attachment_id )[ 'sizes' ] as $ik => $iv ) {
+				$image = wp_get_attachment_image_src( $attachment_id, $ik )[ 0 ];
+				unlink( str_replace( get_site_url() . '/', ABSPATH, $image ) );
+			}
+
+			wp_delete_attachment( $attachment_id );
+
+			return true;
+		}
+
+		return false;
+
 	}
 
 }

@@ -104,13 +104,12 @@ jQuery(document).ready(function($) {
 			button  : {text: 'Add Image'}
 		});
 		frame.on('close', function(data) {
-			var imageArray = [],
-				imagesObj = [],
+			var imagesObj = [],
 				images = frame.state().get('selection');
 
 			images.each(function(image) {
 				var singleImage = image.attributes;
-				imageArray.push(singleImage.url);
+
 				imagesObj.push(
 					{
 						id : singleImage.id,

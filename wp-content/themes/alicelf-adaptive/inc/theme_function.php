@@ -18,6 +18,22 @@ if ( ! function_exists( 'forget_array_item' ) ) {
 	}
 }
 
+
+if ( ! function_exists( 'aa_delete_attachment' ) ) {
+	/**
+	 * Delete Attachment record and unlink related files
+	 *
+	 * @param $id
+	 *
+	 * @return bool
+	 */
+	function aa_delete_attachment( $id )
+	{
+		return Helper::deleteAttachment( $id );
+	}
+}
+
+
 if ( ! function_exists( 'is_localhost' ) ) {
 	/**
 	 * @return bool
@@ -196,6 +212,7 @@ function al_search_form( $echo = true )
 	} else {
 		return $result;
 	}
+
 	return false;
 }
 
@@ -247,7 +264,6 @@ function get_header_second()
 	</div>
 	<?php
 }
-
 
 // Switch headers
 function header_type()
@@ -321,9 +337,8 @@ function form_process_to_send()
 	}
 }
 
-
 if ( ! function_exists( 'login_register_form' ) ) {
-	function login_register_form(  )
+	function login_register_form()
 	{
 		?>
 		<div class="clearfix" id="aa-login-register-forms">
