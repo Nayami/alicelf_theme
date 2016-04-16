@@ -151,7 +151,8 @@ class Helper {
 		if ( wp_get_attachment_image_src( $attachment_id ) ) {
 			unlink( get_attached_file( $attachment_id ) );
 
-			foreach ( wp_get_attachment_metadata( $attachment_id )[ 'sizes' ] as $ik => $iv ) {
+			$attachment_meta = wp_get_attachment_metadata( $attachment_id );
+			foreach ( $attachment_meta[ 'sizes' ] as $ik => $iv ) {
 				$image = wp_get_attachment_image_src( $attachment_id, $ik )[ 0 ];
 				unlink( str_replace( get_site_url() . '/', ABSPATH, $image ) );
 			}
