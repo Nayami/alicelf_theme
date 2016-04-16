@@ -18,9 +18,10 @@
 @import "style-parts/transformicons/index/tcons";
 
 // Content Parts
-@import "style-parts/_header";
-@import "style-parts/_main";
-@import "style-parts/_footer";
+@import "style-parts/header";
+@import "style-parts/main";
+@import "style-parts/user";
+@import "style-parts/footer";
 
 @import "style-parts/_responsive";
 @import "style-parts/loaderanimation";

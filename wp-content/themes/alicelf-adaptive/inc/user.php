@@ -167,9 +167,9 @@ function aa_func_20161815081848()
 	}
 
 	?>
-	<div class="ghostly-wrap" id="user-idenity-<?php echo $user_id ?>">
+	<div class="ghostly-wrap" data-user="<?php echo $user_id ?>" id="user-container-idenity">
 		<div class="row">
-			<div class="col-sm-3">
+			<aside class="col-sm-3 aside-profile">
 
 				<?php if($current_viewer === $user_id): ?>
 				<a href="#" class="thumbnail" data-edit-image="<?php echo $avatar[ 'id' ] ?>">
@@ -181,10 +181,12 @@ function aa_func_20161815081848()
 					</div>
 				<?php endif; ?>
 
-			</div>
-			<div class="col-sm-9">
+			</aside>
+
+			<div class="col-sm-9 info-container">
 				<h2><?php echo $user->data->user_email ?></h2>
 			</div>
+
 		</div>
 
 	</div>
