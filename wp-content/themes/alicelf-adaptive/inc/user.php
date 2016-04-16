@@ -72,9 +72,8 @@ function aa_func_20161315081350( $profileuser )
 
 							case "upload_single":
 								$image = empty( $v )
-									? null
-									:
-									"<div class='img-wrap'><img src='{$v}'><i data-src='{$v}' class='fa fa-remove'></i></div>";
+									? null :
+									"<div class='img-wrap'><img src='{$v}'><i data-id-src='{$v}' class='fa fa-remove'></i></div>";
 								echo "<div class='backend-uploader-handler' data-type='single'>";
 								echo "<div class='image-holder'>{$image}</div>";
 								echo "<button data-fragment='aa-upload-backend' class='button button-small'>Change Image</button>";
@@ -84,14 +83,15 @@ function aa_func_20161315081350( $profileuser )
 
 							case "upload_multiple":
 								$image = null;
+
 								if ( ! empty( $v ) ) {
-									foreach ( explode( ',', $v ) as $item ) {
-										$image .= "<div title='{$item}' class='img-wrap'>";
-										$image .= "<img src='{$item}'><i data-src='{$item}' class='fa fa-remove'></i>";
+									foreach ( json_decode($v) as $item ) {
+										$image .= "<div class='img-wrap'>";
+										$image .= "<img src='{$item->url}'><i data-id-src='{$item->id}' class='fa fa-remove'></i>";
 										$image .= "</div>";
 									}
 								}
-
+//
 								echo "<div class='backend-uploader-handler' data-type='multiple'>";
 								echo "<div class='image-holder'>{$image}</div>";
 								echo "<button data-fragment='aa-upload-backend' class='button button-small'>Add Images</button>";

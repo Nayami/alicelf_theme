@@ -93,8 +93,8 @@ jQuery(document).ready(function($) {
 			inputValues = [],
 			newHtmlValues = "";
 
-		if (textInput.attr('value') !== undefined && textInput.attr('value') !=="")
-			inputValues = textInput.attr('value').split(',');
+		if (textInput.attr('value') !== undefined && textInput.attr('value') !== "")
+			inputValues = JSON.parse(textInput.attr('value'));
 
 		var frame = wp.media({
 			title   : 'Add your title here',
@@ -105,36 +105,39 @@ jQuery(document).ready(function($) {
 		});
 		frame.on('close', function(data) {
 			var imageArray = [],
+				imagesObj = [],
 				images = frame.state().get('selection');
+
 			images.each(function(image) {
-				imageArray.push(image.attributes.url);
+				var singleImage = image.attributes;
+				imageArray.push(singleImage.url);
+				imagesObj.push({id:singleImage.id,url:singleImage.url});
 			});
 
-			if (imageArray.length > 0) {
+			if(imagesObj.length > 0) {
 				imageContainer.empty();
-
 				if (uploadMultiple) {
 					var newArrayCombine;
 
-					console.log(inputValues.length);
+					// @todo: combine 2 arrays
 					if (inputValues.length > 0)
-						newArrayCombine = imageArray.concat(inputValues);
+						newArrayCombine = imagesObj.concat(inputValues);
 					else
-						newArrayCombine = imageArray;
+						newArrayCombine = imagesObj;
 
 					newArrayCombine.forEach(function(elemIndex) {
 						newHtmlValues += "<div class='img-wrap'>";
-						newHtmlValues += "<img src='" + elemIndex + "'>";
-						newHtmlValues += "<i data-src='" + elemIndex + "' class='fa fa-remove'></i>";
+						newHtmlValues += "<img src='" + elemIndex.url + "'>";
+						newHtmlValues += "<i data-id-src='" + elemIndex.id + "' class='fa fa-remove'></i>";
 						newHtmlValues += "</div>";
 					});
 					imageContainer.append(newHtmlValues);
-					textInput.attr('value', newArrayCombine);
+					textInput.attr('value', JSON.stringify(newArrayCombine));
 
 				} else {
 					newHtmlValues = "<div class='img-wrap'>";
 					newHtmlValues += "<img src='" + imageArray[0] + "'>";
-					newHtmlValues += "<i data-src='" + imageArray[0] + "' class='fa fa-remove'></i>";
+					newHtmlValues += "<i data-id-src='" + imageArray[0] + "' class='fa fa-remove'></i>";
 					newHtmlValues += "</div>";
 
 					textInput.attr('value', imageArray[0]);
@@ -142,46 +145,60 @@ jQuery(document).ready(function($) {
 				}
 
 			}
+
+
 		});
 		frame.open();
 	});
+
 	/**
 	 * ==================== Remove Image from input ======================
 	 * 15.04.2016
 	 */
-
 	$('.backend-uploader-handler').find('i.fa-remove').waitUntilExists(function() {
 		var that = $(this);
 		that.on('click', function(e) {
 
 			var parent = that.parents('.backend-uploader-handler'),
-				relatedSrc = that.attr('data-src'),
+				relaredIdSrc = that.attr('data-id-src'),
 				wrapper = that.parents('.img-wrap'),
 				input = parent.find(':hidden'),
-				parentType = parent.attr('data-type'),
-				inputValues = input.attr('value').split(','),
-				index = inputValues.indexOf(relatedSrc);
+				parentType = parent.attr('data-type');
 
 			if (parentType === 'single') {
 				input.attr('value', '');
-				wrapper.fadeOut();
+				wrapper.fadeOut(200, function() {
+					wrapper.remove();
+				});
 			} else {
 				// Multiple removements
-				if (index !== -1) {
-					inputValues.splice(index, 1);
-					input.attr('value', inputValues);
+				var inputValues = JSON.parse(input.attr('value'));
+
+				if(inputValues.length > 0) {
+					for (var obj in inputValues) {
+						if(parseInt(relaredIdSrc) === inputValues[obj].id) {
+							inputValues.splice(obj, 1);
+						}
+					}
+
+					input.attr('value', JSON.stringify(inputValues));
 					wrapper.fadeOut(200, function() {
 						wrapper.remove();
-					})
+					});
+
 				}
+
 			}
 			// End ifelse
 
 		});
 	});
+	/**
+	 * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 * ==================== Backend Default Uploads fields END ======================
+	 * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	 */
 
-
-	// ! Backend global uploads END
 
 
 	$('.invoke-conversion').on('click', function(e) {
