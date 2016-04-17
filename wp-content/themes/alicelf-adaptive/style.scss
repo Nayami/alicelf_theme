@@ -6,13 +6,13 @@
  Tags: white, one-column, two-columns, customizable, theme-editor, right-sidebar, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, translation-ready
  */
 
-@import "style-parts/_vars";
-@import "style-parts/_mix";
-@import "style-parts/_basics";
-@import "style-parts/_thumbs";
-@import "style-parts/_animate";
-@import "style-parts/_parallax-bg";
-@import "style-parts/_alerts_and_messages";
+@import "style-parts/vars";
+@import "style-parts/mix";
+@import "style-parts/basics";
+@import "style-parts/thumbs";
+@import "style-parts/animate";
+@import "style-parts/parallax-bg";
+@import "style-parts/alerts_and_messages";
 
 // TransformIcons
 @import "style-parts/transformicons/index/tcons";
@@ -23,5 +23,5 @@
 @import "style-parts/user";
 @import "style-parts/footer";
 
-@import "style-parts/_responsive";
+@import "style-parts/responsive";
 @import "style-parts/loaderanimation";

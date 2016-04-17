@@ -214,7 +214,8 @@ jQuery(document).ready(function($) {
 	stickNavbar();
 
 	transformicons.add('.tcon');
-	;(function() {
+	;
+	(function() {
 
 		var openCloseMenu = function(selector, menu) {
 			if (selector.hasClass('tcon-transform')) {
@@ -262,5 +263,32 @@ jQuery(document).ready(function($) {
 
 
 	})();
+
+
+	/**
+	 * ==================== Frontend Modal ======================
+	 * 17.04.2016
+	 */
+	$('[data-modal-trigger]').on('click', function(e) {
+
+		e.preventDefault();
+		var that = $(this),
+			type = that.attr('data-modal-trigger'),
+			body = $('body'),
+			relatedModal = that.attr('data-related-modal');
+
+		body.find(relatedModal).css({'display':'block'});
+		setTimeout(function(){
+			body.find(relatedModal).addClass('show');
+		}, 10);
+
+		$(window).trigger('aaModalOpened', [type, relatedModal]);
+
+	});
+
+
+	//$(window).on('aaModalOpened', function(e, type, relatedModal){
+		//console.log(e, type, relatedModal);
+	//});
 
 });

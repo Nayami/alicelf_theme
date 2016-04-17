@@ -109,7 +109,7 @@ jQuery(document).ready(function($) {
 
 			images.each(function(image) {
 				var singleImage = image.attributes;
-
+				console.log(singleImage);
 				imagesObj.push(
 					{
 						id : singleImage.id,

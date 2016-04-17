@@ -172,9 +172,10 @@ function aa_func_20161815081848()
 			<aside class="col-sm-3 aside-profile">
 
 				<?php if($current_viewer === $user_id): ?>
-				<a href="#" class="thumbnail" data-edit-image="<?php echo $avatar[ 'id' ] ?>">
+				<a href="" class="thumbnail" data-related-modal="#users-files-gallery" data-modal-trigger="gallery">
 					<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
 				</a>
+
 				<?php else: ?>
 					<div class="thumbnail">
 						<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
@@ -190,5 +191,21 @@ function aa_func_20161815081848()
 		</div>
 
 	</div>
+	<?php if($current_viewer === $user_id): ?>
+	<div class="modal-backdrop" id="users-files-gallery">
+		<div class="aa-modal-container">
+
+			<?php
+
+			echo "<pre>";
+			print_r(aa_get_userallfiles($user_id));
+			echo "</pre>";
+
+			?>
+
+		</div>
+	</div>
+	<?php endif; ?>
+
 	<?php
 }

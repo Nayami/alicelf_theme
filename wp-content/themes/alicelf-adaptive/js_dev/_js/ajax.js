@@ -60,17 +60,17 @@ jQuery(document).ready(function($) {
 			return "<div class='alert-backdrop'><div class='alert alert-" + itemClass + "'>" +
 				"<p>" + msg + "</p></div></div>"
 		},
-		launchModalAlert = function(itemClass, msg){
+		launchModalAlert = function(itemClass, msg) {
 			var bodyselector = $('body');
 			bodyselector.prepend(modalAlert(itemClass, msg));
-			setTimeout(function(){
+			setTimeout(function() {
 				bodyselector.find('.alert-backdrop').addClass('show');
 			}, 100);
 		},
 		elemHasClass = function(el, cls) {
 			return el.className && new RegExp("(\\s|^)" + cls + "(\\s|$)").test(el.className);
 		},
-		capitalize = function (string) {
+		capitalize = function(string) {
 			return string.charAt(0).toUpperCase() + string.slice(1);
 		};
 
@@ -88,6 +88,18 @@ jQuery(document).ready(function($) {
 		});
 	});
 
+	$('.modal-backdrop').waitUntilExists(function() {
+		var that = $(this);
+		that.on('click', function(e) {
+			e.stopPropagation();
+			if (elemHasClass(e.target, 'modal-backdrop')) {
+				that.removeClass('show');
+				setTimeout(function() {
+					that.css({'display': 'none'});
+				}, 400);
+			}
+		});
+	});
 
 
 	/**
@@ -97,10 +109,10 @@ jQuery(document).ready(function($) {
 
 	(function mainThemeAjaxScope() {
 
-		var successMessage ="Your message has been successfully sended",
+		var successMessage = "Your message has been successfully sended",
 			errorMessage = "Fill Correct all required fields!",
 			wrongCaptcha = "Fill Correct Captha",
-			unknownError ="Something Wrong, try again later";
+			unknownError = "Something Wrong, try again later";
 
 		var formContactProcess = function(act) {
 
@@ -108,7 +120,7 @@ jQuery(document).ready(function($) {
 				var that = $(this),
 					method = that.attr('method'),
 					formData = {
-						action : act
+						action: act
 					};
 
 				that.find('[name]').each(function() {
@@ -191,7 +203,7 @@ jQuery(document).ready(function($) {
 					data      : {
 						alice_ajax_posts: true,
 						pageNumber      : page,
-						action: 'alice_ajax_posts'
+						action          : 'alice_ajax_posts'
 					},
 					dataType  : "html",
 					beforeSend: function() {
@@ -238,7 +250,6 @@ jQuery(document).ready(function($) {
 			ajaxLoadPosts();
 
 	})();
-
 
 
 });

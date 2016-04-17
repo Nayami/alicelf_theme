@@ -18,6 +18,7 @@
       "inc/theme_metaboxes.php",
       "inc/thumbnails.php",
       "inc/widget_sidebars.php",
+      "inc/attachments.php",
       "inc/user.php",
       "inc/form-processors.php",
 
