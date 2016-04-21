@@ -274,9 +274,11 @@ jQuery(document).ready(function($) {
 	})();
 
 
+
+
 	/**
-	 * ==================== Frontend Modal and Alerts ======================
-	 * 17.04.2016
+	 * ==================== FRONTEND MODALS ======================
+	 * 21.04.2016
 	 */
 	$('[data-modal-trigger]').on('click', function(e) {
 
@@ -322,7 +324,7 @@ jQuery(document).ready(function($) {
 
 		modalOverlay.removeClass('show');
 		setTimeout(function() {
-			modalOverlay.remove();
+			modalOverlay.css('display', 'none');
 			$(window).trigger('aaModalClosed', [type, relatedTrigger])
 		}, 300);
 
@@ -340,12 +342,26 @@ jQuery(document).ready(function($) {
 			e.preventDefault();
 			modalOverlay.removeClass('show');
 			setTimeout(function() {
-				modalOverlay.remove();
+				modalOverlay.css('display', 'none');
 				$(window).trigger('aaModalClosed')
 			}, 300);
 		});
 
 	};
+
+	var closeTrigger = $('[data-destroy-modal]');
+	closeTrigger.on('click', function(e) {
+		e.preventDefault();
+		var that = $(this),
+			modalOverlay = $(that.attr('data-destroy-modal'));
+
+		modalOverlay.removeClass('show');
+		setTimeout(function() {
+			modalOverlay.css('display', 'none');
+			$(window).trigger('aaModalClosed')
+		}, 300);
+	});
+
 
 	//raizeModalEvent("#login-modal");
 	//setTimeout(function(){

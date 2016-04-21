@@ -87,3 +87,26 @@
 		}
 	}
 }
+
+@mixin modalMix($container, $wide) {
+	#{$container} {
+
+		/*To tablet and desktop*/
+		@media (min-width : $wide+px) {
+			.aa-modal-container {
+				max-width   : $wide+px;
+				margin-left : -$wide/2+px;
+				left        : 50%;
+			}
+		}
+		/*Mobile*/
+		@media (max-width : $wide+px) {
+			.aa-modal-container {
+				display     : block;
+				width       : 100%;
+				left        : auto;
+				margin-left : auto;
+			}
+		}
+	}
+}
