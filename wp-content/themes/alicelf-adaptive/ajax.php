@@ -13,7 +13,7 @@ function alice_ajax_posts()
 		'posts_per_page' => $numPosts,
 		'paged'          => $page
 	) );
-	get_template_part( 'templates/tpl-index-loop' );
+	get_template_part( 'templates/loop-post' );
 	die();
 }
 

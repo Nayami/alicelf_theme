@@ -2,8 +2,6 @@
 /**
  * The template for displaying 404 pages (Not Found)
  */
-
-get_header();
 ?>
 <div class="not-found-loop row">
 	<div class="ghostly-wrap">
@@ -14,4 +12,3 @@ get_header();
 		</div>
 	</div>
 </div>
-<?php get_footer(); ?>

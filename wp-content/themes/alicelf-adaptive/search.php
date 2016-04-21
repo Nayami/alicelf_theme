@@ -1,24 +1,35 @@
 <?php
 
 get_header(); ?>
-<?php if ( have_posts() ) : ?>
-	<div class="ghostly-wrap">
-	<!--	Search Page -->
-<?php $search_count = 0; $search = new WP_Query("s=$s & showposts=-1");
 
-	if($search->have_posts())
-		while($search->have_posts()) { $search->the_post(); $search_count++; } ?>
-			<h5 class="page-title"> Search result for: <?php echo get_search_query();?></h5>
-			<p>Num of matched results: <?php echo $search_count; ?></p>
-			<div class="row">
-				<?php $class_co_sm = is_active_sidebar( "base-widgeted-sidebar" ) ? 8 : 12; ?>
-				<div class="col-sm-<?php echo $class_co_sm ?> front-loop">
-					<?php get_template_part( 'templates/tpl-index-loop' ); ?>
-				</div>
-				<?php aa_default_wiget_sidebar( 4 ); paged_navigation(); ?>
-			</div>
-	<?php else:
-	include get_404_template();
-	; endif; ?>
-</div>
-<?php get_footer() ?>
+	<!-- Search Page -->
+	<?php
+	$per_page = get_option( 'posts_per_page' );
+	$query = "s={$s}&posts_per_page={$per_page}&showposts=-1";
+
+	$search_query = new WP_Query( apply_filters( 'aa_search_hook', $query, $per_page ) );
+
+	if ( $search_query->have_posts() ) {
+
+		echo "<div class='ghostly-wrap'>";
+		paged_navigation();
+
+		while ( $search_query->have_posts() ) {
+			$search_query->the_post();
+			$post_id = $post->ID;
+
+			//@TODO: make a loop with searched posts
+
+
+			echo $post->post_title;
+
+		}
+		echo "</div>";
+
+	} else {
+		include get_404_template();
+	}
+
+	?>
+
+<?php get_footer(); ?>

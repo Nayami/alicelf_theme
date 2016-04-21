@@ -25,23 +25,22 @@ function alice_remove_post_type_support()
 	remove_post_type_support( 'post', 'post-formats' );
 }
 
-/**
- * @param $title
- *
- * @return string
- */
-function title_addon( $title )
+
+add_filter('wp_title', 'aa_func_20164019094058', 10, 1);
+function aa_func_20164019094058($title)
 {
-	( is_home() || is_front_page() ) ?
-		$title = bloginfo( 'name' ) . " | " . get_bloginfo( 'description', 'display' ) : $title = the_title() . " | " . get_bloginfo( 'name' );
-	if ( is_404() ) {
-		$title = bloginfo( 'name' ) . ' | .404!';
+	if(is_home() || is_front_page()) {
+		$title = get_bloginfo( 'name' ) . " | " . get_bloginfo( 'description', 'display' );
+	} else if(is_404()) {
+		$title = get_bloginfo( 'name' ) . ' | .404!';
+	} else if (is_search()) {
+		$title = get_bloginfo( 'name' ) . " | Search ". get_search_query();
+	} else {
+		$title = get_the_title() . " | " . get_bloginfo( 'name' );
 	}
 
 	return $title;
 }
-
-add_filter( 'wp_title', 'title_addon' );
 
 /**
  * Add "Read More" custom text for Recent Projects (if use the_excerpt())
@@ -144,4 +143,17 @@ add_filter('login_headertitle', 'aa_func_20160815060854', 10, 1);
 function aa_func_20160815060854($title)
 {
 	return get_bloginfo('name');
+}
+
+
+/**
+ * ==================== SEARCH ======================
+ * 19.04.2016
+ */
+add_filter('aa_search_hook', 'aa_func_20164919094939', 10, 2);
+function aa_func_20164919094939($query, $per_page)
+{
+	isset( $_GET[ 'page' ] ) && $query .= "&paged={$_GET['page']}";
+
+	return $query;
 }

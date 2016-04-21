@@ -13,8 +13,6 @@ function custom_posts_shortcode( $atts )
 	$columns      = null;
 	$ignoresticky = null;
 
-	$layout = null;
-
 	extract( shortcode_atts( array(
 		'type'         => '',
 		'order'        => 'DESC',
@@ -25,9 +23,7 @@ function custom_posts_shortcode( $atts )
 		'columns'      => '',
 		'ignoresticky' => '1',
 		'cat'          => '',
-		'tag'          => '',
-
-		'layout' => ''
+		'tag'          => ''
 
 	), $atts ) );
 
@@ -68,46 +64,39 @@ function custom_posts_shortcode( $atts )
 		'order'               => $order,
 		'orderby'             => $orderby,
 		'post__not_in'        => $excludearray,
-		// Exclude posts by id
 		'post__in'            => $includearray,
 		'posts_per_page'      => $limit,
-		// Number of posts to display.
 		'ignore_sticky_posts' => $ignoresticky,
 		'paged'               => $paged,
 		'cat'                 => $cat,
 		'tag'                 => $tag
 	);
 	// rewind
-	$my_query = null;
-	$my_query = new WP_Query( $args );
+	$posts_query = null;
+	$posts_query = new WP_Query( $args );
 
-	if ( $my_query->have_posts() ) {
-
-		echo "<div class='row posts-shortcode-{$type}'>";
-		while ( $my_query->have_posts() ) : $my_query->the_post();
-			$post_id = get_the_ID();
-			echo "<article id='post-{$post_id}' class='col-sm-{$modulo} shortcode-single-{$type}'>";
-
-			switch ( $layout ) {
-				case "@TODO: cases" :
-					echo "lorem ipsum";
-					break;
-				default :
-					get_template_part( 'templates/tpl-shortcode-single' );
-			}
-
-			echo "</article>";
-		endwhile;
-		echo "</div>";
-
+	if ( $posts_query->have_posts() ) {
+		do_action( 'aa_shortcode_posts', $posts_query, $type, $modulo );
 	} else {
 		echo "no posts found on post type : " . $type;
 	}
-
 	wp_reset_query();
 
 	return ob_get_clean();
+}
 
+add_action( 'aa_shortcode_posts', 'aa_func_20160420020425', 10, 3 );
+function aa_func_20160420020425( $posts_query, $type, $modulo )
+{
+	?>
+	<div class='row posts-shortcode-<?php echo $type ?>'>
+		<?php while ( $posts_query->have_posts() ): $posts_query->the_post(); ?>
+			<article id='post-<?php the_ID() ?>' class='col-sm-<?php echo $modulo ?>'>
+				<?php get_template_part( 'templates/shortcode-single-' . $type ) ?>
+			</article>
+		<?php endwhile; ?>
+	</div>
+	<?php
 }
 
 function do_the_breadcrumb()
@@ -132,7 +121,7 @@ function do_the_breadcrumb()
 					echo trim( $output, $separator );
 				} ?>
 				<li class="active"><?php echo the_title() ?></li>
-			<?php
+				<?php
 			}
 			if ( is_page() ) {
 				if ( is_page() && $post->post_parent > 0 ) {
@@ -141,7 +130,7 @@ function do_the_breadcrumb()
 					<?php endforeach;
 				} ?>
 				<li class="active"><?php echo the_title() ?></li>
-			<?php
+				<?php
 			}
 			if ( is_category() ) {
 				foreach ( $categories as $category ) {
@@ -152,11 +141,11 @@ function do_the_breadcrumb()
 			if ( is_archive() ) {
 				?>
 				<li class="active">Archive</li>
-			<?php
+				<?php
 			}
 		} ?>
 	</ol>
-<?php
+	<?php
 }
 
 /**
@@ -166,20 +155,22 @@ function get_theme_slider()
 {
 	ob_start();
 	global $alicelf;
-	$active    = 'active';
-	$ac_bullet = 'active';
+	$active     = 'active';
+	$ac_bullet  = 'active';
 	$transition = null;
 
-	switch ($alicelf[ 'opt-carouseltransition' ]) {
+	switch ( $alicelf[ 'opt-carouseltransition' ] ) {
 		case 2 :
-			$transition = 'carousel-fade slide'; break;
+			$transition = 'carousel-fade slide';
+			break;
 		case 3 :
-			$transition = 'slick_thumbs'; break;
+			$transition = 'slick_thumbs';
+			break;
 		default :
 			$transition = 'slide';
 	}
 
-	do_action('aa_theme_carousel_process', $alicelf, $active, $ac_bullet, $transition);
+	do_action( 'aa_theme_carousel_process', $alicelf, $active, $ac_bullet, $transition );
 
 	return ob_get_clean();
 }

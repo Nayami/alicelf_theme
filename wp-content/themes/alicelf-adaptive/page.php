@@ -18,7 +18,7 @@
 			$class_co_sm = is_active_sidebar( 'default-widgetize-sidebar' ) ? 8 : 12;
 		?>
 		<div class="col-sm-<?php echo $class_co_sm ?>">
-			<?php get_template_part( 'templates/tpl-page-loop' ); ?>
+			<?php get_template_part( 'templates/loop-page' ); ?>
 		</div>
 		<?php
 		if ( ! is_plugin_active( 'generate-meta/generate_meta.php' ) )
