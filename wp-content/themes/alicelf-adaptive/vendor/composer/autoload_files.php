@@ -24,5 +24,6 @@ return array(
     'ffd884cba2c57f0dd10c49647d470474' => $baseDir . '/inc/attachments.php',
     '1d36fd2c68f3e45a5b5c2c9736fcd8e9' => $baseDir . '/inc/user.php',
     'c80b0348ba6b6b0636d4f9afc6d1ef62' => $baseDir . '/inc/form-processors.php',
+    '90d47b802e084c8966cfdc06c50131a3' => $baseDir . '/inc/registration_login.php',
     '3c417106c7943eb210429eeb706634a8' => $baseDir . '/ajax.php',
 );

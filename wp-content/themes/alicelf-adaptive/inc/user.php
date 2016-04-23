@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * ==================== Avatar in adminbar ======================
+ * 23.04.2016
+ */
 //add_action('admin_bar_menu', 'aa_func_20162016102013');
 function aa_func_20162016102013( $wp_admin_bar )
 {
@@ -22,7 +25,9 @@ function aa_func_20162016102013( $wp_admin_bar )
 }
 
 /**
- * ==================== Add and handle User Meta ======================
+ * ==========================================================
+ * ==================== Save User Meta ======================
+ * ==========================================================
  * 15.04.2016
  */
 add_action( 'personal_options_update', 'aa_func_20160815080818', 10, 1 ); // Own Profile
@@ -41,6 +46,7 @@ function aa_func_20160815080818( $user_id )
 
 /**
  * ==================== Render User Profile ======================
+ * ==================== In admin area view  ======================
  * 15.04.2016
  */
 add_action( 'show_user_profile', 'aa_func_20161315081350', 10, 1 ); // Own profile
@@ -145,14 +151,16 @@ function aa_func_20161315081350( $profileuser )
 }
 
 /**
+ * ======================================================================
  * ==================== Frontend User Profile view ======================
+ * ======================================================================
  * 15.04.2016
  */
 add_action( 'aa_userprofile_action', 'aa_func_20161815081848' );
 function aa_func_20161815081848()
 {
 	$current_viewer = get_current_user_id();
-	$user_id        = isset( $_GET[ 'profile_id' ] ) ? (int)$_GET[ 'profile_id' ] : $current_viewer;
+	$user_id        = isset( $_GET[ 'profile_id' ] ) ? (int) $_GET[ 'profile_id' ] : $current_viewer;
 	$user           = new WP_User( $user_id );
 
 	$avatar_meta = get_user_meta( $user_id, '_aa_user_avatar', true );
@@ -171,10 +179,10 @@ function aa_func_20161815081848()
 		<div class="row">
 			<aside class="col-sm-3 aside-profile">
 
-				<?php if($current_viewer === $user_id): ?>
-				<a href="" class="thumbnail" data-related-modal="#users-files-gallery" data-modal-trigger="gallery">
-					<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
-				</a>
+				<?php if ( $current_viewer === $user_id ): ?>
+					<a href="" class="thumbnail" data-related-modal="#users-files-gallery" data-modal-trigger="gallery">
+						<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
+					</a>
 
 				<?php else: ?>
 					<div class="thumbnail">
@@ -191,21 +199,21 @@ function aa_func_20161815081848()
 		</div>
 
 	</div>
-	<?php if($current_viewer === $user_id): ?>
+	<?php if ( $current_viewer === $user_id ): ?>
 	<div class="modal-backdrop" id="users-files-gallery">
 		<div class="aa-modal-container">
 
 			<?php
 
 			echo "<pre>";
-			print_r(aa_get_userallfiles($user_id));
+			print_r( aa_get_userallfiles( $user_id ) );
 			echo "</pre>";
 
 			?>
 
 		</div>
 	</div>
-	<?php endif; ?>
+<?php endif; ?>
 
 	<?php
 }

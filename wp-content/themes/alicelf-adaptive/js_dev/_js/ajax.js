@@ -252,4 +252,173 @@ jQuery(document).ready(function($) {
 	})();
 
 
+	/**
+	 * =========================================================
+	 * =========================================================
+	 * ==================== Login Process ======================
+	 * =========================================================
+	 * =========================================================
+	 */
+	var loginAjaxHandler = function(clickLauncher, parentContainer) {
+		$(clickLauncher).on('click', function(e) {
+
+			var that = $(this),
+				container = $(parentContainer),
+				progressLine = container.find('[data-progress]').attr('id'),
+				login = container.find('[name=login]'),
+				pass = container.find('[name=pass]'),
+				progress = $("#" + progressLine);
+
+			progress.empty();
+			progress.fadeIn();
+
+			var line = new ProgressBar.Line("#" + progressLine, {color: _COLORS.red});
+			line.animate(0.2);
+
+			$.ajax({
+				url       : AJAXURL,
+				type      : "POST",
+				data      : {
+					action: "ajx20161223091233",
+					login : login.val(),
+					pass  : pass.val()
+				},
+				//dataType : "html",
+				beforeSend: function() {
+					line.animate(0.7);
+				},
+				success   : function(data) {
+					container.find('.alert').remove();
+					if (data) {
+						switch (data) {
+							case "wrong-pass":
+								container.prepend(alertHolder('warning', 'Wrong pass'));
+								setTimeout(function() {
+									container.find('.alert').fadeOut();
+								}, 4000);
+
+								break;
+							case "not-found":
+								container.prepend(alertHolder('danger', 'User not found'));
+								setTimeout(function() {
+									container.find('.alert').fadeOut();
+								}, 4000);
+
+								break;
+							case "success":
+								container.prepend(alertHolder('success', 'Success'));
+								setTimeout(function() {
+									location.reload();
+								}, 1000);
+
+								break;
+							default:
+								console.log('unknown');
+						}
+					}
+					line.animate(1);
+					setTimeout(function() {
+						progress.fadeOut();
+					}, 500);
+				},
+				error     : function(jqXHR, textStatus, errorThrown) {
+					alert(jqXHR + " :: " + textStatus + " :: " + errorThrown);
+				}
+			});
+		});
+	};
+	loginAjaxHandler('#login-trigger', '#aa-loginform-container');
+
+	/**
+	 * =========================================================
+	 * =========================================================
+	 * ==================== Register Process ===================
+	 * =========================================================
+	 * =========================================================
+	 */
+	var registerAjaxHandler = function(clickLauncher, parentContainer) {
+		$(clickLauncher).on('click', function(e) {
+			var that = $(this),
+				container = $(parentContainer),
+				progressLine = container.find('[data-progress]').attr('id'),
+				progress = $("#" + progressLine),
+				first_name = container.find('[name=first_name]'),
+				last_name = container.find('[name=last_name]'),
+				email = container.find('[name=email]'),
+				pass = container.find('[name=pass]'),
+				pass_confirm = container.find('[name=pass_confirm]');
+
+			progress.empty();
+			progress.fadeIn();
+
+			var line = new ProgressBar.Line("#" + progressLine, {color: _COLORS.red});
+			line.animate(0.2);
+
+			$.ajax({
+				url       : AJAXURL,
+				type      : "POST",
+				data      : {
+					action      : "ajx20161023111004",
+					first_name  : first_name.val(),
+					last_name   : last_name.val(),
+					email       : email.val(),
+					pass        : pass.val(),
+					pass_confirm: pass_confirm.val()
+				},
+				//dataType : "html",
+				beforeSend: function() {
+					line.animate(0.7);
+				},
+				success   : function(data) {
+					container.find('.alert').remove();
+					// alicelfdev@gmail.com
+					if(data) {
+						console.log(data);
+
+						switch (data) {
+							case "user-exists":
+								container.prepend(alertHolder('danger', 'User already exists'));
+								setTimeout(function() {
+									container.find('.alert').fadeOut();
+								}, 4000);
+								break;
+
+							case "password-missmatch":
+								container.prepend(alertHolder('warning', 'Password Mismatch or empty'));
+								setTimeout(function() {
+									container.find('.alert').fadeOut();
+								}, 4000);
+								break;
+
+							case "email-error":
+								container.prepend(alertHolder('warning', 'Not valid email'));
+								setTimeout(function() {
+									container.find('.alert').fadeOut();
+								}, 4000);
+								break;
+
+							case "success":
+								container.prepend(alertHolder('success', 'Check your email'));
+
+								break;
+
+							default :
+								console.log("unknown");
+						}
+
+					}
+
+					line.animate(1);
+					setTimeout(function() {
+						progress.fadeOut();
+					}, 500);
+				},
+				error     : function(jqXHR, textStatus, errorThrown) {
+					alert(jqXHR + " :: " + textStatus + " :: " + errorThrown);
+				}
+			});
+		});
+	};
+	registerAjaxHandler('#register-trigger', '#aa-register-container');
+
 });

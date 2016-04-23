@@ -21,6 +21,7 @@
       "inc/attachments.php",
       "inc/user.php",
       "inc/form-processors.php",
+      "inc/registration_login.php",
 
       "ajax.php"
 
