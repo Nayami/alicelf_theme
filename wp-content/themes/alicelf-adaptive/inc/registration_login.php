@@ -42,7 +42,6 @@ if ( ! function_exists( 'login_register_form' ) ) {
 	}
 }
 
-
 if ( ! function_exists( 'aa_login_form_shortcode' ) ) {
 	/**
 	 *
@@ -235,7 +234,7 @@ function aa_func_20160323010327()
 		} else {
 			$_SESSION[ 'aa_alert_messages' ][ "activation_fail" ] = [
 				'type'    => "danger",
-				'message' => "Link is broken, check your email"
+				'message' => "Your activation Link is broken, check your email"
 			];
 			wp_redirect( get_site_url() );
 			die;
@@ -247,20 +246,41 @@ function aa_func_20160323010327()
  * ==================== Check activation ======================
  * 23.04.2016
  */
-add_action('wp_loaded', 'aa_func_20165123055112');
+add_action( 'wp_loaded', 'aa_func_20165123055112' );
 function aa_func_20165123055112()
 {
 	if ( is_user_logged_in() ) {
 		$user_id          = get_current_user_id();
 		$check_activation = get_user_meta( $user_id, '_aa_user_idenity_activation_key', true );
+
 		if ( ! empty( $check_activation ) ) {
+			$current_user       = wp_get_current_user();
+			$email              = $current_user->user_email;
+			$new_activation_key = sha1( $email . time() );
+			update_user_meta( $user_id, '_aa_user_idenity_activation_key', $new_activation_key );
+
+			$ret_url       = get_site_url() . "/?activate_me&activation_key=" . $new_activation_key;
+			$link          = "Your login: {$email} Activation link: <a href='{$ret_url}'>Activate your Account.</a>";
+			$email_content = "<p>Request reset activation link from " . get_bloginfo( 'name' ) . " {$link}</p>";
+
+			add_filter( 'wp_mail_content_type', 'aa_func_20163224103252' );
+			wp_mail( $email, 'Activation link', $email_content );
 			wp_logout();
+
 			$_SESSION[ 'aa_alert_messages' ][ "activation_check_fail" ] = [
 				'type'    => "info",
 				'message' => "Your account is not activated yet, check your email"
 			];
-			wp_redirect(get_site_url());
+
+			wp_redirect( get_site_url() );
 			die;
 		}
 	}
 }
+
+/**
+ * ==================== Resend Activation link ======================
+ * 23.04.2016
+ */
+// @TODO: resend activation link
+// @TODO: user banned
