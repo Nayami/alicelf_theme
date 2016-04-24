@@ -235,4 +235,19 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+
+	/**
+	 * ==================== Generate hash button ======================
+	 * 24.04.2016
+	 */
+	$('.activation-key-container').find('button').on('click', function(e){
+		e.preventDefault();
+		var that = $(this),
+			relatedInput = $('input[data-relation='+that.attr('data-bind')+']');
+		relatedInput.val(Math.random().toString(36).slice(2));
+
+
+	});
+
+
 });

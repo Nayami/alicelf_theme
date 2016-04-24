@@ -96,8 +96,10 @@ if ( ! function_exists( 'aa_registrationform_shortcode' ) ) {
 				<input type="text" name="email" placeholder="E-mail" class="form-control">
 				<input type="password" name="pass" placeholder="Password" class="form-control">
 				<input type="password" name="pass_confirm" placeholder="Password Confirm" class="form-control">
-				<div class="clearfix">
-					<button id="register-trigger" class="btn btn-default">Registration</button>
+				<div class="btn-group btn-group-justified" role="group">
+					<div class="btn-group">
+						<button id="register-trigger" class="btn btn-default">Registration</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -234,7 +236,7 @@ function aa_func_20160323010327()
 		} else {
 			$_SESSION[ 'aa_alert_messages' ][ "activation_fail" ] = [
 				'type'    => "danger",
-				'message' => "Your activation Link is broken, check your email"
+				'message' => "Your activation Link is broken, check your email" //@TODO: or reset manually
 			];
 			wp_redirect( get_site_url() );
 			die;
@@ -278,9 +280,16 @@ function aa_func_20165123055112()
 	}
 }
 
-/**
- * ==================== Resend Activation link ======================
- * 23.04.2016
- */
-// @TODO: resend activation link
-// @TODO: user banned
+
+add_action('after_password_reset', 'aa_func_20163924013929', 10, 2);
+function aa_func_20163924013929($user, $new_pass)
+{
+	update_user_meta( $user->ID, '_aa_user_idenity_activation_key', '' );
+	$_SESSION[ 'aa_alert_messages' ][ "reset_pass_successfully" ] = [
+		'type'    => "info",
+		'message' => "Your password has been restored, now you can login with your new credentials"
+	];
+
+	wp_redirect( get_site_url() );
+	die;
+}

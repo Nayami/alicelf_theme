@@ -63,7 +63,7 @@ function aa_func_20161315081350( $profileuser )
 	$aa_usermeta_fields = [
 		'activation_key' => [
 			'title' => 'Activation Key',
-			'type'  => null,
+			'type'  => 'activation_key',
 			'name'  => '_aa_user_idenity_activation_key'
 		],
 		'avatar'         => [
@@ -136,6 +136,13 @@ function aa_func_20161315081350( $profileuser )
 
 							case "textarea" :
 								echo "<textarea class='form-control' name='aa-unique-usermeta[{$value['name']}]'>{$v}</textarea>";
+								break;
+							case "activation_key" :
+								echo "<div class='activation-key-container'>";
+								echo "<input data-relation='{$value['name']}' class='form-control' type='text' name='aa-unique-usermeta[{$value['name']}]' value='{$v}'>";
+								echo "<button data-bind='{$value['name']}' class='button button-small'>Generate Hash</button>";
+								echo "<small> Note: if that field not empty user won't log in. Can be useful for banning users</small>";
+								echo "</div>";
 								break;
 
 							default:
