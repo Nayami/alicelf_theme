@@ -141,7 +141,7 @@ function aa_func_20161315081350( $profileuser )
 								echo "<div class='activation-key-container'>";
 								echo "<input data-relation='{$value['name']}' class='form-control' type='text' name='aa-unique-usermeta[{$value['name']}]' value='{$v}'>";
 								echo "<button data-bind='{$value['name']}' class='button button-small'>Generate Hash</button>";
-								echo "<small> Note: if that field not empty user won't log in. Can be useful for banning users</small>";
+								echo "<small> Note: if that field not empty user won't log in</small>";
 								echo "</div>";
 								break;
 
@@ -171,6 +171,9 @@ function aa_func_20161815081848()
 	$user           = new WP_User( $user_id );
 
 	$avatar_meta = get_user_meta( $user_id, '_aa_user_avatar', true );
+	$user_meta = get_user_meta($user_id);
+	$f_name = get_user_meta($user_id, 'first_name', true);
+	$l_name = get_user_meta($user_id, 'last_name', true);
 	$avatar      = [
 		'id'  => null,
 		'url' => get_template_directory_uri() . "/img/user-placeholder.png"
@@ -191,6 +194,7 @@ function aa_func_20161815081848()
 						<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
 					</a>
 
+
 				<?php else: ?>
 					<div class="thumbnail">
 						<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
@@ -201,6 +205,32 @@ function aa_func_20161815081848()
 
 			<div class="col-sm-9 info-container">
 				<h2><?php echo $user->data->user_email ?></h2>
+				<?php if ( $current_viewer === $user_id ): ?>
+
+					<form action="" id="user-infoedit-form" method="POST">
+
+						<div class="row">
+							<div class="col-sm-6">
+								<input value="<?php echo $f_name ?>" type="text" name="first_name" placeholder="First Name" class="form-control">
+							</div>
+							<div class="col-sm-6">
+								<input value="<?php echo $l_name ?>" type="text" name="last_name" placeholder="Last Name" class="form-control">
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<input type="password" name="pass" placeholder="Password" class="form-control">
+							</div>
+							<div class="col-sm-6">
+								<input type="password" name="pass_confirm" placeholder="Password Confirmation" class="form-control">
+							</div>
+						</div>
+
+						<button name="aa-edit-mypersonalinfo" type="submit" class="btn btn-default btn-sm">Update</button>
+					</form>
+
+				<?php endif; ?>
 			</div>
 
 		</div>
