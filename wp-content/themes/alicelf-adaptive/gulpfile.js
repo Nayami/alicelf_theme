@@ -47,7 +47,7 @@ gulp.task('plugins', function() {
 			//'js_dev/_bootstrap/tooltip.js',
 			//'js_dev/_bootstrap/popover.js',
 			//'js_dev/_bootstrap/scrollspy.js',
-			//'js_dev/_bootstrap/tab.js',
+			'js_dev/_bootstrap/tab.js',
 			'js_dev/_bootstrap/transition.js',
 
 			'js_dev/_js/smooth-scroll.js',

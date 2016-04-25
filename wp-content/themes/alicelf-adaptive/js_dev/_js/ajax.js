@@ -421,4 +421,18 @@ jQuery(document).ready(function($) {
 	};
 	registerAjaxHandler('#register-trigger', '#aa-register-container');
 
+
+	/**
+	 * ==================== User Gallery Ajax Scope ======================
+	 * 25.04.2016
+	 */
+	$("#users-files-gallery").on('aaModalOpened', function(e, type, related) {
+		if(related === "#users-files-gallery") {
+
+			// @TODO: handle gallery body
+
+		}
+	});
+
+
 });

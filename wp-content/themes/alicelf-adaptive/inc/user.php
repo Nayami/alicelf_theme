@@ -171,9 +171,8 @@ function aa_func_20161815081848()
 	$user           = new WP_User( $user_id );
 
 	$avatar_meta = get_user_meta( $user_id, '_aa_user_avatar', true );
-	$user_meta = get_user_meta($user_id);
-	$f_name = get_user_meta($user_id, 'first_name', true);
-	$l_name = get_user_meta($user_id, 'last_name', true);
+	$f_name      = get_user_meta( $user_id, 'first_name', true );
+	$l_name      = get_user_meta( $user_id, 'last_name', true );
 	$avatar      = [
 		'id'  => null,
 		'url' => get_template_directory_uri() . "/img/user-placeholder.png"
@@ -185,21 +184,33 @@ function aa_func_20161815081848()
 	}
 
 	?>
-	<div class="ghostly-wrap" data-user="<?php echo $user_id ?>" id="user-container-idenity">
+<div class="ghostly-wrap" data-user="<?php echo $user_id ?>" id="user-container-idenity">
+
+	<!-- Start userform -->
+	<form action="" id="user-infoedit-form" method="POST">
 		<div class="row">
 			<aside class="col-sm-3 aside-profile">
 
-				<?php if ( $current_viewer === $user_id ): ?>
-					<a href="" class="thumbnail" data-related-modal="#users-files-gallery" data-modal-trigger="gallery">
-						<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
-					</a>
-
-
-				<?php else: ?>
+				<?php
+				if ( $current_viewer === $user_id ) {
+					echo "<pre>";
+					print_r($avatar);
+					echo "</pre>";
+					$config = [
+						'type'        => 'radio',
+						'name'        => '_aa_user_avatar',
+						'value'       => $avatar_meta,
+						'button_text' => 'Change Image'
+					];
+					aa_media_button( $config );
+				} else {
+					?>
 					<div class="thumbnail">
 						<img src="<?php echo $avatar[ 'url' ] ?>" alt="<?php echo $user->data->user_email ?>" class="img-responsive">
 					</div>
-				<?php endif; ?>
+					<?php
+				}
+				?>
 
 			</aside>
 
@@ -207,50 +218,34 @@ function aa_func_20161815081848()
 				<h2><?php echo $user->data->user_email ?></h2>
 				<?php if ( $current_viewer === $user_id ): ?>
 
-					<form action="" id="user-infoedit-form" method="POST">
 
-						<div class="row">
-							<div class="col-sm-6">
-								<input value="<?php echo $f_name ?>" type="text" name="first_name" placeholder="First Name" class="form-control">
-							</div>
-							<div class="col-sm-6">
-								<input value="<?php echo $l_name ?>" type="text" name="last_name" placeholder="Last Name" class="form-control">
-							</div>
+					<div class="row">
+						<div class="col-sm-6">
+							<input value="<?php echo $f_name ?>" type="text" name="first_name" placeholder="First Name" class="form-control">
 						</div>
-
-						<div class="row">
-							<div class="col-sm-6">
-								<input type="password" name="pass" placeholder="Password" class="form-control">
-							</div>
-							<div class="col-sm-6">
-								<input type="password" name="pass_confirm" placeholder="Password Confirmation" class="form-control">
-							</div>
+						<div class="col-sm-6">
+							<input value="<?php echo $l_name ?>" type="text" name="last_name" placeholder="Last Name" class="form-control">
 						</div>
+					</div>
 
-						<button name="aa-edit-mypersonalinfo" type="submit" class="btn btn-default btn-sm">Update</button>
-					</form>
+					<div class="row">
+						<div class="col-sm-6">
+							<input type="password" name="pass" placeholder="Password" class="form-control">
+						</div>
+						<div class="col-sm-6">
+							<input type="password" name="pass_confirm" placeholder="Password Confirmation" class="form-control">
+						</div>
+					</div>
+
+					<button name="aa-edit-mypersonalinfo" type="submit" class="btn btn-default btn-sm">Update</button>
 
 				<?php endif; ?>
 			</div>
-
 		</div>
+	</form>
+	<!-- End Userform -->
 
-	</div>
-	<?php if ( $current_viewer === $user_id ): ?>
-	<div class="modal-backdrop" id="users-files-gallery">
-		<div class="aa-modal-container">
-
-			<?php
-
-			echo "<pre>";
-			print_r( aa_get_userallfiles( $user_id ) );
-			echo "</pre>";
-
-			?>
-
-		</div>
-	</div>
-<?php endif; ?>
+</div>
 
 	<?php
 }

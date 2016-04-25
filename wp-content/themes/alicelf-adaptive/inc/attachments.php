@@ -126,7 +126,7 @@ if ( ! function_exists( 'aa_get_userallfiles' ) ) {
 		global $wpdb;
 		$files   = [ ];
 		$results = $wpdb->get_results(
-			"SELECT {$wpdb->posts}.ID, {$wpdb->posts}.post_author FROM {$wpdb->posts}
+			"SELECT ID, post_title, post_author FROM {$wpdb->posts}
 			WHERE post_author={$user_id} AND post_type='attachment'" );
 
 		if ( ! empty( $results ) ) {
@@ -134,6 +134,7 @@ if ( ! function_exists( 'aa_get_userallfiles' ) ) {
 				$files [] = [
 					'_id'     => $result->ID,
 					'_author' => $result->post_author,
+					'_title'  => $result->post_title,
 					'_url'    => wp_get_attachment_url( $result->ID ),
 					'_thumb'  => wp_get_attachment_image_src( $result->ID )
 				];

@@ -292,10 +292,11 @@ jQuery(document).ready(function($) {
 		setTimeout(function() {
 			body.find(relatedModal).addClass('show');
 		}, 10);
-
-		$(window).trigger('aaModalOpened', [type, relatedModal]);
+		$(relatedModal).trigger('aaModalOpened', [type, relatedModal]);
 
 	});
+
+
 
 	/**
 	 * ==================== Open modal from event ======================
@@ -360,6 +361,11 @@ jQuery(document).ready(function($) {
 			modalOverlay.css('display', 'none');
 			$(window).trigger('aaModalClosed')
 		}, 300);
+	});
+
+	$('#modal-userfiles-tabs').find('a').click(function(e) {
+		e.preventDefault();
+		$(this).tab('show')
 	});
 
 
