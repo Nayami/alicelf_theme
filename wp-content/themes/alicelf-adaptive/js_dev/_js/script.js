@@ -2,6 +2,14 @@
  * Base Theme Script ver 0.1.0
  */
 
+var _BODY = document.body,
+	_HTML = document.documentElement,
+	_DOCUMENT_HEIGHT = Math.max(_BODY.scrollHeight, _BODY.offsetHeight,
+		_HTML.clientHeight, _HTML.scrollHeight, _HTML.offsetHeight),
+	_TOP_OFFSET = document.documentElement.scrollTop || document.body.scrollTop,
+	_LEFT_OFFSET = document.documentElement.scrollLeft || document.body.scrollLeft;
+
+
 window.onload = function() {
 
 	"use strict";
@@ -263,6 +271,7 @@ jQuery(document).ready(function($) {
 			e.stopPropagation();
 			if ($(e.target).hasClass('main-navigation')) {
 				menuContainer.removeClass('open-menu');
+				$('body').removeClass('disable-scroll');
 				setTimeout(function() {
 					menuContainer.css('display', 'none');
 				}, 300);
@@ -362,6 +371,28 @@ jQuery(document).ready(function($) {
 			$(window).trigger('aaModalClosed')
 		}, 300);
 	});
+
+	/**
+	 * ==================== Fit Modal Size ======================
+	 * 06.05.2016
+	 */
+	$(window).on('aaModalOpened', function() {
+		$(_BODY).find('.modal-backdrop[itemscope="aa-modal"]')
+			.css({
+				'height': _DOCUMENT_HEIGHT + 'px'
+			});
+		$(_BODY).find('.aa-modal-container')
+			.css({
+				'top': _TOP_OFFSET + 60 + 'px'
+			});
+	});
+	$(window).on('resize', function() {
+		$(_BODY).find('.modal-backdrop[itemscope="aa-modal"]')
+			.css({
+				'height': _DOCUMENT_HEIGHT + 'px'
+			});
+	});
+
 
 	$('#modal-userfiles-tabs').find('a').click(function(e) {
 		e.preventDefault();

@@ -18,7 +18,7 @@ add_action( 'aa_afterbodystart', 'aa_func_20164825094852' );
 function aa_func_20164825094852()
 {
 	?>
-	<div class="modal-backdrop" id="users-files-gallery">
+	<div itemscope="aa-modal" class="modal-backdrop" id="users-files-gallery">
 		<div class="aa-modal-container">
 			<ul id="modal-userfiles-tabs" class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active">

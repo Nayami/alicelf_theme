@@ -88,7 +88,7 @@ jQuery(document).ready(function($) {
 		});
 	});
 
-	$('.modal-backdrop').waitUntilExists(function() {
+	$('.modal-backdrop[itemscope="aa-modal"]').waitUntilExists(function() {
 		var that = $(this);
 		that.on('click', function(e) {
 			e.stopPropagation();
