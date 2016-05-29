@@ -1,4 +1,5 @@
 {
+
   "autoload": {
     "files" : [
       "theme_init/plugins_dependences.php",
@@ -6,6 +7,7 @@
       "theme_init/config.php",
 
       "walkers/AliceNavigator.php",
+      "walkers/CustomFieldsMenu.php",
       "walkers/BootstrapWalker.php",
 
       "inc/custom_posts_config.php",
@@ -30,5 +32,7 @@
     "psr-4": {
       "Alicelf\\": "theme_init"
     }
+  },
+  "require": {
   }
 }

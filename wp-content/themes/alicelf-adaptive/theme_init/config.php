@@ -11,7 +11,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 $opt_name = "alicelf_theme_setup";
 $theme    = wp_get_theme();
-$subtheme = null;
+$subtheme = get_bloginfo('name');
 $imgdir   = get_template_directory_uri() . '/img/';
 
 $args = array(

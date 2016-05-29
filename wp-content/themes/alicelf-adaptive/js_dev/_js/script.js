@@ -324,7 +324,7 @@ jQuery(document).ready(function($) {
 	};
 
 	/**
-	 * ==================== Remove Modal from event ======================
+	 * ==================== Remove Modal ======================
 	 * detachModalEvent("#login-modal")
 	 */
 	var detachModalEvent = function(modal) {
@@ -376,14 +376,21 @@ jQuery(document).ready(function($) {
 	 * ==================== Fit Modal Size ======================
 	 * 06.05.2016
 	 */
-	$(window).on('aaModalOpened', function() {
+	var modalPosition = _TOP_OFFSET + 40;
+
+	$(window).on('scroll', function(){
+		modalPosition = (document.documentElement.scrollTop || document.body.scrollTop) + 40 ;
+	});
+
+	$(window).on('aaModalOpened', function(e) {
+		//console.log(modalPosition);
 		$(_BODY).find('.modal-backdrop[itemscope="aa-modal"]')
 			.css({
 				'height': _DOCUMENT_HEIGHT + 'px'
 			});
 		$(_BODY).find('.aa-modal-container')
 			.css({
-				'top': _TOP_OFFSET + 60 + 'px'
+				'top': modalPosition + 'px'
 			});
 	});
 	$(window).on('resize', function() {

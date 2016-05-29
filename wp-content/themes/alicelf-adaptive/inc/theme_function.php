@@ -9,12 +9,13 @@ if ( ! function_exists( 'forget_array_item' ) ) {
 	 * @param $maybe_array
 	 * @param $param
 	 * @param bool $key
+	 * @param bool $numeric
 	 *
-	 * @return mixed (new array)
+	 * @return mixed
 	 */
-	function forget_array_item( $maybe_array, $param, $key = false )
+	function forget_array_item( $maybe_array, $param, $key = false, $numeric = false )
 	{
-		return Arr::forget( $maybe_array, $param, $key );
+		return Arr::forget( $maybe_array, $param, $key, $numeric );
 	}
 }
 

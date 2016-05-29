@@ -22,16 +22,16 @@ class Arr {
 	}
 
 	/**
-	 *
 	 * Forget item in array
 	 *
 	 * @param $maybe_array
 	 * @param $param
 	 * @param bool $key - if key, will search key in array instead value
+	 * @param bool $numeric_array - means [0]=>val, [2]=>val
 	 *
 	 * @return mixed
 	 */
-	public static function forget( $maybe_array, $param, $key = false )
+	public static function forget( $maybe_array, $param, $key = false, $numeric_array = false )
 	{
 		if ( ! is_array( $maybe_array ) )
 			$maybe_array = unserialize( $maybe_array );
@@ -42,8 +42,12 @@ class Arr {
 			else
 				$position = array_search( $param, $maybe_array );
 
-			if ( $position !== false )
-				unset( $maybe_array[ $param ] );
+			if ( $position !== false ) {
+				if ( $numeric_array === true )
+					unset( $maybe_array[ $position ] );
+				else
+					unset( $maybe_array[ $param ] );
+			}
 
 			return $maybe_array; // can be false
 		}

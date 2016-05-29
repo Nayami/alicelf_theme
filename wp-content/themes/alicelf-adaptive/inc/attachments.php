@@ -6,6 +6,34 @@
  */
 use Alicelf\Helpers\Helper;
 
+
+
+if ( ! function_exists( 'aa_get_attachment' ) ) {
+	/**
+	 *
+	 * Get attachment data
+	 *
+	 * @param $attachment_id
+	 *
+	 * @return array
+	 */
+	function aa_get_attachment( $attachment_id )
+	{
+		$attachment = get_post( $attachment_id );
+
+		return [
+			'attachment_ID' => $attachment->ID,
+			'alt'           => get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
+			'caption'       => $attachment->post_excerpt,
+			'description'   => $attachment->post_content,
+			'href'          => get_permalink( $attachment->ID ),
+			'src'           => $attachment->guid,
+			'title'         => $attachment->post_title
+		];
+	}
+}
+
+
 if ( ! function_exists( 'aa_delete_attachment' ) ) {
 	/**
 	 * Delete Attachment record and unlink related files
