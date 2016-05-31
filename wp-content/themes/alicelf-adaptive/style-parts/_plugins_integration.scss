@@ -1,0 +1,28 @@
+/**
+ * ==================== CF7 Alert Messages ======================
+ * 21.05.2016
+ */
+.wpcf7-form {
+	.wpcf7-not-valid-tip {
+		color : $dangerColor;
+	}
+	.wpcf7-response-output {
+		border        : none;
+		padding       : 20px;
+		line-height   : 20px;
+		margin        : 0 0 15px;
+		border-radius : 1px;
+		&.wpcf7-validation-errors {
+			background-color : $warningColor;
+			color            : #000;
+		}
+		&.wpcf7-mail-sent-ng {
+			background-color : $dangerColor;
+			color            : #fff;
+		}
+		&.wpcf7-mail-sent-ok {
+			background-color : $successColor;
+			color            : #fff;
+		}
+	}
+}

@@ -8,11 +8,13 @@
 
 @import "style-parts/vars";
 @import "style-parts/mix";
+@import "style-parts/plugins_integration";
 @import "style-parts/basics";
 @import "style-parts/thumbs";
 @import "style-parts/animate";
 @import "style-parts/parallax-bg";
 @import "style-parts/alerts_and_messages";
+@import "style-parts/media";
 
 // TransformIcons
 @import "style-parts/transformicons/index/tcons";

@@ -402,6 +402,7 @@ Redux::setSection( $opt_name, $section );
 
 /**
  * Google Api
+ * AIzaSyAeyZuw9Qdha9fbH-nnq-Sz7NUzfSJq9ZM
  */
 $section = array(
 	'title'      => 'Google API',
@@ -410,7 +411,16 @@ $section = array(
 	'desc'       => '',
 	'icon'       => 'el el-googleplus',
 	'fields'     => array(
-		array(),
+		array(
+			'id'       => 'opt-api-googlemapkey',
+			'type'     => 'text',
+			'title'    => __( 'Google Map Key', 'alicelf-adaptive' ),
+			'subtitle' => __( 'Your app Key', 'alicelf-adaptive' ),
+			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
+//			'validate' => 'email',
+//			'msg'      => 'custom error message',
+			'default'  => 'AIzaSyAeyZuw9Qdha9fbH-nnq-Sz7NUzfSJq9ZM'
+		),
 	)
 );
 

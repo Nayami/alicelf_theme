@@ -322,3 +322,12 @@ function form_process_to_send()
 		echo "error";
 	}
 }
+
+
+// ============= Aa_is_profile =============
+if ( ! function_exists( 'aa_is_profile' ) ) {
+	function aa_is_profile( $page_id )
+	{
+		return get_page_template_slug($page_id) === 'profile.php';
+	}
+}

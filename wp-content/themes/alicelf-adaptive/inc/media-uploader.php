@@ -1,54 +1,57 @@
 <?php
-
-if ( ! function_exists( 'aa_media_button' ) ) {
-	/**
-	 * @param $config
-	 */
-	function aa_media_button( $config )
-	{
-		$modal_atts = "data-related-modal='#users-files-gallery' data-modal-trigger='{$config['type']}'"
-		// @TODO: image(s) container and input handler with $config['name'] $config['value']
-		?>
-		<a href="" <?php echo $modal_atts ?> class="btn btn-sm btn-default"><?php echo $config['button_text'] ?></a>
-		<?php
+/**
+ * ==================== Init WpEnque ======================
+ * In frontend and for profile only
+ * 29.05.2016
+ */
+add_action( 'wp_head', 'aa_func_20164829084834' );
+function aa_func_20164829084834()
+{
+	if ( aa_is_profile( get_the_ID() ) ) {
+		wp_enqueue_media();
 	}
 }
 
-add_action( 'aa_afterbodystart', 'aa_func_20164825094852' );
-function aa_func_20164825094852()
+add_filter( 'media_view_strings', 'aa_func_20160031110053', 30, 1 );
+function aa_func_20160031110053( $strings )
 {
-	?>
-	<div itemscope="aa-modal" class="modal-backdrop" id="users-files-gallery">
-		<div class="aa-modal-container">
-			<ul id="modal-userfiles-tabs" class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active">
-					<a href="#allmy-uploaded-fls" aria-controls="allmy-uploaded-fls" role="tab" data-toggle="tab">
-						<h3>My Files</h3>
-					</a>
-				</li>
-				<li role="presentation">
-					<a href="#upload-newfile" aria-controls="upload-newfile" role="tab" data-toggle="tab">
-						<h3>Upload</h3>
-					</a>
-				</li>
-			</ul>
+	if ( ! is_admin() ) {
+		unset( $strings[ 'createGalleryTitle' ] );
+		unset( $strings[ 'insertFromUrlTitle' ] );
+	}
 
-			<div class="tab-content">
-				<div role="tabpanel" class="tab-pane fade in active" id="allmy-uploaded-fls">
+	return $strings;
+}
 
-					<!-- @TODO: fill the files regarding to css -->
+//function custom_media_upload_tab_name( $tabs ) {
+//	$newtab = array( 'tab_slug' => 'Your Tab Name' );
+//	return array_merge( $tabs, $newtab );
+//}
+//add_filter( 'media_upload_tabs', 'custom_media_upload_tab_name' );
+//function custom_media_upload_tab_content() {
+//	// Add you content here.
+//}
+//add_action( 'media_upload_tab_slug', 'custom_media_upload_tab_content' );
+/**
+ * ==================== Add filter for non admins ======================
+ * 29.05.2016
+ */
+add_filter( 'ajax_query_attachments_args', 'aa_func_20161529091520', 10, 1 );
+function aa_func_20161529091520( $query )
+{
+	if ( ! current_user_can( 'manage_options' ) ) {
+		$query[ 'author' ] = get_current_user_id();
+	}
 
-				</div>
-				<div role="tabpanel" class="tab-pane fade" id="upload-newfile">
-					<form action="" id="frontend-upload-form" enctype="multipart/form-data" method="POST">
-						<label for="upload-userfile" class="btn btn-default btn-lg">
-							<i class="fa fa-upload"></i> Upload
-						</label>
-						<input type="file" name="upload-userfile" id="upload-userfile">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php
+	return $query;
+}
+
+// @TODO: create button container with config options
+if ( ! function_exists( 'aa_native_wp_mediabutton' ) ) {
+	function aa_native_wp_mediabutton( $config = [ ] )
+	{
+		?>
+		<a href="" class="btn btn-sm btn-default" data-trig="glrtrig">Trigger</a>
+		<?php
+	}
 }

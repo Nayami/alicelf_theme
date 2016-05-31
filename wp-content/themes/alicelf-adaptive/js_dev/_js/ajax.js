@@ -91,7 +91,6 @@ jQuery(document).ready(function($) {
 	$('.modal-backdrop[itemscope="aa-modal"]').waitUntilExists(function() {
 		var that = $(this);
 		that.on('click', function(e) {
-			e.stopPropagation();
 			if (elemHasClass(e.target, 'modal-backdrop')) {
 				that.removeClass('show');
 				setTimeout(function() {
@@ -423,16 +422,25 @@ jQuery(document).ready(function($) {
 
 
 	/**
+	 * ===================================================================
 	 * ==================== User Gallery Ajax Scope ======================
+	 * ===================================================================
 	 * 25.04.2016
 	 */
-	$("#users-files-gallery").on('aaModalOpened', function(e, type, related) {
-		if(related === "#users-files-gallery") {
+	// Test media
+	$('[data-trig]').on('click', function(e) {
+		e.preventDefault();
 
-			// @TODO: handle gallery body
+		var that = $(this);
+		var frame = wp.media({
+			title   : 'Add your title here',
+			frame   : 'post',
+			multiple: true,
+			library : {type: 'image'},
+			button  : {text: 'Add Image'}
+		});
+		frame.open();
 
-		}
 	});
-
 
 });

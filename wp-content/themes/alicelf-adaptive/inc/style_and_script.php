@@ -25,6 +25,9 @@ function invoke_scripts()
 	// ================== Plugins and Libs ==================
 	wp_enqueue_script( 'aa-tp-scripts', $theme_path . '/js_prod/compiled-plugins-script.js', array('jquery'), false, true );
 
+	// Googlemap Api
+//	wp_enqueue_script('aa-googlemap-api', 'http://maps.googleapis.com/maps/api/js?language=en&key='.$alicelf['opt-api-googlemapkey']);
+
 	// ============= Non Uglified =============
 //	wp_enqueue_script( 'non-uglified', $theme_path . '/js_prod/non-uglified.js', array('jquery'), false, true );
 

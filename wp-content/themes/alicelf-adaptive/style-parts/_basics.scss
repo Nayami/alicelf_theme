@@ -417,3 +417,20 @@ li.menu-item-has-children {
     float : right;
   }
 }
+
+
+.media-modal.wp-core-ui {
+
+	.media-toolbar {
+		label {
+			display: none;
+		}
+	}
+	.screen-reader-text {
+		display: none;
+	}
+	.media-modal-close {
+
+	}
+
+}

@@ -196,13 +196,15 @@ function aa_func_20161815081848()
 					echo "<pre>";
 					print_r($avatar);
 					echo "</pre>";
+
 					$config = [
-						'type'        => 'radio',
+						'type'        => 'single',
 						'name'        => '_aa_user_avatar',
 						'value'       => $avatar_meta,
 						'button_text' => 'Change Image'
 					];
-					aa_media_button( $config );
+					aa_native_wp_mediabutton($config);
+
 				} else {
 					?>
 					<div class="thumbnail">
