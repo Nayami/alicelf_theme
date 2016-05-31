@@ -2,3 +2,31 @@
  * ==================== Media Uploader Frontend Styles ======================
  * 29.05.2016
  */
+// Hide sidebar actions
+.media-frame  {
+	> * {
+		&.media-frame-menu {
+			left: -200px;
+		}
+		&:not(.media-frame-menu) {
+			left : 0;
+		}
+	}
+}
+
+
+.media-modal.wp-core-ui {
+
+	.media-toolbar {
+		label {
+			display: none;
+		}
+	}
+	.screen-reader-text {
+		display: none;
+	}
+	.media-modal-close {
+
+	}
+
+}

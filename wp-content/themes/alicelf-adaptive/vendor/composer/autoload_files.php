@@ -10,6 +10,7 @@ return array(
     '969fc85c6262d7a6f2dedd181065f45e' => $baseDir . '/theme_init/ReduxCore/framework.php',
     '848c44240fd7b43d7b484a97d32ac10a' => $baseDir . '/theme_init/config.php',
     '02e394a5202caa30d3e9776ae2b06e74' => $baseDir . '/walkers/AliceNavigator.php',
+    '13efdbd866f69d24a4c7777a40b44db1' => $baseDir . '/walkers/custom_menu_actions.php',
     '23ee204f34347f63e95de4f1dcf43f86' => $baseDir . '/walkers/CustomFieldsMenu.php',
     'edc4fa14d7c3db2a0fe06c33aa956e87' => $baseDir . '/walkers/BootstrapWalker.php',
     '0b482dc0f8af2569d73094b02b8b4749' => $baseDir . '/inc/custom_posts_config.php',

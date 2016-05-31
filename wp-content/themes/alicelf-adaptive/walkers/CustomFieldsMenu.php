@@ -1,83 +1,25 @@
 <?php
 
-// @TODO: Create fabric fields class
-
-
-add_action('admin_head', 'aa_func_20165429115424');
-function aa_func_20165429115424()
-{
-	$screen = get_current_screen();
-	if($screen->id === 'nav-menus')
-		wp_enqueue_media();
-}
-
-add_action('aa_custom_menu_edit_before', 'aa_func_20163629113604',10, 2);
-function aa_func_20163629113604($item_id, $item)
-{
-	$value = get_post_meta($item_id, '_menu_item_custom', true);
-
-	?>
-	<p class="upload-menu-item upload-menu-item-wide">
-		<label for="upload-menu-item-<?php echo $item_id; ?>">
-			<?php _e( 'Menu Image' ); ?><br/>
-			<?php
-			$image = null;
-			if ( ! empty( $value ) ) {
-				$item = json_decode( $value );
-				$image .= "<div class='img-wrap'>";
-				$image .= "<img src='{$item->url}'><i data-id-src='{$item->id}' class='fa fa-remove'></i>";
-				$image .= "</div>";
-			}
-			echo "<div class='backend-uploader-handler' data-type='single'>";
-			echo "<div class='image-holder'>{$image}</div>";
-			echo "<button data-fragment='aa-upload-backend' class='button button-small'>Change Image</button>";
-			echo "<input type='hidden' name='aa-menu-item-custom[{$item_id}]' value='{$value}'>";
-			echo "</div>";
-			?>
-
-		</label>
-	</p>
-	<?php
-}
-
-add_filter('aa_menu_afrer_link_open', 'aa_func_20161629121611',10, 1);
-function aa_func_20161629121611($item)
-{
-	$value = get_post_meta($item, '_menu_item_custom', true);
-
-	if(!empty($value)) {
-		$v = json_decode($value);
-		return "<img src='{$v->url}'>";
-	}
-	return null;
-}
-
-/**
- * ==================== Update menu item values ======================
- * 29.05.2016
- */
-add_action( 'wp_update_nav_menu_item', 'aa_func_20163329103314', 10, 3 );
-function aa_func_20163329103314( $menu_id, $menu_item_db_id, $args )
-{
-	if ( isset( $_REQUEST[ 'aa-menu-item-custom' ] ) ) {
-		$custom_value = $_REQUEST[ 'aa-menu-item-custom' ][ $menu_item_db_id ];
-		update_post_meta( $menu_item_db_id, '_menu_item_custom', $custom_value );
-	}
-}
-
-
-// Fully replace walker
-add_filter( 'wp_edit_nav_menu_walker', 'custom_nav_edit_walker', 10, 2 );
-function custom_nav_edit_walker( $walker, $menu_id )
-{
-	return 'CustomFieldsMenu';
-}
 
 class CustomFieldsMenu extends Walker_Nav_Menu {
 
-	function start_lvl( &$output, $depth = 0, $args = array() ) {
-		$indent = str_repeat( "\t", $depth );
-		$output .= "\n$indent<ul class=\"sub-menu dropdown-menu dropdown-onhover\">\n";
+	function start_lvl( &$output, $depth = 0, $args = array() )
+	{
+		if(!is_admin()) {
+			$indent = str_repeat( "\t", $depth );
+			$output .= "\n$indent<ul class=\"sub-menu dropdown-menu dropdown-onhover\">\n";
+		}
+
+	}
+	public function end_lvl( &$output, $depth = 0, $args = array() ) {
+		if(!is_admin()) {
+			$indent = str_repeat("\t", $depth);
+			$output .= "$indent</ul>\n";
+		}
+	}
+	function display_element( $element, &$children_elements, $max_depth, $depth = 0, $args, &$output ) {
+		$element->hasChildren = isset( $children_elements[ $element->ID ] ) && ! empty( $children_elements[ $element->ID ] );
+		parent::display_element( $element, $children_elements, $max_depth, $depth, $args, $output );
 	}
 
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 )
@@ -91,6 +33,7 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 		 * 29.05.2016
 		 */
 		if ( is_admin() ) {
+
 			global $_wp_nav_menu_max_depth;
 			$_wp_nav_menu_max_depth = $depth > $_wp_nav_menu_max_depth ? $depth : $_wp_nav_menu_max_depth;
 
@@ -185,7 +128,6 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 			</div>
 
 
-
 			<div class="menu-item-settings wp-clearfix" id="menu-item-settings-<?php echo $item_id; ?>">
 
 				<?php
@@ -197,7 +139,7 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 				 * ============================================================
 				 * 29.05.2016
 				 */
-				do_action('aa_custom_menu_edit_before', $item_id, $item);
+				do_action( 'aa_custom_menu_edit_before', $item_id, $item );
 				?>
 
 
@@ -262,7 +204,7 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 				 * ============================================================
 				 * 29.05.2016
 				 */
-				do_action('aa_custom_menu_edit_after', $item_id, $item);
+				do_action( 'aa_custom_menu_edit_after', $item_id, $item );
 				?>
 
 				<p class="field-move hide-if-no-js description description-wide">
@@ -292,11 +234,7 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 							admin_url( 'nav-menus.php' )
 						),
 						'delete-menu_item_' . $item_id
-					); ?>"><?php _e( 'Remove' ); ?></a> <span class="meta-sep hide-if-no-js"> | </span> <a class="item-cancel submitcancel hide-if-no-js" id="cancel-<?php echo $item_id; ?>"
-					                                                                                       href="<?php echo esc_url( add_query_arg( array(
-						                                                                                       'edit-menu-item' => $item_id, 'cancel' => time()
-					                                                                                       ), admin_url( 'nav-menus.php' ) ) );
-					                                                                                       ?>#menu-item-settings-<?php echo $item_id; ?>"><?php _e( 'Cancel' ); ?></a>
+					); ?>"><?php _e( 'Remove' ); ?></a> <span class="meta-sep hide-if-no-js"> | </span> <a class="item-cancel submitcancel hide-if-no-js" id="cancel-<?php echo $item_id; ?>"href="<?php echo esc_url( add_query_arg( array('edit-menu-item' => $item_id, 'cancel' => time()), admin_url( 'nav-menus.php' ) ) );?>#menu-item-settings-<?php echo $item_id; ?>"><?php _e( 'Cancel' ); ?></a>
 				</div>
 
 				<input class="menu-item-data-db-id" type="hidden" name="menu-item-db-id[<?php echo $item_id; ?>]" value="<?php echo $item_id; ?>"/>
@@ -320,14 +258,14 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 			 * 29.05.2016
 			 */
 
-			$indent     = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-			$value      = '';
-			$classes    = empty( $item->classes ) ? array() : (array) $item->classes;
-			$classes[ ] = 'menu-item-' . $item->ID;
+			$indent    = ( $depth ) ? str_repeat( "\t", $depth ) : '';
+			$value     = '';
+			$classes   = empty( $item->classes ) ? array() : (array) $item->classes;
+			$classes[] = 'menu-item-' . $item->ID;
 			/* If this item has a dropdown menu, add the 'dropdown' class for Bootstrap */
 
-			$item->hasChildren && $classes[ ] = 'dropdown';
-			in_array( 'current-menu-item', $classes ) && $classes[ ] = 'active ';
+			$item->hasChildren && $classes[] = 'dropdown';
+			in_array( 'current-menu-item', $classes ) && $classes[] = 'active ';
 
 			$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args ) );
 			$class_names = ' class="' . esc_attr( $class_names ) . '"';
@@ -336,8 +274,6 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 			$id = strlen( $id ) ? ' id="' . esc_attr( $id ) . '"' : '';
 
 			$output .= $indent . '<li' . $id . $value . $class_names . '>';
-
-
 
 			$attributes = ! empty( $item->attr_title ) ? ' title="' . esc_attr( $item->attr_title ) . '"' : '';
 			$attributes .= ! empty( $item->target ) ? ' target="' . esc_attr( $item->target ) . '"' : '';
@@ -350,7 +286,6 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 
 			$item_output = '<span class="title-icons glyphicon ' . esc_attr( $item->attr_title ) . ' "></span><a' . $attributes . '>';
 
-
 			/**
 			 * ==================================================
 			 * ==================================================
@@ -359,12 +294,11 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 			 * ==================================================
 			 * 29.05.2016
 			 */
-			$item_output .= apply_filters('aa_menu_afrer_link_open', $item->ID);
+			$item_output .= apply_filters( 'aa_menu_afrer_link_open', $item->ID );
 
 			$item_output .= "<span class='text-title'>";
 			$item_output .= apply_filters( 'the_title', $item->title, $item->ID );
 			$item_output .= "</span>";
-
 
 			if ( $item->hasChildren && $depth == 0 ) {
 				$item_output .= '<span class="caret"></span></a>';

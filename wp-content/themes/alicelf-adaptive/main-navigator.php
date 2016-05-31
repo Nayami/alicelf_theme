@@ -25,7 +25,7 @@ if ( !has_nav_menu('primary') ) {
 			'menu_class'     => 'nav navbar-nav',
 			'theme_location' => 'primary',
 			'container'      => false,
-			'walker'         => new AliceNavigator()
+			'walker'         => new CustomFieldsMenu()
 		);
 		wp_nav_menu( $args );
 		?>

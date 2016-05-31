@@ -7,6 +7,7 @@
       "theme_init/config.php",
 
       "walkers/AliceNavigator.php",
+      "walkers/custom_menu_actions.php",
       "walkers/CustomFieldsMenu.php",
       "walkers/BootstrapWalker.php",
 
