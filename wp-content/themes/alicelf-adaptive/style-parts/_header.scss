@@ -1,3 +1,34 @@
+.site-header {
+	position: static;
+	width: 100%;
+	z-index: 9;
+	@include transition();
+}
+
+.stick-to-top {
+	padding-top : 153px;
+	.site-header {
+		position : fixed;
+		top : 0;
+		//background-color: #eee;
+	}
+}
+.header-with-bg {
+	background-color: #fff;
+}
+
+body.admin-bar {
+	.stick-to-top {
+		.site-header {
+			padding-top : 30px;
+			/*Desktop*/
+			/*Tablet*/
+			@media (max-width : 951px) {
+				padding-top : 50px;
+			}
+		}
+	}
+}
 
 .disable-scroll {
 	overflow : hidden;
@@ -107,6 +138,8 @@
 			margin     : 50px auto 0;
 			max-width  : 500px;
 			background : url("img/mobile-nav.png");
+			overflow-y: auto ;
+			max-height: 58%;
 		}
 		li {
 			display    : block;

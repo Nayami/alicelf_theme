@@ -93,6 +93,7 @@ jQuery(document).ready(function($) {
 		that.on('click', function(e) {
 			if (elemHasClass(e.target, 'modal-backdrop')) {
 				that.removeClass('show');
+				$(window).trigger('aaModalClosed');
 				setTimeout(function() {
 					that.css({'display': 'none'});
 				}, 400);
@@ -607,6 +608,14 @@ window.onload = function() {
 
 jQuery(document).ready(function($) {
 
+	$(window).on('scroll', function(){
+		var _TOP_OFFSET = document.documentElement.scrollTop || document.body.scrollTop,
+			header = $('header.site-header'),
+			hh = header.height();
+		_TOP_OFFSET > hh ? header.addClass('header-with-bg') : header.removeClass('header-with-bg');
+
+	});
+
 	var slickSliderOpt = function() {
 		$('.slider-for').slick({
 			slidesToShow  : 1,
@@ -627,54 +636,7 @@ jQuery(document).ready(function($) {
 	if (typeof $.fn.slick === 'function')
 		slickSliderOpt();
 
-	var stickNavbar = function() {
 
-		$(window).on('scroll', function() {
-			var topOffset = document.documentElement.scrollTop || document.body.scrollTop,
-				selection = $('.stick-to-top').find('>.container > header'),
-				wpAdminBarH = $('#wpadminbar').height(),
-				selectionHeight = selection.height();
-
-			if ($(window).width() < 600)
-				wpAdminBarH = 0;
-
-			$(window).on('resize', function() {
-				if ($(window).width() < 600)
-					wpAdminBarH = 0;
-				selectionHeight = $('.stick-to-top').find('>.container > header').height();
-			});
-
-			if (topOffset > selectionHeight) {
-				selection.css({
-					position : 'fixed',
-					width    : '100%',
-					top      : (0 + wpAdminBarH) + 'px',
-					'z-index': '999'
-				});
-				if (!selection.hasClass('header-touch-top')) {
-					selection.css({
-						top    : -selectionHeight + 'px',
-						opacity: '0'
-					});
-					selection.animate({
-						top    : (0 + wpAdminBarH) + 'px',
-						opacity: 1
-					}, 500)
-				}
-				selection.addClass('header-touch-top');
-				$('#shock-absorber').css({height: selectionHeight + "px"});
-			} else {
-				selection.css({
-					position: 'static',
-					width   : 'auto'
-				});
-				selection.removeClass('header-touch-top');
-				$('#shock-absorber').css({height: 0});
-			}
-		});
-
-	};
-	stickNavbar();
 
 	transformicons.add('.tcon');
 	;
@@ -799,7 +761,7 @@ jQuery(document).ready(function($) {
 			modalOverlay.removeClass('show');
 			setTimeout(function() {
 				modalOverlay.css('display', 'none');
-				$(window).trigger('aaModalClosed')
+				$(window).trigger('aaModalClosed');
 			}, 300);
 		});
 
@@ -814,43 +776,19 @@ jQuery(document).ready(function($) {
 		modalOverlay.removeClass('show');
 		setTimeout(function() {
 			modalOverlay.css('display', 'none');
-			$(window).trigger('aaModalClosed')
+			$(window).trigger('aaModalClosed');
 		}, 300);
 	});
 
-	/**
-	 * ==================== Fit Modal Size ======================
-	 * 06.05.2016
-	 */
-	var modalPosition = _TOP_OFFSET + 40;
-
-	$(window).on('scroll', function(){
-		modalPosition = (document.documentElement.scrollTop || document.body.scrollTop) + 40 ;
-	});
-
 	$(window).on('aaModalOpened', function(e) {
-		//console.log(modalPosition);
-		$(_BODY).find('.modal-backdrop[itemscope="aa-modal"]')
-			.css({
-				'height': _DOCUMENT_HEIGHT + 'px'
-			});
-		$(_BODY).find('.aa-modal-container')
-			.css({
-				'top': modalPosition + 'px'
-			});
+		$(_BODY).addClass('aa-modal-overlay');
 	});
-	$(window).on('resize', function() {
-		$(_BODY).find('.modal-backdrop[itemscope="aa-modal"]')
-			.css({
-				'height': _DOCUMENT_HEIGHT + 'px'
-			});
+
+	$(window).on('aaModalClosed', function(e) {
+		$(_BODY).removeClass('aa-modal-overlay');
 	});
 
 
-	$('#modal-userfiles-tabs').find('a').click(function(e) {
-		e.preventDefault();
-		$(this).tab('show')
-	});
 
 
 	//raizeModalEvent("#login-modal");

@@ -26,6 +26,16 @@ function alice_remove_post_type_support()
 }
 
 
+add_action('aa_backend_theme_setup_head', 'aa_func_20161101071136');
+function aa_func_20161101071136()
+{
+	global $alicelf;
+	$_logo = $alicelf['opt-logo'];
+	if(!empty($_logo))
+		echo "<img src='{$_logo['url']}'>";
+}
+
+
 add_filter('wp_title', 'aa_func_20164019094058', 10, 1);
 function aa_func_20164019094058($title)
 {
@@ -83,6 +93,7 @@ function custom_revisions_number( $num, $post )
 	return $num;
 }
 
+add_action( 'wp_head', 'aa_set_favicon' );
 function aa_set_favicon()
 {
 	global $alicelf;
@@ -95,15 +106,24 @@ function aa_set_favicon()
 	echo $output;
 }
 
-add_action( 'wp_head', 'aa_set_favicon' );
-
+add_action('wp_head', 'aa_func_20163901013945', 30);
+function aa_func_20163901013945()
+{
+	global $alicelf;
+	if(!empty($alicelf['opt-snippet-css']))
+		echo "<style>{$alicelf['opt-snippet-css']}</style>";
+}
 /**
- * ==================== Add Loader Line ======================
- * 14.04.2016
+ * ==================== JS after body tag ======================
+ * 01.06.2016
  */
-add_action( 'aa_afterbodystart', 'aa_func_20165314065329', 1 );
+add_action( 'aa_afterbodystart', 'aa_func_20165314065329', 10 );
 function aa_func_20165314065329()
 {
+	global $alicelf;
+	if ( ! empty( $alicelf[ 'opt-snippet-js' ] ) )
+		echo "<script>{$alicelf['opt-snippet-js']}</script>";
+
 	echo "<div id='global-load-line'></div>";
 }
 
@@ -112,7 +132,7 @@ function aa_func_20165314065329()
  * ==================== Render System Messages ======================
  * 15.04.2016
  */
-add_action( 'render_system_messages', 'aa_func_20165722125737', 1 );
+add_action( 'render_system_messages', 'aa_func_20165722125737', 10 );
 function aa_func_20165722125737()
 {
 	if ( isset( $_SESSION[ 'aa_alert_messages' ] ) ) {

@@ -93,6 +93,7 @@ jQuery(document).ready(function($) {
 		that.on('click', function(e) {
 			if (elemHasClass(e.target, 'modal-backdrop')) {
 				that.removeClass('show');
+				$(window).trigger('aaModalClosed');
 				setTimeout(function() {
 					that.css({'display': 'none'});
 				}, 400);

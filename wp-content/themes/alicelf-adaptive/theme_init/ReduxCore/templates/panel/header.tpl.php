@@ -49,7 +49,7 @@
                         class="redux-dev-mode-notice"><?php _e( 'Developer Mode Enabled', 'redux-framework' ); ?></span>
                 </div>
             <?php } ?>
-
+	          <?php do_action('aa_backend_theme_setup_head'); ?>
             <h2><?php echo wp_kses_post( $this->parent->args['display_name'] ); ?></h2>
 
             <?php if ( ! empty( $this->parent->args['display_version'] ) ) { ?>

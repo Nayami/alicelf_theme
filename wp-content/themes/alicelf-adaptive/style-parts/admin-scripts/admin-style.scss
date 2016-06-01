@@ -169,3 +169,11 @@ body {
 		display: none;
 	}
 }
+
+.display_header {
+	margin: 15px 10px 0 !important;
+	> img {
+		width : auto;
+		max-height : 50px;
+	}
+}
