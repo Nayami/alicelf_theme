@@ -1,3 +1,30 @@
+/**
+ * ==================== Registration ======================
+ * 23.04.2016
+ */
+.login-register-optgroups {
+	position    : relative;
+	padding-top : 30px;
+	.alert, [data-progress] {
+		position : absolute;
+		top      : 0;
+		left     : 0;
+		width    : 100%;
+	}
+	.alert {
+		z-index       : 1;
+		padding       : 10px 15px;
+		margin-bottom : 0;
+		h3 {
+			margin    : 0;
+			font-size : 16px;
+		}
+	}
+	[data-progress] {
+		z-index : 2;
+	}
+}
+
 #user-container-idenity {
 	.aside-profile {
 

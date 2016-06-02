@@ -88,18 +88,16 @@ if ( ! function_exists( 'aa_registrationform_shortcode' ) ) {
 		ob_start();
 		?>
 		<div id="aa-register-container" class="login-register-optgroups">
-			<div class="aa-modal-container">
-				<div id="register-progress" data-progress></div>
-				<h1 class="text-center">Register</h1>
-				<input type="text" name="first_name" placeholder="First Name" class="form-control">
-				<input type="text" name="last_name" placeholder="Last Name" class="form-control">
-				<input type="text" name="email" placeholder="E-mail" class="form-control">
-				<input type="password" name="pass" placeholder="Password" class="form-control">
-				<input type="password" name="pass_confirm" placeholder="Password Confirm" class="form-control">
-				<div class="btn-group btn-group-justified" role="group">
-					<div class="btn-group">
-						<button id="register-trigger" class="btn btn-default">Registration</button>
-					</div>
+			<div id="register-progress" data-progress></div>
+			<h1 class="text-center">Register</h1>
+			<input type="text" name="first_name" placeholder="First Name" class="form-control">
+			<input type="text" name="last_name" placeholder="Last Name" class="form-control">
+			<input type="text" name="email" placeholder="E-mail" class="form-control">
+			<input type="password" name="pass" placeholder="Password" class="form-control">
+			<input type="password" name="pass_confirm" placeholder="Password Confirm" class="form-control">
+			<div class="btn-group btn-group-justified" role="group">
+				<div class="btn-group">
+					<button id="register-trigger" class="btn btn-default">Registration</button>
 				</div>
 			</div>
 		</div>
