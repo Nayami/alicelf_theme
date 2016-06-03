@@ -14,22 +14,23 @@ Author URI: http://vzazerkalie.com/portf/
 //@Template Todo: datepicker box type
 //@Template Todo: extend plugin
 
-require('GenerateMeta.php');
-require('ajax_actions.php');
+require( 'GenerateMeta.php' );
+require( 'ajax_actions.php' );
 
 // Include all dynamic custom fields
-foreach ( glob( plugin_dir_path(__FILE__) . "/dynamic_metafields/*.php" ) as $filename )
+foreach ( glob( plugin_dir_path( __FILE__ ) . "/dynamic_metafields/*.php" ) as $filename ) {
 	require_once( $filename );
+}
 
 /**
  * Include styles and scripts
  *
  */
-add_action('admin_enqueue_scripts', 'aa_func_20154904124919');
+add_action( 'admin_enqueue_scripts', 'aa_func_20154904124919' );
 function aa_func_20154904124919()
 {
 	$plugindir = plugin_dir_url( __DIR__ ) . basename( __DIR__ );
-	
+
 	// Plugin scripts
 	wp_enqueue_style( 'alice_font_awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css' );
 	wp_enqueue_style( 'GenerateMetaStyle', $plugindir . '/style_script/style.css' );
@@ -41,25 +42,3 @@ function aa_func_20154904124919()
 	);
 	wp_localize_script( 'GenerateMetaScript', 'aa_generate_meta_var', $data );
 }
-
-$section_template = array(
-	array(
-		'type' => 'text',
-		'name' => 'title',
-		'value' => '',
-	),
-	array(
-		'type' => 'image',
-		'name' => 'slider-image',
-		'value' => '',
-	),
-	array(
-		'type' => 'textarea',
-		'name' => 'description',
-		'value' => '',
-	)
-);
-
-$dynamic_metabox = new Repeater( 'pages_repeater_meta', 'Page Accordion', 'page' );
-$dynamic_metabox->run( 'repeater', null, 'high', $section_template );
-$dynamic_metabox->saveMetadata();

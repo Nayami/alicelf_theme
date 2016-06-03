@@ -35,19 +35,27 @@ input[type="password"] {
  *        Site Style        *
  ****************************/
 
-#ed_toolbar {
+
+// Content box fixes START
+@mixin contentBox(){
 	-moz-box-sizing : content-box;
 	box-sizing      : content-box;
 }
 
-#menu-to-edit, .theme {
-	-moz-box-sizing : content-box;
-	box-sizing      : content-box;
-	* {
-		-moz-box-sizing : content-box;
-		box-sizing      : content-box;
+.tablenav-pages {
+	*, :before, :after {
+		@include contentBox();
 	}
 }
+
+#ed_toolbar,
+#menu-to-edit, .theme {
+	@include contentBox();
+	* {
+		@include contentBox();
+	}
+}
+// Content box fixes END
 
 #menu-to-edit {
 	p {

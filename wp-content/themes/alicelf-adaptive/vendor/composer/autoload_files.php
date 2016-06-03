@@ -6,6 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'c964ee0ededf28c96ebd9db5099ef910' => $vendorDir . '/guzzlehttp/promises/src/functions_include.php',
+    'a0edc8309cc5e1d60e3047b5df6b7052' => $vendorDir . '/guzzlehttp/psr7/src/functions_include.php',
+    '37a3dc5111fe8f707ab4c132ef1dbc62' => $vendorDir . '/guzzlehttp/guzzle/src/functions_include.php',
     '9a12a92e97bbc75a32c0d58a4a866c10' => $baseDir . '/theme_init/plugins_dependences.php',
     '969fc85c6262d7a6f2dedd181065f45e' => $baseDir . '/theme_init/ReduxCore/framework.php',
     '848c44240fd7b43d7b484a97d32ac10a' => $baseDir . '/theme_init/config.php',
@@ -13,7 +16,6 @@ return array(
     '13efdbd866f69d24a4c7777a40b44db1' => $baseDir . '/walkers/custom_menu_actions.php',
     '23ee204f34347f63e95de4f1dcf43f86' => $baseDir . '/walkers/CustomFieldsMenu.php',
     'edc4fa14d7c3db2a0fe06c33aa956e87' => $baseDir . '/walkers/BootstrapWalker.php',
-    '0b482dc0f8af2569d73094b02b8b4749' => $baseDir . '/inc/custom_posts_config.php',
     '705eddcceb94b2ff91b65953e5350651' => $baseDir . '/inc/dynamic_styles.php',
     'd3fac19cb44ad4b76498df84f634cf7f' => $baseDir . '/inc/menus.php',
     'a795979fcc15e563388b4b3688a36c0c' => $baseDir . '/inc/shortcodes.php',

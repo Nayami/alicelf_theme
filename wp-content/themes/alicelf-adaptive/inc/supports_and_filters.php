@@ -93,6 +93,7 @@ function custom_revisions_number( $num, $post )
 	return $num;
 }
 
+add_action( 'admin_head', 'aa_set_favicon' );
 add_action( 'wp_head', 'aa_set_favicon' );
 function aa_set_favicon()
 {

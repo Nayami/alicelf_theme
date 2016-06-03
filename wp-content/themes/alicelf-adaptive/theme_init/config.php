@@ -230,7 +230,7 @@ $section = array(
 		array(
 			'id'       => 'opt-social-twitter',
 			'type'     => 'text',
-			'title'    => __( 'Tweeter Url', 'alicelf-adaptive' ),
+			'title'    => __( 'Twitter url', 'alicelf-adaptive' ),
 			'subtitle' => __( 'Enter your Twitter ID', 'alicelf-adaptive' ),
 			'validate' => 'url',
 			'default'  => 'https://twitter.com/'
@@ -421,6 +421,47 @@ $section = array(
 //			'msg'      => 'custom error message',
 			'default'  => 'AIzaSyAeyZuw9Qdha9fbH-nnq-Sz7NUzfSJq9ZM'
 		),
+
+
+		[
+			'id'       => 'google-api-client-id',
+			'type'     => 'text',
+			'title'    => __( 'Client ID', 'alicelf-adaptive' ),
+		],
+		[
+			'id'       => 'google-api-client-secret',
+			'type'     => 'text',
+			'title'    => __( 'Client Secret', 'alicelf-adaptive' ),
+		],
+		[
+			'id'       => 'google-api-redirect-url',
+			'type'     => 'text',
+			'title'    => __( 'Redirect Url', 'alicelf-adaptive' ),
+		],
+		[
+			'id'       => 'google-api-auth-url',
+			'type'     => 'text',
+			'title'    => __( 'Redirect Url', 'alicelf-adaptive' ),
+			'default'  => 'https://accounts.google.com/o/oauth2/auth',
+			'readonly' => true
+		],
+		[
+			'id'       => 'google-api-token-url',
+			'type'     => 'text',
+			'title'    => __( 'Token Url', 'alicelf-adaptive' ),
+			'default'  => 'https://accounts.google.com/o/oauth2/token',
+			'readonly' => true
+		],
+		[
+			'id'       => 'google-api-userinfo-url',
+			'type'     => 'text',
+			'title'    => __( 'Token Url', 'alicelf-adaptive' ),
+			'default'  => 'https://www.googleapis.com/oauth2/v1/userinfo',
+			'readonly' => true
+		]
+
+
+
 	)
 );
 
