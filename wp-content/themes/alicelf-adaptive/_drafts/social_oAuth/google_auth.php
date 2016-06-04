@@ -13,11 +13,18 @@ function aa_func_20162003112035()
 	$token_url     = $alicelf[ 'google-api-token-url' ];
 	$userinfo_url  = $alicelf[ 'google-api-userinfo-url' ];
 
+	$scopes = [
+		'https://www.googleapis.com/auth/userinfo.profile',
+		'https://www.googleapis.com/auth/userinfo.email',
+		'https://www.googleapis.com/auth/plus.me',
+	];
+	$scopes = implode(" ", $scopes);
+
 	$get_params = [
 		'client_id'     => $client_id,
 		'redirect_uri'  => $redirect_uri,
 		'response_type' => 'code',
-		'scope'         => 'https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile'
+		'scope'         => $scopes
 	];
 	$link       = $auth_url . '?' . urldecode( http_build_query( $get_params ) );
 	echo "<a class='btn btn-default' href='{$link}'>Google Auth</a>";
@@ -52,6 +59,7 @@ function aa_func_20162003112035()
 			$request = $client->get( $userinfo_url, [ 'query' => $get_params ] );
 
 			$userInfo = json_decode( $request->getBody(), true );
+			$userInfo[ 'access_token' ] = $get_params[ 'access_token' ];
 			echo "<pre>";
 			print_r( $userInfo );
 			echo "</pre>";
