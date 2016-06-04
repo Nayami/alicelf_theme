@@ -166,6 +166,23 @@ function aa_func_20160815060854($title)
 	return get_bloginfo('name');
 }
 
+/**
+ * ==================== Editor tags ======================
+ * 04.06.2016
+ */
+add_action( 'admin_print_footer_scripts', 'aa_func_20163004123014' );
+function aa_func_20163004123014()
+{
+	if ( wp_script_is( 'quicktags' ) ) {
+		?>
+		<script type="text/javascript">
+			QTags.addButton('ghostly_wrap', 'Wrap', '<div class="ghostly-wrap">', '</div>', 'p', 'Wrap', 140);
+			QTags.addButton('eg_pre', 'Pre', '<pre>', '</pre>', 'q', 'Preformatted text tag', 141);
+		</script>
+		<?php
+	}
+}
+
 
 /**
  * ==================== SEARCH ======================
