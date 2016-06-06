@@ -2,19 +2,19 @@
 use GuzzleHttp\Client;
 
 // ============= Fb_vars =============
-if ( ! function_exists( 'fb_vars' ) ) {
-	function fb_vars()
+if ( ! function_exists( 'fb_apivars' ) ) {
+	function fb_apivars()
 	{
-		global $alicef;
+		global $alicelf;
 
 		return [
-			'client_id'     => '1651075215180567',
-			'client_secret' => '747b7b816b16144ea5608cd010f2f5ab',
-			'redirect_uri'  => 'http://localhost/redux',
-			'scope'         => 'email,public_profile,user_friends',
-			'auth_url'      => 'https://www.facebook.com/dialog/oauth',
-			'token_url'     => 'https://graph.facebook.com/v2.5/oauth/access_token',
-			'me_url'        => 'https://graph.facebook.com/v2.5/me'
+			'client_id'     => $alicelf['opt-api-fb-clientid'],
+			'client_secret' => $alicelf['opt-api-fb-clientsecret'],
+			'scope'         => $alicelf['opt-api-fbscope'],
+			'redirect_uri'  => $alicelf['opt-api-fbredirecturl'],
+			'auth_url'      => $alicelf['opt-api-fbauthuri'],
+			'token_url'     => $alicelf['opt-api-fbaccesstokenuri'],
+			'me_url'        => $alicelf['opt-api-meuri']
 		];
 	}
 }
@@ -22,7 +22,8 @@ if ( ! function_exists( 'fb_vars' ) ) {
 add_action( 'aa_afterbodystart', 'aa_func_20163106113113' );
 function aa_func_20163106113113()
 {
-	$settings   = fb_vars();
+	$settings   = fb_apivars();
+
 	$get_params = [
 		'client_id'    => $settings[ 'client_id' ],
 		'redirect_uri' => $settings[ 'redirect_uri' ],

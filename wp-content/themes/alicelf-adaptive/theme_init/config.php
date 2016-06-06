@@ -11,7 +11,7 @@ include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 $opt_name = "alicelf_theme_setup";
 $theme    = wp_get_theme();
-$subtheme = get_bloginfo('name');
+$subtheme = get_bloginfo( 'name' );
 $imgdir   = get_template_directory_uri() . '/img/';
 
 $args = array(
@@ -141,7 +141,6 @@ $section = array(
 			),
 			'default'    => '1'
 		),
-
 
 //		array(
 //			'id'         => 'mobile-menu-type',
@@ -329,72 +328,57 @@ $section = array(
 	'desc'       => '',
 	'icon'       => 'el el-facebook',
 	'fields'     => array(
-		array(
-			'id'       => 'opt-api-fb-user',
-			'type'     => 'text',
-			'title'    => __( 'Facebook User', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your user id', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => '100009974258293'
-		),
 
 		array(
-			'id'            => 'opt-api-fb-postcount',
-			'type'          => 'slider',
-			'title'         => __( 'Post Count', 'alicelf-adaptive' ),
-			'subtitle'      => __( 'Set default posts count', 'alicelf-adaptive' ),
-			'desc'          => __( 'Slider description. Min: 0, max: 300, step: 5, default value: 75', 'alicelf-adaptive' ),
-			'default'       => 10,
-			'min'           => 1,
-			'step'          => 1,
-			'max'           => 1000,
-			'display_value' => 'text'
-		),
-
-		array(
-			'id'       => 'opt-api-fb-appid',
+			'id'       => 'opt-api-fb-clientid',
 			'type'     => 'text',
-			'title'    => __( 'Facebook App ID', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your user App ID', 'alicelf-adaptive' ),
+			'title'    => __( 'Facebook Client ID', 'alicelf-adaptive' ),
+			'subtitle' => __( 'Your user Client ID', 'alicelf-adaptive' ),
 			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => '494617204040308'
+			'default'  => '1651075215180567'
 		),
 		array(
-			'id'       => 'opt-api-fb-secret',
+			'id'       => 'opt-api-fb-clientsecret',
 			'type'     => 'text',
-			'title'    => __( 'Facebook App Secret', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your user App Secret', 'alicelf-adaptive' ),
+			'title'    => __( 'Facebook Client Secret', 'alicelf-adaptive' ),
+			'subtitle' => __( 'Your user Client Secret', 'alicelf-adaptive' ),
 			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => 'f90024597f44d17d1b35120cc38b61bb'
+			'default'  => '747b7b816b16144ea5608cd010f2f5ab'
 		),
+		[
+			'id'      => 'opt-api-fbscope',
+			'type'    => 'text',
+			'title'   => __( 'Auth scope', 'alicelf-adaptive' ),
+			'default' => 'email,public_profile,user_friends'
+		],
 
-		array(
-			'id'       => 'opt-api-fb-apptoken',
+		[
+			'id'      => 'opt-api-fbredirecturl',
+			'type'    => 'text',
+			'title'   => __( 'Redirect Uri', 'alicelf-adaptive' ),
+			'default' => 'http://localhost'
+		],
+		[
+			'id'       => 'opt-api-fbauthuri',
 			'type'     => 'text',
-			'title'    => __( 'Facebook AppToken', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your user AppToken', 'alicelf-adaptive' ),
-			'desc'     => __( 'See the <a target="_blank" href="https://developers.facebook.com/tools/explorer/">Graph Explorer</a>', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => '494617204040308|hBpC5U9bsX3e-5i4fOLQ_-DjXY0'
-		),
-
-		array(
-			'id'       => 'opt-api-fb-accesstoken',
-			'type'     => 'text',
-			'title'    => __( 'Facebook Accesstoken', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your user Accesstoken', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => ''
-		),
+			'title'    => __( 'Auth Uri', 'alicelf-adaptive' ),
+			'default'  => 'https://www.facebook.com/dialog/oauth',
+			'readonly' => true
+		],
+		[
+			'id'      => 'opt-api-fbaccesstokenuri',
+			'type'    => 'text',
+			'title'   => __( 'Access token Uri', 'alicelf-adaptive' ),
+			'default' => 'https://graph.facebook.com/v2.5/oauth/access_token',
+			'readonly' => true
+		],
+		[
+			'id'      => 'opt-api-meuri',
+			'type'    => 'text',
+			'title'   => __( 'Me Uri', 'alicelf-adaptive' ),
+			'default' => 'https://graph.facebook.com/v2.5/me',
+			'readonly' => true
+		],
 
 	)
 );
@@ -422,21 +406,20 @@ $section = array(
 			'default'  => 'AIzaSyAeyZuw9Qdha9fbH-nnq-Sz7NUzfSJq9ZM'
 		),
 
-
 		[
-			'id'       => 'google-api-client-id',
-			'type'     => 'text',
-			'title'    => __( 'Client ID', 'alicelf-adaptive' ),
+			'id'    => 'google-api-client-id',
+			'type'  => 'text',
+			'title' => __( 'Client ID', 'alicelf-adaptive' ),
 		],
 		[
-			'id'       => 'google-api-client-secret',
-			'type'     => 'text',
-			'title'    => __( 'Client Secret', 'alicelf-adaptive' ),
+			'id'    => 'google-api-client-secret',
+			'type'  => 'text',
+			'title' => __( 'Client Secret', 'alicelf-adaptive' ),
 		],
 		[
-			'id'       => 'google-api-redirect-url',
-			'type'     => 'text',
-			'title'    => __( 'Redirect Url', 'alicelf-adaptive' ),
+			'id'    => 'google-api-redirect-url',
+			'type'  => 'text',
+			'title' => __( 'Redirect Url', 'alicelf-adaptive' ),
 		],
 		[
 			'id'       => 'google-api-auth-url',
@@ -460,8 +443,6 @@ $section = array(
 			'readonly' => true
 		]
 
-
-
 	)
 );
 
@@ -474,51 +455,10 @@ $section = array(
 	'title'      => 'YouTube API',
 	'id'         => 'youtube-api-subsection',
 	'subsection' => true,
-	'desc'       => '',
+	'desc'       => '@TODO: add youtube api fields',
 	'icon'       => 'el el-youtube',
 	'fields'     => array(
-		array(
-			'id'       => 'opt-api-youtube-user',
-			'type'     => 'text',
-			'title'    => __( 'YouTube User', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your user id', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => '56786786867867'
-		),
-		array(
-			'id'       => 'opt-api-youtube-apikey',
-			'type'     => 'text',
-			'title'    => __( 'Youtube api key', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your google api key', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => 'gfhfghfghfgh'
-		),
-		array(
-			'id'       => 'opt-api-youtube-playlist',
-			'type'     => 'text',
-			'title'    => __( 'Youtube playlist(s)', 'alicelf-adaptive' ),
-			'subtitle' => __( 'set id your playlists(comma separated)', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => 'tyrty78fgfhfghfghfgh'
-		),
-		array(
-			'id'            => 'opt-api-youtube-postcount',
-			'type'          => 'slider',
-			'title'         => __( 'Post Count', 'alicelf-adaptive' ),
-			'subtitle'      => __( 'Set default posts count', 'alicelf-adaptive' ),
-			'desc'          => __( 'Slider description. Min: 0, max: 50, step: 5', 'alicelf-adaptive' ),
-			'default'       => 4,
-			'min'           => 1,
-			'step'          => 1,
-			'max'           => 50,
-			'display_value' => 'text'
-		),
+
 	)
 );
 Redux::setSection( $opt_name, $section );
@@ -530,71 +470,10 @@ $section = array(
 	'title'      => 'Twitter API',
 	'id'         => 'twitter-api-subsection',
 	'subsection' => true,
-	'desc'       => '',
+	'desc'       => '@TODO: add twitter api fields',
 	'icon'       => 'el el-twitter',
 	'fields'     => array(
-		array(
-			'id'       => 'opt-api-twitter-user',
-			'type'     => 'text',
-			'title'    => __( 'Twitter User', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your user id', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => '56786786867867'
-		),
-		array(
-			'id'       => 'opt-api-consumer-key',
-			'type'     => 'text',
-			'title'    => __( 'Twitter Consumer key', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your twitter consumer key', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => 'gfhfghfghfgh'
-		),
-		array(
-			'id'       => 'opt-api-consumer-secret',
-			'type'     => 'text',
-			'title'    => __( 'Twitter Consumer secret', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your twitter consumer secret', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => 'gfhfghfghfgh'
-		),
-		array(
-			'id'       => 'opt-api-access-token',
-			'type'     => 'text',
-			'title'    => __( 'Twitter access token', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your access token', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => 'gfhfghfghfgh'
-		),
-		array(
-			'id'       => 'opt-api-access-token-secret',
-			'type'     => 'text',
-			'title'    => __( 'Twitter access token secret', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your access token secret', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-//			'validate' => 'email',
-//			'msg'      => 'custom error message',
-			'default'  => 'gfhfghfghfgh'
-		),
-		array(
-			'id'            => 'opt-api-twitter-notweets',
-			'type'          => 'slider',
-			'title'         => __( 'Tweets Count', 'alicelf-adaptive' ),
-			'subtitle'      => __( 'Set default posts count', 'alicelf-adaptive' ),
-			'desc'          => __( 'Slider description. Min: 0, max: 100, step: 5', 'alicelf-adaptive' ),
-			'default'       => 4,
-			'min'           => 1,
-			'step'          => 1,
-			'max'           => 100,
-			'display_value' => 'text'
-		),
+
 	)
 );
 Redux::setSection( $opt_name, $section );
