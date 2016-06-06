@@ -1,13 +1,31 @@
-@mixin scaleModal($scale: 0.5){
-	-ms-transform     : scale($scale);
-	-webkit-transform : scale($scale);
-	transform         : scale($scale);
+@mixin transformPref($action) {
+	-o-transform      : $action;
+	-ms-transform     : $action;
+	-moz-transform    : $action;
+	-webkit-transform : $action;
+	transform         : $action;
 }
 
+@mixin scaleModal($scale: 0.5) {
+	@include transformPref(scale($scale));
+}
 
-@mixin modalMix($container, $wide) {
+@mixin flipXModal($modificator:45) {
+	@include transformPref(rotateX($modificator+deg))
+}
+
+@mixin flipYModal( $modificator:45) {
+	@include transformPref(rotateY($modificator+deg))
+}
+
+@mixin modalMix($container, $wide, $perspective:null, $origin:null) {
 	#{$container} {
-
+		@if ($perspective) {
+			perspective : $perspective+px;
+		}
+		@if ($origin) {
+			perspective-origin : $origin;
+		}
 		/*To tablet and desktop*/
 		@media (min-width : $wide+px) {
 			.aa-modal-container {
@@ -28,6 +46,8 @@
 	}
 }
 
+// selector | width | perspective | origin
+@include modalMix('#related-modal-id', 500, 700, top);
 
 body.aa-modal-overlay {
 	overflow-y : hidden;
@@ -58,19 +78,19 @@ i[data-destroy-modal] {
 	opacity          : 0;
 	@include transition();
 	.aa-modal-container {
-		position          : absolute;
-		max-height        : 90%;
-		top               : 60px;
-		left              : 50%;
-		width             : 100%;
-		max-width         : 1000px;
-		margin-left       : -500px;
-		overflow-y        : auto;
-		z-index           : 5;
-		padding           : 15px;
-		border-radius     : 3px;
-		background-color  : #fff;
-		border            : 1px solid #ccc;
+		position         : absolute;
+		max-height       : 90%;
+		top              : 60px;
+		left             : 50%;
+		width            : 100%;
+		max-width        : 1000px;
+		margin-left      : -500px;
+		overflow-y       : auto;
+		z-index          : 5;
+		padding          : 15px;
+		border-radius    : 3px;
+		background-color : #fff;
+		border           : 1px solid #ccc;
 		@include transition();
 
 		/**
@@ -80,6 +100,12 @@ i[data-destroy-modal] {
 		 */
 		&[data-animation="scale"] {
 			@include scaleModal();
+		}
+		&[data-animation="flip-x"] {
+			@include flipXModal();
+		}
+		&[data-animation="flip-y"] {
+			@include flipYModal();
 		}
 
 	}
@@ -104,11 +130,16 @@ i[data-destroy-modal] {
 			&[data-animation="scale"] {
 				@include scaleModal(1);
 			}
+			&[data-animation="flip-x"] {
+				@include flipXModal(0);
+			}
+			&[data-animation="flip-y"] {
+				@include flipYModal(0);
+			}
 
 		}
 	}
 }
-
 
 /**
  * ==================================================
