@@ -2,8 +2,7 @@
 
 use GuzzleHttp\Client;
 
-$tmp_token = 'ya29.CjD3AlDzSCJcOIR23fv0W22kdvH5yf_qxoUKVjwb9HZ1gON_o4Dmxz_VByrY6c7rlFU';
-$tmp_userid = '112959301303370803582';
+
 // https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=[YOUR_TOKEN]
 
 if ( ! function_exists( 'google_vars' ) ) {

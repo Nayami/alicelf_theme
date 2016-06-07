@@ -424,7 +424,7 @@ $section = array(
 		[
 			'id'       => 'google-api-auth-url',
 			'type'     => 'text',
-			'title'    => __( 'Redirect Url', 'alicelf-adaptive' ),
+			'title'    => __( 'Auth Url', 'alicelf-adaptive' ),
 			'default'  => 'https://accounts.google.com/o/oauth2/auth',
 			'readonly' => true
 		],
@@ -438,7 +438,7 @@ $section = array(
 		[
 			'id'       => 'google-api-userinfo-url',
 			'type'     => 'text',
-			'title'    => __( 'Token Url', 'alicelf-adaptive' ),
+			'title'    => __( 'Userinfo Url', 'alicelf-adaptive' ),
 			'default'  => 'https://www.googleapis.com/oauth2/v1/userinfo',
 			'readonly' => true
 		]
