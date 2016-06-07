@@ -358,27 +358,6 @@ $section = array(
 			'title'   => __( 'Redirect Uri', 'alicelf-adaptive' ),
 			'default' => 'http://localhost'
 		],
-		[
-			'id'       => 'opt-api-fbauthuri',
-			'type'     => 'text',
-			'title'    => __( 'Auth Uri', 'alicelf-adaptive' ),
-			'default'  => 'https://www.facebook.com/dialog/oauth',
-			'readonly' => true
-		],
-		[
-			'id'      => 'opt-api-fbaccesstokenuri',
-			'type'    => 'text',
-			'title'   => __( 'Access token Uri', 'alicelf-adaptive' ),
-			'default' => 'https://graph.facebook.com/v2.5/oauth/access_token',
-			'readonly' => true
-		],
-		[
-			'id'      => 'opt-api-meuri',
-			'type'    => 'text',
-			'title'   => __( 'Me Uri', 'alicelf-adaptive' ),
-			'default' => 'https://graph.facebook.com/v2.5/me',
-			'readonly' => true
-		],
 
 	)
 );
@@ -420,27 +399,6 @@ $section = array(
 			'id'    => 'google-api-redirect-url',
 			'type'  => 'text',
 			'title' => __( 'Redirect Url', 'alicelf-adaptive' ),
-		],
-		[
-			'id'       => 'google-api-auth-url',
-			'type'     => 'text',
-			'title'    => __( 'Auth Url', 'alicelf-adaptive' ),
-			'default'  => 'https://accounts.google.com/o/oauth2/auth',
-			'readonly' => true
-		],
-		[
-			'id'       => 'google-api-token-url',
-			'type'     => 'text',
-			'title'    => __( 'Token Url', 'alicelf-adaptive' ),
-			'default'  => 'https://accounts.google.com/o/oauth2/token',
-			'readonly' => true
-		],
-		[
-			'id'       => 'google-api-userinfo-url',
-			'type'     => 'text',
-			'title'    => __( 'Userinfo Url', 'alicelf-adaptive' ),
-			'default'  => 'https://www.googleapis.com/oauth2/v1/userinfo',
-			'readonly' => true
 		]
 
 	)

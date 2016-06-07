@@ -1,8 +1,12 @@
 <?php
 use GuzzleHttp\Client;
 
-// ============= Fb_vars =============
 if ( ! function_exists( 'fb_apivars' ) ) {
+	/**
+	 * Fb Defaults
+	 *
+	 * @return array
+	 */
 	function fb_apivars()
 	{
 		global $alicelf;
@@ -12,9 +16,9 @@ if ( ! function_exists( 'fb_apivars' ) ) {
 			'client_secret' => $alicelf['opt-api-fb-clientsecret'],
 			'scope'         => $alicelf['opt-api-fbscope'],
 			'redirect_uri'  => $alicelf['opt-api-fbredirecturl'],
-			'auth_url'      => $alicelf['opt-api-fbauthuri'],
-			'token_url'     => $alicelf['opt-api-fbaccesstokenuri'],
-			'me_url'        => $alicelf['opt-api-meuri']
+			'auth_url'      => 'https://www.facebook.com/dialog/oauth',
+			'token_url'     => 'https://graph.facebook.com/v2.5/oauth/access_token',
+			'me_url'        => 'https://graph.facebook.com/v2.5/me'
 		];
 	}
 }

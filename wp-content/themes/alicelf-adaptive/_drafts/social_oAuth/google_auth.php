@@ -1,11 +1,14 @@
 <?php
-
 use GuzzleHttp\Client;
-
 
 // https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=[YOUR_TOKEN]
 
 if ( ! function_exists( 'google_vars' ) ) {
+	/**
+	 * Google Defaults
+	 *
+	 * @return array
+	 */
 	function google_vars()
 	{
 		global $alicelf;
@@ -14,9 +17,9 @@ if ( ! function_exists( 'google_vars' ) ) {
 			'client_id'     => $alicelf[ 'google-api-client-id' ],
 			'client_secret' => $alicelf[ 'google-api-client-secret' ],
 			'redirect_uri'  => $alicelf[ 'google-api-redirect-url' ],
-			'auth_url'      => $alicelf[ 'google-api-auth-url' ],
-			'token_url'     => $alicelf[ 'google-api-token-url' ],
-			'userinfo_url'  => $alicelf[ 'google-api-userinfo-url' ]
+			'auth_url'      => 'https://accounts.google.com/o/oauth2/auth',
+			'token_url'     => 'https://accounts.google.com/o/oauth2/token',
+			'userinfo_url'  => 'https://www.googleapis.com/oauth2/v1/userinfo'
 		];
 	}
 }
