@@ -403,7 +403,39 @@ $section = array(
 
 	)
 );
+Redux::setSection( $opt_name, $section );
 
+
+/**
+ * Instagramm Api
+ */
+$section = array(
+	'title'      => 'Instagram API',
+	'id'         => 'instagram-api-subsection',
+	'subsection' => true,
+	'desc'       => '',
+	'icon'       => 'el el-instagram',
+	'fields'     => array(
+		[
+			'id'      => 'instagram-api-client-id',
+			'type'    => 'text',
+			'title'   => __( 'Client ID', 'alicelf-adaptive' ),
+			'default' => '16aa38d49d6547aba76349241c92872b'
+		],
+		[
+			'id'      => 'instagram-api-client-secret',
+			'type'    => 'text',
+			'title'   => __( 'Client Secret', 'alicelf-adaptive' ),
+			'default' => '18760be01b7b4c2d9e5cb0808ca8ef8e'
+		],
+		[
+			'id'      => 'instagram-api-redirect-url',
+			'type'    => 'text',
+			'title'   => __( 'Redirect Url', 'alicelf-adaptive' ),
+			'default' => 'http://localhost/redux'
+		]
+	)
+);
 Redux::setSection( $opt_name, $section );
 
 /**
