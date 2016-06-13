@@ -10,6 +10,7 @@
 	@include transformPref(scale($scale));
 }
 
+
 @mixin flipXModal($modificator:45) {
 	@include transformPref(rotateX($modificator+deg))
 }
