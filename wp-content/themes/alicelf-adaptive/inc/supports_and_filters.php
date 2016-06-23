@@ -107,6 +107,20 @@ function aa_set_favicon()
 	echo $output;
 }
 
+
+if ( ! function_exists( 'opt_snippet_html' ) ) {
+	function opt_snippet_html()
+	{
+		ob_start();
+		global $alicelf;
+		echo $alicelf[ 'opt-snippet-html' ];
+
+		return ob_get_clean();
+	}
+
+	add_shortcode( 'opt_snippet_html', 'opt_snippet_html' );
+}
+
 add_action('wp_head', 'aa_func_20163901013945', 30);
 function aa_func_20163901013945()
 {

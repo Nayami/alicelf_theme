@@ -62,3 +62,21 @@ function ajx20161009111025()
 		$wpdb->delete( $wpdb->prefix . "bp_xprofile_data", [ 'user_id' => $item[ 'ID' ] ] );
 	}
 }
+
+/**
+ * ==================== Three tables joined ======================
+ * 16.06.2016
+ */
+$results    = $wpdb->get_results(
+	"SELECT {$wpdb->commentmeta}.comment_id, {$wpdb->commentmeta}.meta_key, {$wpdb->commentmeta}.meta_value,
+			{$wpdb->comments}.comment_ID, {$wpdb->comments}.comment_post_ID, {$wpdb->comments}.comment_approved,
+			{$wpdb->posts}.*
+			FROM {$wpdb->commentmeta}
+			JOIN {$wpdb->comments}
+			ON {$wpdb->commentmeta}.comment_id={$wpdb->comments}.comment_ID
+			JOIN {$wpdb->posts}
+			ON {$wpdb->posts}.ID={$wpdb->comments}.comment_post_ID
+			WHERE {$wpdb->comments}.comment_approved='1'
+			AND {$wpdb->commentmeta}.meta_key='__rating'
+			AND {$wpdb->posts}.post_status='publish'",
+	ARRAY_A );

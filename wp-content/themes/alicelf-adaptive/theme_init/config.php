@@ -445,7 +445,7 @@ $section = array(
 	'title'      => 'YouTube API',
 	'id'         => 'youtube-api-subsection',
 	'subsection' => true,
-	'desc'       => '@TODO: add youtube api fields',
+	'desc'       => 'Note: use Google api section for authorization.',
 	'icon'       => 'el el-youtube',
 	'fields'     => array(
 
@@ -538,11 +538,11 @@ $section = array(
 			'type'     => 'ace_editor',
 			'mode'     => 'html',
 			'title'    => __( 'Html Snippet', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Html Snippet', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
+			'subtitle' => __( 'usage in content [opt_snippet_html]', 'alicelf-adaptive' ),
+			'desc'     => __( 'Keep here most repeating custom html', 'alicelf-adaptive' ),
 //			'msg'      => 'custom error message',
 			'options'  => array(
-				'minLines' => 15
+				'minLines' => 10
 			),
 		),
 		array(
@@ -554,7 +554,7 @@ $section = array(
 			'desc'     => __( 'If you need quickly add some ajustments', 'alicelf-adaptive' ),
 //			'msg'      => 'custom error message',
 			'options'  => array(
-				'minLines' => 15
+				'minLines' => 10
 			),
 		),
 		array(
@@ -566,7 +566,7 @@ $section = array(
 			'desc'     => __( 'Put here your Google Analytics, facebook roots etc.', 'alicelf-adaptive' ),
 //			'msg'      => 'custom error message',
 			'options'  => array(
-				'minLines' => 15
+				'minLines' => 10
 			),
 		),
 	)
