@@ -3,6 +3,11 @@
 	width: 100%;
 	z-index: 9;
 	@include transition();
+	/*Tablet*/
+	@media (max-width : 951px) {
+		margin-left : 0;
+		margin-right : 0;
+	}
 }
 
 .stick-to-top {
@@ -10,7 +15,11 @@
 	.site-header {
 		position : fixed;
 		top : 0;
-		//background-color: #eee;
+		/*Tablet*/
+		@media (max-width : 951px) {
+			margin-left : -15px;
+			margin-right : -15px;
+		}
 	}
 }
 .header-with-bg {

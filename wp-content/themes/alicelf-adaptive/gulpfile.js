@@ -18,7 +18,10 @@ gulp.task('aa-concat', function() {
 			// Ajax
 			'js_dev/_js/ajax.js',
 			// Site script
-			'js_dev/_js/script.js'
+			'js_dev/_js/script.js',
+			'js_dev/_js/partials/popup.js',
+			'js_dev/_js/partials/mobile_menu.js',
+			'js_dev/_js/partials/alerts_modals.js'
 
 		])
 		.pipe(aa_sourcemaps.init())
@@ -82,7 +85,14 @@ gulp.task('nonuglified-scripts', function() {
 
 
 gulp.task('watch', function() {
-	gulp.watch(['js_dev/_js/ajax.js', 'js_dev/_js/script.js'], ['aa-concat']);
+	gulp.watch([
+		'js_dev/_js/ajax.js',
+		'js_dev/_js/script.js',
+		'js_dev/_js/partials/popup.js',
+		'js_dev/_js/partials/mobile_menu.js',
+		'js_dev/_js/partials/alerts_modals.js'
+	],
+		['aa-concat']);
 });
 
 // @Template Todo: create watch task

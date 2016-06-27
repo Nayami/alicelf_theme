@@ -1,0 +1,101 @@
+.popup-holder {
+	position : relative;
+	.popup-window {
+		position   : absolute;
+		box-shadow : 0 0 10px #ccc;
+		left       : 0;
+		opacity    : 0;
+		display    : none;
+		z-index    : 8;
+		@include transition(.7s);
+		header {
+			background-color : #fff;
+			padding          : 25px 25px 20px;
+		}
+		.content-popup {
+			background-color : #fafafa;
+			padding          : 25px 25px 20px;
+			.tooltip {
+				letter-spacing : 2px;
+			}
+		}
+		&[data-placement=top] {
+			bottom : 60px;
+			left   : -144px;
+			.content-popup {
+				&:after {
+					content         : "";
+					width           : 15px;
+					height          : 13px;
+					// @TODO: BOTTOM ARROW
+					background-size : contain;
+					position        : absolute;
+					bottom          : -13px;
+					left            : 50%;
+					margin-left     : -5px;
+				}
+			}
+			&.show {
+				opacity : 1;
+				bottom  : 30px;
+			}
+		}
+
+		&[data-placement=right] {
+			left : 60px;
+			top  : -68px;
+			.content-popup {
+				&:after {
+					content         : "";
+					width           : 15px;
+					height          : 13px;
+					// @TODO: LEFT ARROW
+					background-size : contain;
+					position        : absolute;
+					top             : 11%;
+					margin-top      : -15px;
+					left            : -11px;
+				}
+			}
+			&.show {
+				opacity : 1;
+				left    : 25px;
+			}
+			/*Mobile*/
+			@media (max-width : 767px) {
+				bottom : 60px;
+				left   : -180px;
+				top    : auto;
+				table {
+					border : none;
+				}
+				.content-popup {
+					&:after {
+						content         : "";
+						width           : 15px;
+						height          : 13px;
+						// @TODO: LEFT ARROW
+						background-size : contain;
+						position        : absolute;
+						bottom          : -13px;
+						left            : 50%;
+						margin-left     : -5px;
+						top             : auto;
+					}
+				}
+				&.show {
+					opacity : 1;
+					bottom  : 30px;
+					left    : -180px;
+				}
+			}
+		}
+		// @TODO: left and bottom popups
+		&[data-placement=left] {}
+		&[data-placement=bottom] {}
+
+	}
+	.content-popup {
+		position : relative;
+	}
+}
