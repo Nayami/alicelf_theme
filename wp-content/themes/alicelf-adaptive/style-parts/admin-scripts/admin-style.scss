@@ -9,19 +9,32 @@
 @import "../animate";
 @import "../loaderanimation";
 
-body.login {
-	@include gradient($azure, $brand-color);
+/**
+ * ==================== BODY admin fixes ======================
+ * 29.06.2016
+ */
+body {
+	&.login {
+		@include gradient(#fff, $azure);
 
-	#login {
-		width : 500px;
-		a {
-			color : #fff;
+		#login {
+			width : 500px;
+			a {
+				color : #000;
+			}
 		}
 	}
-}
-
-input[type=submit] {
-	@include primButton();
+	&.toplevel_page_revslider {
+		* {
+			box-sizing      : content-box;
+			-moz-box-sizing : content-box;
+		}
+	}
+	&.product_page_global_addons {
+		.wc-metaboxes-wrapper .wc-metabox table td{
+			padding: 15px 10px;
+		}
+	}
 }
 
 textarea,
@@ -35,27 +48,19 @@ input[type="password"] {
  *        Site Style        *
  ****************************/
 
-
-// Content box fixes START
-@mixin contentBox(){
+#ed_toolbar {
 	-moz-box-sizing : content-box;
 	box-sizing      : content-box;
 }
 
-.tablenav-pages {
-	*, :before, :after {
-		@include contentBox();
-	}
-}
-
-#ed_toolbar,
 #menu-to-edit, .theme {
-	@include contentBox();
+	-moz-box-sizing : content-box;
+	box-sizing      : content-box;
 	* {
-		@include contentBox();
+		-moz-box-sizing : content-box;
+		box-sizing      : content-box;
 	}
 }
-// Content box fixes END
 
 #menu-to-edit {
 	p {
@@ -171,17 +176,9 @@ body {
 		color            : #fff;
 		line-height      : 15px;
 		background-color : $dangerColor;
-		cursor : pointer;
+		cursor           : pointer;
 	}
 	&.hidden {
-		display: none;
-	}
-}
-
-.display_header {
-	margin: 15px 10px 0 !important;
-	> img {
-		width : auto;
-		max-height : 50px;
+		display : none;
 	}
 }

@@ -367,11 +367,17 @@ Redux::setSection( $opt_name, $section );
  * Google Api
  * AIzaSyAeyZuw9Qdha9fbH-nnq-Sz7NUzfSJq9ZM
  */
+$gconsole    = "https://console.cloud.google.com/home/dashboard";
+$description = "Temporary production key for gmap ";
+$description .= "<strong>AIzaSyAzDGQmvYgB2JRBkS621QMnbGsR-ah2Kdw</strong>";
+$description .= "<br>Visit <a href='{$gconsole}' target='_blank'>Google dashboard</a>";
+$description .= " and create your own credentials";
+
 $section = array(
 	'title'      => 'Google API',
 	'id'         => 'google-api-subsection',
 	'subsection' => true,
-	'desc'       => '',
+	'desc'       => $description,
 	'icon'       => 'el el-googleplus',
 	'fields'     => array(
 		array(
@@ -379,7 +385,7 @@ $section = array(
 			'type'     => 'text',
 			'title'    => __( 'Google Map Key', 'alicelf-adaptive' ),
 			'subtitle' => __( 'Your app Key', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
+			'desc'     => "",
 //			'validate' => 'email',
 //			'msg'      => 'custom error message',
 			'default'  => 'AIzaSyAeyZuw9Qdha9fbH-nnq-Sz7NUzfSJq9ZM'
@@ -404,7 +410,6 @@ $section = array(
 	)
 );
 Redux::setSection( $opt_name, $section );
-
 
 /**
  * Instagramm Api
@@ -447,9 +452,7 @@ $section = array(
 	'subsection' => true,
 	'desc'       => 'Note: use Google api section for authorization.',
 	'icon'       => 'el el-youtube',
-	'fields'     => array(
-
-	)
+	'fields'     => array()
 );
 Redux::setSection( $opt_name, $section );
 
@@ -462,8 +465,51 @@ $section = array(
 	'subsection' => true,
 	'desc'       => '@TODO: add twitter api fields',
 	'icon'       => 'el el-twitter',
-	'fields'     => array(
+	'fields'     => array()
+);
+Redux::setSection( $opt_name, $section );
 
+/**
+ * Mailchimp Api
+ * 4e3a7a4113b7f8f39684e4ecf3305086-us10
+ */
+$section = array(
+	'title'      => 'Mailchimp API',
+	'id'         => 'mailchimp-api-subsection',
+	'subsection' => true,
+	'desc'       => 'mailchimp api fields',
+	'icon'       => 'el el-envelope',
+	'fields'     => array(
+		[
+			'id'      => 'mailchimp-api-key',
+			'type'    => 'text',
+			'title'   => __( 'Mailchimp Api Key', 'alicelf-adaptive' ),
+			'default' => '4e3a7a4113b7f8f39684e4ecf3305086-us10'
+		],
+		[
+			'id'      => 'mailchimp-redirect_uri',
+			'type'    => 'text',
+			'title'   => __( 'Mailchimp Redirect Uri', 'alicelf-adaptive' ),
+			'default' => '127.0.0.1/redux'
+		],
+		[
+			'id'      => 'mailchimp-client_id',
+			'type'    => 'text',
+			'title'   => __( 'Mailchimp Client ID', 'alicelf-adaptive' ),
+			'default' => '352509122062'
+		],
+		[
+			'id'      => 'mailchimp-client_secret',
+			'type'    => 'text',
+			'title'   => __( 'Mailchimp Client Secret', 'alicelf-adaptive' ),
+			'default' => '56bf0d5500b6280432b35cf9f4655655'
+		],
+		[
+			'id'      => 'mailchimp-list-id',
+			'type'    => 'text',
+			'title'   => __( 'Mailchimp List ID', 'alicelf-adaptive' ),
+			'default' => '79bbdbe61d'
+		],
 	)
 );
 Redux::setSection( $opt_name, $section );
