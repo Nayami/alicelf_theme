@@ -1,3 +1,4 @@
+<?php global $alicelf; ?>
 <footer id="footer" class="navbar navbar-default row">
 	<div class="ghostly-wrap">
 		<?php
@@ -14,9 +15,8 @@
 
 		?>
 	</div>
-	<div class="ghostly-wrap">
-		<p class="text-center"><?php bloginfo( 'name' ); ?> <strong> Theme: <?php echo wp_get_theme(); ?></strong></p>
-
+	<div class="ghostly-wrap text-center">
+		<?php echo nl2br($alicelf['opt-company-copyright']) ?>
 	</div>
 	<a href="#scroll-trigger-top" id="footer-angle-arrow" class="smooth-scrolled-item">
 		<i class="glyphicon glyphicon-arrow-up"></i>

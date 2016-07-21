@@ -1,6 +1,4 @@
-<ol>
-    <?php wp_list_comments(); ?>
-</ol>
+<ol class="comments-wrapper"><?php wp_list_comments(); ?></ol>
 <?php
 $commenter = wp_get_current_commenter();
 $req = get_option( 'require_name_email' );

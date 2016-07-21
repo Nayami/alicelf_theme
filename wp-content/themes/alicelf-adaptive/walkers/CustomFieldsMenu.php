@@ -310,7 +310,7 @@ class CustomFieldsMenu extends Walker_Nav_Menu {
 
 			/* Output the actual caret for the user to click on to toggle the menu */
 			if ( $item->description ) {
-				$item_output .= "<span>$item->description</span>";
+//				$item_output .= "<span>$item->description</span>";
 			}
 
 			$output .= apply_filters( 'walker_nav_menu_start_el', $item_output, $item, $depth, $args );

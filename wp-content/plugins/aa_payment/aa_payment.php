@@ -8,12 +8,15 @@ Version: 0.0.1
 Author URI: https://www.upwork.com/freelancers/~0171355a1c2fd95935
 */
 
-require_once( 'AAPluginInitial.php' );
-include( 'ajax.php' );
-
+// Dependencies
+require_once ('AAPluginInitial.php');
 $aa_payment = new AAPluginInitial( "AA Payment" );
 // Subpage
 $aa_payment->addSubpage( 'Some SUb Page' );
+
+require_once ('vendor/autoload.php');
+
+
 
 // Wrap to wp_loaded for get user and set him notice
 add_action( 'plugins_loaded', 'aa_func_20150406060442', 1 );

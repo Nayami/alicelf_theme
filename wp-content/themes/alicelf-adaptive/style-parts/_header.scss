@@ -1,3 +1,19 @@
+body {
+	/*Tablet*/
+	@media (max-width : 951px) {
+		overflow-x : hidden;
+	}
+
+	&.admin-bar {
+		/*Mobile*/
+		@media (max-width : 768px) {
+			ul.nav {
+				margin-top : 100px;
+			}
+		}
+	}
+}
+
 .site-header {
 	position: static;
 	width: 100%;
@@ -39,6 +55,17 @@ body.admin-bar {
 	}
 }
 
+/**
+ * ==================== Menu section ======================
+ * 10.07.2016
+ */
+.navigator-wrapper {
+	@include clearfix();
+	> nav {
+		@include clearfix();
+	}
+}
+
 .disable-scroll {
 	overflow : hidden;
 }
@@ -52,16 +79,13 @@ body.admin-bar {
 	margin-bottom : 15px;
 	> img {
 		display : block;
-		width   : 100%;
+		max-width   : 100%;
 		height  : auto;
-		max-width : 300px;
-
 	}
 	/*Mobile*/
 	@media (max-width : 767px) {
 		> img {
 			display      : block;
-			width        : 90%;
 			height       : auto;
 			margin-left  : auto;
 			margin-right : auto;
@@ -255,20 +279,4 @@ body.admin-bar {
 
 	}
 
-}
-
-body {
-	/*Tablet*/
-	@media (max-width : 951px) {
-		overflow-x : hidden;
-	}
-
-	&.admin-bar {
-		/*Mobile*/
-		@media (max-width : 768px) {
-			ul.nav {
-				margin-top : 100px;
-			}
-		}
-	}
 }

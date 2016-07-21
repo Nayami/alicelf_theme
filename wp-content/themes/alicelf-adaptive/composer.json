@@ -2,9 +2,9 @@
 
   "autoload": {
     "files" : [
-      "theme_init/plugins_dependences.php",
-      "theme_init/ReduxCore/framework.php",
-      "theme_init/config.php",
+      "Artisan/plugins_dependences.php",
+      "Artisan/ReduxCore/framework.php",
+      "Artisan/config.php",
 
       "walkers/AliceNavigator.php",
       "walkers/custom_menu_actions.php",
@@ -30,7 +30,7 @@
 
     ],
     "psr-4": {
-      "Alicelf\\": "theme_init"
+      "Alicelf\\": "Artisan"
     }
   },
   "require": {

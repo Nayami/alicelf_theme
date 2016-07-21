@@ -1,0 +1,13 @@
+#footer {
+	margin-bottom : 0;
+	font          : normal 100 16px $baseFont;
+	color         : $mainColor;
+	padding       : 30px 0;
+
+	.copywright-text {
+		a {
+			color           : $mainColor;
+			text-decoration : underline;
+		}
+	}
+}

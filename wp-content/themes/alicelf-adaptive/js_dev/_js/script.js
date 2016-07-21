@@ -179,4 +179,12 @@ jQuery(document).ready(function($) {
 	if (typeof $.fn.slick === 'function')
 		slickSliderOpt();
 
+
+	//$(window).on('scroll',function(){
+	//	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+	//		console.log('sdfsdfs');
+	//	}
+	//});
+
+
 });

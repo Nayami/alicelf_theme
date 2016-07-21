@@ -51,7 +51,7 @@
 			triggerHover.on({
 				mouseenter: function () {
 					var that = $(this),
-						popupWindow = that.find('.rating-popup');
+						popupWindow = that.find('.onhover');
 					popupWindow.css({display: 'block'});
 
 					setTimeout(function() {
@@ -60,7 +60,7 @@
 				},
 				mouseleave: function () {
 					var that = $(this),
-						popupWindow = that.find('.rating-popup');
+						popupWindow = that.find('.onhover');
 					popupWindow.removeClass('show');
 
 					setTimeout(function() {

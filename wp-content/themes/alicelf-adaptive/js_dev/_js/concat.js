@@ -626,6 +626,14 @@ jQuery(document).ready(function($) {
 	if (typeof $.fn.slick === 'function')
 		slickSliderOpt();
 
+
+	//$(window).on('scroll',function(){
+	//	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+	//		console.log('sdfsdfs');
+	//	}
+	//});
+
+
 });
 +function($) {
 
@@ -680,7 +688,7 @@ jQuery(document).ready(function($) {
 			triggerHover.on({
 				mouseenter: function () {
 					var that = $(this),
-						popupWindow = that.find('.rating-popup');
+						popupWindow = that.find('.onhover');
 					popupWindow.css({display: 'block'});
 
 					setTimeout(function() {
@@ -689,7 +697,7 @@ jQuery(document).ready(function($) {
 				},
 				mouseleave: function () {
 					var that = $(this),
-						popupWindow = that.find('.rating-popup');
+						popupWindow = that.find('.onhover');
 					popupWindow.removeClass('show');
 
 					setTimeout(function() {

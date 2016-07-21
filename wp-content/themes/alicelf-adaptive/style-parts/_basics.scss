@@ -71,9 +71,6 @@ body {
   }
 }
 
-.navigator-wrapper {
-  margin-bottom : 20px;
-}
 
 .list-group-item {
   &.wdg_title {
@@ -406,6 +403,10 @@ li.menu-item-has-children {
     }
   }
 
+}
+
+.comments-wrapper {
+	margin : 0;
 }
 
 /*Desktop*/

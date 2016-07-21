@@ -10,5 +10,5 @@ return array(
     'GuzzleHttp\\Psr7\\' => array($vendorDir . '/guzzlehttp/psr7/src'),
     'GuzzleHttp\\Promise\\' => array($vendorDir . '/guzzlehttp/promises/src'),
     'GuzzleHttp\\' => array($vendorDir . '/guzzlehttp/guzzle/src'),
-    'Alicelf\\' => array($baseDir . '/theme_init'),
+    'Alicelf\\' => array($baseDir . '/Artisan'),
 );
