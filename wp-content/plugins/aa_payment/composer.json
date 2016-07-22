@@ -2,7 +2,8 @@
   "autoload": {
     "files" : [
       "ajax.php",
-      "PaypalScope/run.php"
+      "PaypalScope/run.php",
+      "PaypalScope/shortcodes.php"
     ]
   },
     "require": {

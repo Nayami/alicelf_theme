@@ -121,7 +121,8 @@ jQuery(document).ready(function($) {
 				alert(jqXHR + " :: " + textStatus + " :: " + errorThrown);
 			}
 		})
-	})
+	});
+
 
 
 });

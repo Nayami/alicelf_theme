@@ -9,14 +9,12 @@ Author URI: https://www.upwork.com/freelancers/~0171355a1c2fd95935
 */
 
 // Dependencies
-require_once ('AAPluginInitial.php');
+require_once( 'AAPluginInitial.php' );
 $aa_payment = new AAPluginInitial( "AA Payment" );
 // Subpage
-$aa_payment->addSubpage( 'Some SUb Page' );
+$aa_payment->addSubpage( 'Donation Forms' );
 
-require_once ('vendor/autoload.php');
-
-
+require_once( 'vendor/autoload.php' );
 
 // Wrap to wp_loaded for get user and set him notice
 add_action( 'plugins_loaded', 'aa_func_20150406060442', 1 );
@@ -28,9 +26,10 @@ function aa_func_20150406060442()
 
 	$aa_payment->setOption( 'paypa_credentials',
 		[
-			'email'     => '',
-			'client_id' => '',
-			'secret'    => '',
+			'email'        => '',
+			'client_id'    => '',
+			'secret'       => '',
+			'redirect_url' => '',
 		]
 	);
 }
@@ -39,7 +38,7 @@ function aa_func_20150406060442()
 add_filter( 'aa_payment_basetitle', 'aa_func_20150506060501', 10, 1 );
 function aa_func_20150506060501( $title )
 {
-	return $title .= " (test mode)";
+	return $title .= " (payment gateway credentials)";
 }
 
 /**
@@ -73,3 +72,4 @@ function aa_func_20150506060514()
 	</form>
 	<?php
 }
+

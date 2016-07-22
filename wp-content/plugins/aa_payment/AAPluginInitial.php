@@ -292,4 +292,15 @@ class AAPluginInitial {
 	{
 		return ( $_SERVER[ 'REMOTE_ADDR' ] === '127.0.0.1' || $_SERVER[ 'REMOTE_ADDR' ] === 'localhost' ) ? 1 : 0;
 	}
+
+	/**
+	 * returns images plugin dir
+	 * @return string
+	 */
+	public function get_images_dir_url()
+	{
+		$plugindir = plugin_dir_url( __DIR__ ) . basename( __DIR__ );
+		return $plugindir."/img/";
+	}
+
 }

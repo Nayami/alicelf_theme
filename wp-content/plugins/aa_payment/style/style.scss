@@ -17,3 +17,12 @@
 .aa-pluginsloader-holder {
 	position : relative;
 }
+
+#toplevel_page_aa_payment {
+	.wp-menu-image {
+		&:before {
+			@include fAwesome();
+			content: "\f07a"; //"\f217"
+		}
+	}
+}
