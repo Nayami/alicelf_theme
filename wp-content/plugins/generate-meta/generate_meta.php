@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Generate Meta
-Plugin URI: http://vzazerkalie.com/portf/
+Plugin URI: http://www.upwork.com/fl/olegtsibulnik
 Description: Alicelf Generate Metaboxes plugin - Upload and Activate.
-Author: Alicelf
-Version: 3.0.2
-Author URI: http://vzazerkalie.com/portf/
+Author: Alicelf WebArtisan
+Version: 3.1.2
+Author URI: http://www.upwork.com/fl/olegtsibulnik
 */
 //@Template Todo: create separate sections
 //@Template Todo: define user frendly factory

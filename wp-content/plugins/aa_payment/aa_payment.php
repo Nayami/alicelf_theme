@@ -1,16 +1,16 @@
 <?php
 /*
 Plugin Name: AA Payment
-Plugin URI: https://www.upwork.com/freelancers/~0171355a1c2fd95935
+Plugin URI: http://www.upwork.com/fl/olegtsibulnik
 Description: AA Payment plugin - Upload and Activate. PHP version 5.4+ required
-Author: Alicelf
-Version: 0.0.1
-Author URI: https://www.upwork.com/freelancers/~0171355a1c2fd95935
+Author: Alicelf WebArtisan
+Version: 1.0.1
+Author URI: http://www.upwork.com/fl/olegtsibulnik
 */
 
 // Dependencies
 require_once( 'AAPluginInitial.php' );
-$aa_payment = new AAPluginInitial( "AA Payment" );
+$aa_payment = new AAPluginInitial( "AA Payment", null, null, null, 99 );
 // Subpage
 $aa_payment->addSubpage( 'Donation Forms' );
 
@@ -38,7 +38,8 @@ function aa_func_20150406060442()
 add_filter( 'aa_payment_basetitle', 'aa_func_20150506060501', 10, 1 );
 function aa_func_20150506060501( $title )
 {
-	return $title .= " (payment gateway credentials)";
+	$title .= " (payment gateway credentials)";
+	return $title;
 }
 
 /**

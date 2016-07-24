@@ -41,9 +41,8 @@ function alicelf_theme_register_dependences()
 	 * Array of plugin arrays. Required keys are name and slug.
 	 * If the source is NOT from the .org repo, then source is also required.
 	 */
-	$plugins_uri = get_template_directory_uri() . '/theme_init/plugins/';
+	$plugins_uri = get_template_directory_uri() . '/Artisan/plugins/';
 	$plugins     = array(
-
 		// ACF PRo
 		array(
 			'name'               => 'ACF Pro',

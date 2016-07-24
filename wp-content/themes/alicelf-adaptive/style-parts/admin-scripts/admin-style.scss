@@ -84,6 +84,7 @@ input[type="password"] {
 
 body {
 
+
 	&.post-type-acf-field-group {
 		#wpbody {
 			.acf-hl {
@@ -95,9 +96,9 @@ body {
 	}
 
 }
-
+.acf-input-prepend, .acf-input-append,
 .acf-gallery .acf-gallery-toolbar {
-	height : auto;
+	height : auto !important;
 }
 
 //Additional Styles

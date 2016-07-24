@@ -77,6 +77,13 @@ function aa_func_20165515055520()
 	wp_enqueue_style( 'alice_style_admin', $t_dir . '/admin-scripts/admin-style.css' );
 	?>
 	<style type="text/css">
+		.btn-fullwidth {
+			display: block;
+			width : 100%;
+		}
+		.captha-holder {
+			margin-bottom : 10px !important;
+		}
 		#login > h1 a {
 			background: url("<?php echo $alicelf['opt-logo']['url'] ?>");
 			width: <?php echo $alicelf['opt-logo']['width'] ?>px;

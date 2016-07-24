@@ -1,10 +1,18 @@
 {
   "autoload": {
+
     "files" : [
       "ajax.php",
       "PaypalScope/run.php",
-      "PaypalScope/shortcodes.php"
-    ]
+      "PaypalScope/shortcodes.php",
+      "products/product_custom_posts.php",
+      "products/orders_custom_posts.php",
+      "content_templates/attributes.php",
+      "content_templates/init.php"
+    ],
+    "psr-4": {
+      "Apayment\\": "Apayment"
+    }
   },
     "require": {
         "paypal/rest-api-sdk-php": "^1.7"
