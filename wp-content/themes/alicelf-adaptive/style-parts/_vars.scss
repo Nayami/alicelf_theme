@@ -1,5 +1,32 @@
 $baseFont : "Open Sans", sans-serif;
 
+$gilsans : "emoGillsans";
+$gilsansLight : "gillsans-light";
+.gilsans {
+	font-family : $gilsans, sans-serif !important;
+}
+.gilsansLight {
+	font-family : $gilsansLight, sans-serif !important;
+}
+
+$OswaldLight :'OswaldLight';
+$OswaldRegular :'OswaldRegular';
+$OswaldDemiBold :'OswaldDemiBold';
+$OswaldBold :'OswaldBold';
+.OswaldLight {
+	font-family :$OswaldLight, sans-serif !important;
+}
+.OswaldRegular {
+	font-family :$OswaldRegular, sans-serif !important;
+}
+.OswaldDemiBold {
+	font-family :$OswaldDemiBold, sans-serif !important;
+}
+.OswaldBold {
+	font-family :$OswaldBold, sans-serif !important;
+}
+
+
 $mainColor : #21759b;
 
 $infoColor : #67a6df;

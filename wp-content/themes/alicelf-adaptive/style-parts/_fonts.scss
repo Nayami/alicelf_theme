@@ -1,0 +1,57 @@
+$dir: 'style-parts/fonts/';
+
+/**
+ * ==================== Gill Sans ======================
+ * 31.07.2016
+ */
+@font-face {
+	font-family : 'emoGillsans';
+	src         : url('#{$dir}GillSansMedium/GillSansMTPro-Medium.eot');
+	src         : url('#{$dir}GillSansMedium/GillSansMTPro-Medium.woff') format('woff'),
+	url('#{$dir}GillSansMedium/GillSansMTPro-Medium.ttf') format('truetype');
+}
+
+@font-face {
+	font-family : 'gillsans-light';
+	src         : url('#{$dir}GillSansLight/GillSansMTPro-Light.eot');
+	src         : url('#{$dir}GillSansLight/GillSansMTPro-Light.woff') format('woff'),
+	url('#{$dir}GillSansLight/GillSansMTPro-Light.ttf') format('truetype');
+}
+
+
+/**
+ * ==================== Oswald ======================
+ * 31.07.2016
+ */
+// Light
+@font-face {
+	font-family: 'OswaldLight';
+	src: url('#{$dir}oswald/oswald-light-webfont.woff2') format('woff2'),
+	url('#{$dir}oswald/oswald-light-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+// Regular
+@font-face {
+	font-family: 'OswaldRegular';
+	src: url('#{$dir}oswald/oswald-regular-webfont.woff2') format('woff2'),
+	url('#{$dir}oswald/oswald-regular-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+// Demibold
+@font-face {
+	font-family: 'OswaldDemiBold';
+	src: url('#{$dir}oswald/oswald-demibold-webfont.woff2') format('woff2'),
+	url('#{$dir}oswald/oswald-demibold-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+// Bold
+@font-face {
+	font-family: 'OswaldBold';
+	src: url('#{$dir}oswald/oswald-bold-webfont.woff2') format('woff2'),
+	url('#{$dir}oswald/oswald-bold-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
