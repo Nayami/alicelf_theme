@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Load ajax posts
  */
@@ -14,6 +13,7 @@ function alice_ajax_posts()
 		'paged'          => $page
 	) );
 	get_template_part( 'templates/loop-post' );
+	echo "Lorem";
 	die();
 }
 

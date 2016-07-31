@@ -2,12 +2,13 @@
   "autoload": {
 
     "files" : [
-      "ajax.php",
+      "payment_ajax.php",
       "PaypalScope/run.php",
       "PaypalScope/shortcodes.php",
       "products/product_custom_posts.php",
       "products/orders_custom_posts.php",
       "content_templates/attributes.php",
+      "content_templates/single-product-content.php",
       "content_templates/init.php"
     ],
     "psr-4": {

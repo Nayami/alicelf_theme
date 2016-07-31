@@ -2,7 +2,7 @@
 /**
  * Register Site styles and Scripts
  */
-add_action( 'wp_enqueue_scripts', 'invoke_scripts' );
+add_action( 'wp_enqueue_scripts', 'invoke_scripts', 20 );
 function invoke_scripts()
 {
 	global $alicelf;
@@ -86,8 +86,12 @@ function aa_func_20165515055520()
 		}
 		#login > h1 a {
 			background: url("<?php echo $alicelf['opt-logo']['url'] ?>");
+			<?php if(!empty($alicelf['opt-logo']['width'])){ ?>
 			width: <?php echo $alicelf['opt-logo']['width'] ?>px;
 			height: <?php echo $alicelf['opt-logo']['height'] ?>px;
+		<?php } else { ?>
+			width : 300px;
+		<?php } ?>
 		}
 	</style>
 	<?php

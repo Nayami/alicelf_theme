@@ -1,5 +1,8 @@
-<?php global $alicelf; ?>
 <footer id="footer" class="navbar navbar-default row">
+	<?php
+		global $alicelf;
+		do_action('aa-before-footerstart');
+	?>
 	<div class="ghostly-wrap">
 		<?php
 		if ( has_nav_menu( 'footer_custom_menu' ) ) {

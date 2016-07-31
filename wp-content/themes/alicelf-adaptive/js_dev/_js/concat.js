@@ -21,6 +21,7 @@ var Loaders = {
 
 jQuery(document).ready(function($) {
 
+
 	/**
 	 * ==================== waitUntilExists ======================
 	 * 2/11/2016
@@ -201,7 +202,6 @@ jQuery(document).ready(function($) {
 					url       : AJAXURL,
 					type      : "POST",
 					data      : {
-						alice_ajax_posts: true,
 						pageNumber      : page,
 						action          : 'alice_ajax_posts'
 					},
@@ -214,6 +214,7 @@ jQuery(document).ready(function($) {
 					},
 					success   : function(data) {
 						var $data = $(data);
+
 						if ($data.length) {
 							$data.hide();
 							$content.append($data);

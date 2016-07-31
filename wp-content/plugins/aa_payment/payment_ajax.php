@@ -3,8 +3,10 @@
 /**
  * Delete notice for current user
  */
-add_action( 'wp_ajax_ajx20150506060531', 'ajx20150506060531' );
-function ajx20150506060531()
+
+add_action('wp_ajax_nopriv_ajx20164726124703', 'ajx20164726124703');
+add_action('wp_ajax_ajx20164726124703', 'ajx20164726124703');
+function ajx20164726124703()
 {
 	if ( isset( $_POST[ 'aa_notice_descriptor' ] ) ) {
 		$notice_option = get_option( $_POST[ 'aa_notice_descriptor' ] );
@@ -20,23 +22,25 @@ function ajx20150506060531()
 			update_option( $_POST[ 'aa_notice_descriptor' ], $notice_option );
 		}
 	}
-	exit;
+	die;
 }
+
 
 /**
  * Submit PayPal Credentials
  */
-add_action( 'wp_ajax_ajx20150207050244', 'ajx20150207050244' );
-function ajx20150207050244()
+add_action('wp_ajax_nopriv_ajx20164726124749', 'ajx20164726124749');
+add_action('wp_ajax_ajx20164726124749', 'ajx20164726124749');
+function ajx20164726124749()
 {
 	global $aa_payment;
 	$p = $_POST[ 'aa_pp_payment' ];
 	if ( isset( $p ) ) {
 		$aa_payment->setOption( 'paypa_credentials', array(
-				'email'     => $p[ 'email' ],
-				'client_id' => $p[ 'client_id' ],
-				'secret'    => $p[ 'secret' ]
-			), true
+			'email'     => $p[ 'email' ],
+			'client_id' => $p[ 'client_id' ],
+			'secret'    => $p[ 'secret' ]
+		), true
 		);
 		echo "success";
 		die;

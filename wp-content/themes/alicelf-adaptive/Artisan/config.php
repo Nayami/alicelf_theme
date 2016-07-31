@@ -438,6 +438,20 @@ $section = array(
 			'type'    => 'text',
 			'title'   => __( 'Redirect Url', 'alicelf-adaptive' ),
 			'default' => 'http://localhost/redux'
+		],
+		[
+			'id'      => 'instagram-shortcode',
+			'type'    => 'text',
+			'title'   => __( 'Insta Shortcode', 'alicelf-adaptive' ),
+			'description' => 'Footer shortcode by "Instagram Feed" plugin',
+			'default' => '[instagram-feed num=15 showfollow=false showheader=false showbutton=false]'
+		],
+		[
+			'id'      => 'instagram-shortcode-mobile',
+			'type'    => 'text',
+			'title'   => __( 'Insta Shortcode mobile', 'alicelf-adaptive' ),
+			'description' => 'Footer shortcode by "Instagram Feed" plugin',
+			'default' => '[instagram-feed num=8 showfollow=false showheader=false showbutton=false]'
 		]
 	)
 );

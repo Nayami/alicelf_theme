@@ -1,16 +1,11 @@
 <?php
-add_action( 'single_itemproduct_before', 'aa_func_20163029123051' );
+add_action( 'single_itemproduct_after', 'aa_func_20163029123051', 10 );
 function aa_func_20163029123051()
 {
 	global $post;
-	$product_price = get_field('item_price');
-	$product_type = get_field('product_type');
 	?>
 	<div class="clearfix">
 		<?php
-		echo "<pre>";
-		print_r($product_price);
-		echo "</pre>";
 		/**
 		 * ==================== Size ======================
 		 * 29.06.2016

@@ -71,7 +71,7 @@ jQuery(document).ready(function($) {
 						aa_notice_descriptor: dataNoticeDescriptor,
 						aa_data_user        : dataUser,
 						aa_data_notice      : dataNotice,
-						action              : 'ajx20150506060531'
+						action              : 'ajx20164726124703'
 					},
 					//dataType : "html",
 					beforeSend: function() {
@@ -111,7 +111,7 @@ jQuery(document).ready(function($) {
 					client_id: clientId.val(),
 					secret   : secret.val()
 				},
-				action       : "ajx20150207050244"
+				action       : "ajx20164726124749"
 			},
 			success: function(data) {
 				thatForm.find('.labsolut').remove();
