@@ -47,36 +47,38 @@ function aa_func_20161530011540()
 add_action( 'aa-before-footerstart', 'aa_func_20165327015348' );
 function aa_func_20165327015348()
 {
-	if(aa_check_plugin('instagram-feed/instagram-feed.php')) {
 
-	}
 	global $alicelf;
 	$inst        = $alicelf[ 'instagram-shortcode' ];
 	$inst_mobile = $alicelf[ 'instagram-shortcode-mobile' ];
-	?>
-	<div class="text-center cleafix">
-		<h2 class="background-line">CONNECT WITH US</h2>
-		<p class="keepup-line">To keep up to date with our latest stock drops, follow us on social media.</p>
-		<ul class="aa-socials-list">
-			<li class="bw-facebook"><a target="_blank" href="<?php echo $alicelf[ 'opt-social-facebook' ] ?>"></a></li>
-			<li class="bw-twitter"><a target="_blank" href="<?php echo $alicelf[ 'opt-social-twitter' ] ?>"></a></li>
-			<li class="bw-pinterest"><a target="_blank" href="<?php echo $alicelf[ 'opt-social-pinterest' ] ?>"></a></li>
-			<li class="bw-instagram"><a target="_blank" href="<?php echo $alicelf[ 'opt-social-instagram' ] ?>"></a></li>
-		</ul>
-	</div>
+	if($alicelf['footer-followus-component']) {
+		?>
+		<div class="text-center cleafix">
+			<h2 class="background-line">CONNECT WITH ME</h2>
+			<p class="keepup-line">To keep up to date with our latest stock drops, follow us on social media.</p>
+			<ul class="aa-socials-list">
+				<li class="bw-facebook"><a target="_blank" href="<?php echo $alicelf[ 'opt-social-facebook' ] ?>"></a></li>
+				<li class="bw-twitter"><a target="_blank" href="<?php echo $alicelf[ 'opt-social-twitter' ] ?>"></a></li>
+				<li class="bw-pinterest"><a target="_blank" href="<?php echo $alicelf[ 'opt-social-pinterest' ] ?>"></a></li>
+				<li class="bw-instagram"><a target="_blank" href="<?php echo $alicelf[ 'opt-social-instagram' ] ?>"></a></li>
+			</ul>
+		</div>
+		<?php
+	}
 
-
-	<div id="instagram-footer-widget" class="clearfix hidden-on-phones">
-		<div class="followusoninstagram"><span></span></div>
-		<div id="footer-instawrapper" class="clearfix">
-			<div id="insta-reel">
-				<?php echo do_shortcode( $inst ) ?>
+	if(aa_check_plugin('instagram-feed/instagram-feed.php')) { ?>
+		<div id="instagram-footer-widget" class="clearfix hidden-on-phones">
+			<div class="followusoninstagram">FOLLOW ME ON INSTAGRAM</div>
+			<div id="footer-instawrapper" class="clearfix">
+				<div id="insta-reel">
+					<?php echo do_shortcode( $inst ) ?>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div id="mobile-instagramm-reel" class="visible-on-phones-only">
-		<div class="followusoninstagram"><span></span></div>
-		<?php echo do_shortcode( $inst_mobile ) ?>
-	</div>
-	<?php
+		<div id="mobile-instagramm-reel" class="visible-on-phones-only">
+			<div class="followusoninstagram">FOLLOW ME ON INSTAGRAM</div>
+			<?php echo do_shortcode( $inst_mobile ) ?>
+		</div>
+		<?php
+	}
 }

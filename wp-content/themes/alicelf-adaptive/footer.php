@@ -1,7 +1,7 @@
 <footer id="footer" class="navbar navbar-default row">
 	<?php
-		global $alicelf;
-		do_action('aa-before-footerstart');
+	global $alicelf;
+	do_action('aa-before-footerstart');
 	?>
 	<div class="ghostly-wrap">
 		<?php
@@ -19,7 +19,9 @@
 		?>
 	</div>
 	<div class="ghostly-wrap text-center">
-		<?php echo nl2br($alicelf['opt-company-copyright']) ?>
+		<div class="company-copyrights">
+			<?php echo nl2br($alicelf['opt-company-copyright']) ?>
+		</div>
 	</div>
 	<a href="#scroll-trigger-top" id="footer-angle-arrow" class="smooth-scrolled-item">
 		<i class="glyphicon glyphicon-arrow-up"></i>

@@ -1,0 +1,27 @@
+.image-overlap {
+	//@include clearfix();
+	clear        : both;
+	float        : none;
+	position     : relative;
+	overflow     : hidden;
+	margin-left  : -15px;
+	margin-right : -15px;
+	img {
+		position : absolute;
+		left     : 0;
+	}
+	.inner-elem {
+		position   : absolute;
+		z-index    : 2;
+		display    : inline-block;
+		text-align : center;
+		font       : normal 20px Arial, sans-serif;
+		color      : #fff;
+		bottom     : 20px;
+
+		/*To tablet and desktop*/
+		@media (min-width : 768px) {
+
+		}
+	}
+}

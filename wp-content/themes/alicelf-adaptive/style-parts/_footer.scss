@@ -1,13 +1,14 @@
 #footer {
 	margin-bottom : 0;
 	font          : normal 100 16px $baseFont;
-	color         : $mainColor;
-	padding       : 30px 0;
+	padding       : 25px 0 55px;
+}
 
-	.copywright-text {
-		a {
-			color           : $mainColor;
-			text-decoration : underline;
-		}
-	}
+.company-copyrights {
+	display         : flex;
+	justify-content : space-around;
+	align-items     : center;
+	font            : normal 12px $baseFont;
+	color           : $text-color;
+	font-weight     : 700;
 }

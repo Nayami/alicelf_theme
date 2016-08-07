@@ -331,3 +331,22 @@ if ( ! function_exists( 'aa_is_profile' ) ) {
 		return get_page_template_slug($page_id) === 'profile.php';
 	}
 }
+
+
+// ============= __woo_options =============
+if ( ! function_exists( '__woo_options' ) ) {
+	function __woo_options()
+	{
+		return [
+			'woocommerce_shop_page_id'         => get_option( 'woocommerce_shop_page_id' ),
+			'woocommerce_cart_page_id'         => get_option( 'woocommerce_cart_page_id' ),
+			'woocommerce_checkout_page_id'     => get_option( 'woocommerce_checkout_page_id' ),
+			'woocommerce_pay_page_id'          => get_option( 'woocommerce_pay_page_id' ),
+			'woocommerce_thanks_page_id'       => get_option( 'woocommerce_thanks_page_id' ),
+			'woocommerce_myaccount_page_id'    => get_option( 'woocommerce_myaccount_page_id' ),
+			'woocommerce_edit_address_page_id' => get_option( 'woocommerce_edit_address_page_id' ),
+			'woocommerce_view_order_page_id'   => get_option( 'woocommerce_view_order_page_id' ),
+			'woocommerce_terms_page_id'        => get_option( 'woocommerce_terms_page_id' ),
+		];
+	}
+}

@@ -39,14 +39,21 @@ function aa_func_20161101071136()
 add_filter('wp_title', 'aa_func_20164019094058', 10, 1);
 function aa_func_20164019094058($title)
 {
-	if(is_home() || is_front_page()) {
+	$woo_presets = __woo_options();
+	if ( is_home() || is_front_page() ) {
 		$title = get_bloginfo( 'name' ) . " | " . get_bloginfo( 'description', 'display' );
-	} else if(is_404()) {
+	} else if ( is_404() ) {
 		$title = get_bloginfo( 'name' ) . ' | .404!';
-	} else if (is_search()) {
-		$title = get_bloginfo( 'name' ) . " | Search ". get_search_query();
+	} else if ( is_search() ) {
+		$title = get_bloginfo( 'name' ) . " | Search " . get_search_query();
 	} else {
 		$title = get_the_title() . " | " . get_bloginfo( 'name' );
+	}
+
+	if(function_exists('is_shop')) {
+		if ( is_shop() ) {
+			$title = get_the_title( $woo_presets[ 'woocommerce_shop_page_id' ] ) . " | " . get_bloginfo( 'name' );
+		}
 	}
 
 	return $title;

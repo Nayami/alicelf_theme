@@ -112,7 +112,7 @@ $section = array(
 	'title'  => 'Header',
 	'id'     => 'header-section',
 	'desc'   => '',
-	'icon'   => 'dashicons dashicons-nametag',
+	'icon'   => 'el el-share-alt',
 	'fields' => array(
 		array(
 			'id'       => 'opt-sticky-header',
@@ -567,15 +567,6 @@ $section = array(
 //			'msg'      => 'custom error message',
 		),
 		array(
-			'id'       => 'opt-company-copyright',
-			'type'     => 'textarea',
-			'title'    => __( 'Company copyrights', 'alicelf-adaptive' ),
-			'subtitle' => __( 'Your company copyrights', 'alicelf-adaptive' ),
-			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
-			'default'  => 'All rights ....'
-//			'msg'      => 'custom error message',
-		),
-		array(
 			'id'       => 'opt-company-map',
 			'type'     => 'textarea',
 			'title'    => __( 'Company map', 'alicelf-adaptive' ),
@@ -632,6 +623,34 @@ $section = array(
 	)
 );
 
+Redux::setSection( $opt_name, $section );
+
+$section = [
+	'title'  => 'Footer',
+	'id'     => 'footer-content-parts',
+	'desc'   => '',
+	'icon'   => 'el el-return-key',
+	'fields' => [
+		[
+			'id'      => 'footer-followus-component',
+			'type'    => 'switch',
+			'title'   => __( 'Display follow Us', 'alicelf-adaptive' ),
+			'default' => false,
+		],
+		[
+			'id'       => 'opt-company-copyright',
+			'type'     => 'editor',
+			'title'    => __( 'Company copyrights', 'alicelf-adaptive' ),
+			'subtitle' => __( 'Your company copyrights', 'alicelf-adaptive' ),
+			'desc'     => __( 'This is the description field, again good for additional info.', 'alicelf-adaptive' ),
+			'default'  => 'All rights ....',
+			'args'     => [
+				'teeny'         => true,
+				'media_buttons' => false,
+			]
+		]
+	]
+];
 Redux::setSection( $opt_name, $section );
 
 $tabs = array(

@@ -5,7 +5,6 @@
 	 * 29.04.2016
 	 */
 	$('.popup-holder').on('click', function(e) {
-		e.preventDefault();
 
 		var targetElem = $(e.target);
 		var that = $(this),
@@ -28,8 +27,8 @@
 	});
 	$('body').on('click', function(e){
 		var targetElem = $(e.target);
-		if(targetElem.parents('.popup-holder').length < 1) {
 
+		if(targetElem.parents('.popup-holder').length < 1) {
 			var popup = $(this).find('.popup-window');
 			setTimeout(function() {
 				popup.removeClass('show');
