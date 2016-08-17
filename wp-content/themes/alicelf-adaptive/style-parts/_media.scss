@@ -3,10 +3,10 @@
  * 29.05.2016
  */
 // Hide sidebar actions
-.media-frame  {
+.media-frame {
 	> * {
 		&.media-frame-menu {
-			left: -200px;
+			left : -200px;
 		}
 		&:not(.media-frame-menu) {
 			left : 0;
@@ -14,16 +14,15 @@
 	}
 }
 
-
 .media-modal.wp-core-ui {
 
 	.media-toolbar {
 		label {
-			display: none;
+			display : none;
 		}
 	}
 	.screen-reader-text {
-		display: none;
+		display : none;
 	}
 	.media-modal-close {
 

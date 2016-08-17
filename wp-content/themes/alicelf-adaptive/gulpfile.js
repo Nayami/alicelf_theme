@@ -3,7 +3,7 @@
 // npm install --save-dev gulp-rename
 // npm install --save-dev gulp-uglify
 // npm install --save-dev gulp-sourcemaps
-
+// i --save-dev gulp gulp-concat gulp-rename gulp-uglify gulp-sourcemaps
 // rimraf node_modules
 
 var gulp = require('gulp'),
