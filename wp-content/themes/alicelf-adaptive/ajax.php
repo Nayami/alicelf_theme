@@ -17,30 +17,7 @@ function alice_ajax_posts()
 	die();
 }
 
-/**
- * Contact form
- */
-add_action( 'wp_ajax_nopriv_aa_contact_form', 'aa_contact_form' );
-add_action( 'wp_ajax_aa_contact_form', 'aa_contact_form' );
-function aa_contact_form()
-{
-	if ( isset( $_POST[ 'alice_form_with_captcha' ] ) ) {
-		require_once ABSPATH . '/wp-content/plugins/custom_captcha/securimage/securimage.php';
-		$securimage = new Securimage();
-		if ( $securimage->check( $_POST[ 'captcha_code' ] ) == false ) {
-			echo "error captcha";
-			die();
-		} else {
-			form_process_to_send();
-			die();
-		}
-	}
 
-	if ( isset( $_POST[ 'alice_default_form' ] ) ) {
-		form_process_to_send();
-		die();
-	}
-}
 
 /**
  * Convert tables to utf8 encoding

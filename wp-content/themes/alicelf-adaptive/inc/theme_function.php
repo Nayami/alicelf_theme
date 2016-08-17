@@ -292,37 +292,6 @@ function aa_social_list( $classes = null )
 	return $output . "</ul>";
 }
 
-function form_process_to_send()
-{
-	// $regexp = "^([_a-z0-9-]+)(\.[_a-z0-9-]+)*@([a-z0-9-]+)(\.[a-z0-9-]+)*(\.[a-z]{2,4})$";
-	if (
-		isset( $_POST[ 'visitor_name' ], $_POST[ 'visitor_email' ], $_POST[ 'visitor_message' ] ) &&
-		( ! empty( $_POST[ 'visitor_name' ] ) && ! empty( $_POST[ 'visitor_email' ] ) && ! empty( $_POST[ 'visitor_message' ] ) )
-	) {
-
-		$name      = trim_data( $_POST[ 'visitor_name' ] );
-		$to        = trim_data( $_POST[ 'to_admin' ] );
-		$sitename  = $_POST[ 'bloginfo_name_field' ];
-		$subject   = 'Email From ' . $sitename . ' sended by ' . $name;
-		$email     = trim_data( $_POST[ 'visitor_email' ] );
-		$mail_body = trim_data( $_POST[ 'visitor_message' ] );
-
-		$headers = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-		$headers .= "From: {$email}\r\n";
-		$headers .= "Reply-To: {$email}\r\n";
-		$headers .= "Return-Path: {$email}\r\n";
-		$headers .= "\r\n";
-
-		$message = "<!doctype html><html lang='en-US'><head><title>$subject</title></head><body><div id='message-container'><h2>$subject</h2><p>email: $email</p><p>Message: <br/></p><p>$mail_body</p></div></body></html>
-	";
-		mail( $to, $subject, $message, $headers );
-		echo 'success';
-	} else {
-		echo "error";
-	}
-}
-
 
 // ============= Aa_is_profile =============
 if ( ! function_exists( 'aa_is_profile' ) ) {
