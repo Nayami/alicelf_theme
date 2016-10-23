@@ -1,10 +1,13 @@
 <?php
-
-
+/**
+ * ==================== Mailchimp ======================
+ * 01.08.2016
+ */
 if ( ! function_exists( 'mailchimp_vars' ) ) {
 	function mailchimp_vars()
 	{
 		global $alicelf;
+
 		return [
 			'api_key'          => $alicelf[ 'mailchimp-api-key' ],
 			'client_id'        => $alicelf[ 'mailchimp-client_id' ],
@@ -19,67 +22,82 @@ if ( ! function_exists( 'mailchimp_vars' ) ) {
 	}
 }
 
-function syncMailchimp($data) {
+function syncMailchimp( $data )
+{
 	$settings = mailchimp_vars();
-	$apiKey = $settings['api_key'];
-	$listId = $settings['list_id'];
+	$apiKey   = $settings[ 'api_key' ];
+	$listId   = $settings[ 'list_id' ];
 
-	$memberId = md5(strtolower($data['email']));
-	$dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
-	$url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
+	$memberId   = md5( strtolower( $data[ 'email' ] ) );
+	$dataCenter = substr( $apiKey, strpos( $apiKey, '-' ) + 1 );
+	$url        = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
 
-	$json = json_encode([
-		'email_address' => $data['email'],
-		'status'        => $data['status'], // "subscribed","unsubscribed","cleaned","pending"
+	$json = json_encode( [
+		'email_address' => $data[ 'email' ],
+		'status'        => $data[ 'status' ], // "subscribed","unsubscribed","cleaned","pending"
 		'merge_fields'  => [
-			'FNAME'     => $data['firstname'],
-			'LNAME'     => $data['lastname']
+			'FNAME' => $data[ 'firstname' ],
+			'LNAME' => $data[ 'lastname' ]
 		]
-	]);
+	] );
 
-	$ch = curl_init($url);
+	$ch = curl_init( $url );
 
-	curl_setopt($ch, CURLOPT_USERPWD, 'user:' . $apiKey);
-	curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
+	curl_setopt( $ch, CURLOPT_USERPWD, 'user:' . $apiKey );
+	curl_setopt( $ch, CURLOPT_HTTPHEADER, [ 'Content-Type: application/json' ] );
+	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
+	curl_setopt( $ch, CURLOPT_TIMEOUT, 10 );
+	curl_setopt( $ch, CURLOPT_CUSTOMREQUEST, 'PUT' );
+	curl_setopt( $ch, CURLOPT_SSL_VERIFYPEER, false );
+	curl_setopt( $ch, CURLOPT_POSTFIELDS, $json );
 
-	$result = curl_exec($ch);
-	$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-	curl_close($ch);
+	$result = curl_exec( $ch );
+//	$httpCode = curl_getinfo( $ch, CURLINFO_HTTP_CODE );
+	curl_close( $ch );
 
 	return $result;
 }
-//5fac64ac54a7dce698a24a3f08da938a
-add_action( 'wp_loaded', 'aa_func_20163707033756' );
-function aa_func_20163707033756()
+
+add_action( 'wp_loaded', 'aa_func_20160901080910' );
+function aa_func_20160901080910()
 {
 	if ( isset( $_POST[ 'mc-email' ] ) ) {
-		$data = [
+		$data        = [
 			'email'     => $_POST[ 'mc-email' ],
-			'status'    => 'subscribed',
-			'firstname' => 'john',
-			'lastname'  => 'doe'
+			'status'    => 'pending', // "subscribed","unsubscribed","cleaned","pending"
+			'firstname' => get_site_url(),
+			'lastname'  => 'Site Subscriber'
 		];
+		$msg         = syncMailchimp( $data );
+		$parsed_data = json_decode( $msg );
 
-		echo "<pre>";
-		print_r( syncMailchimp( $data ) );
-		echo "</pre>";
+		switch ( $parsed_data->status ) {
+			case "pending" :
+				$_SESSION[ 'aa_alert_messages' ][ 'mailchimp_system_message' ] = [
+					'type'    => 'info',
+					'message' => "Almost finished. Now check your email" . " <strong>{$data['email']}</strong> "
+				];
+				break;
+			case "subscribed" :
+				$_SESSION[ 'aa_alert_messages' ][ 'mailchimp_system_message' ] = [
+					'type'    => 'success',
+					'message' => "You subscribed" . " <strong>{$data['email']}</strong> "
+				];
+				break;
+			case 400 :
+				$_SESSION[ 'aa_alert_messages' ][ 'mailchimp_system_message' ] = [
+					'type'    => 'warning',
+					'message' => "Incorrect email "
+				];
+				break;
+			default :
+				$_SESSION[ 'aa_alert_messages' ][ 'mailchimp_system_message' ] = [
+					'type'    => 'danger',
+					'message' => "Sorry, something wrong. We'll try to fix it asap"
+				];
+		}
+
+		wp_redirect( get_site_url() );
+		die;
 	}
-}
-add_action( 'aa_afterbodystart', 'aa_func_20164708014740' );
-function aa_func_20164708014740()
-{
-	?>
-	<div class="ghostly-wrap">
-		<form role="form" method="POST" id="subscribe">
-			<input type="email" name="mc-email" placeholder="you@yourself.com" class="form-control">
-			<button type="submit" class="btn btn-default btn-sm">Subscribe</button>
-		</form>
-	</div>
-	<?php
-
 }

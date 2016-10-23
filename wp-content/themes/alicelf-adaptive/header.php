@@ -24,7 +24,7 @@
 <div id="scroll-trigger-top"></div>
 <div class="<?php echo $site_content_class ?>">
 	<div class="container">
-		<header class="site-header row"><?php header_type(); ?></header>
+		<header class="site-header"><?php header_type(); ?></header>
 		<div class="row">
 			<nav class="ghostly-wrap"><?php do_the_breadcrumb() ?></nav>
 		</div>

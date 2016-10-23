@@ -7,9 +7,9 @@
  Version: 3.6.1
  Tags: white, one-column, two-columns, customizable, theme-editor, right-sidebar, flexible-width, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, translation-ready
  */
-
 @import "style-parts/fonts";
 @import "style-parts/vars";
+@import "style-parts/flex-grid";
 @import "style-parts/mix";
 @import "style-parts/plugins_integration";
 @import "style-parts/basics";
@@ -18,15 +18,12 @@
 @import "style-parts/alerts_modals";
 @import "style-parts/popup";
 @import "style-parts/media";
-
 // TransformIcons
 @import "style-parts/transformicons/index/tcons";
-
 // Content Parts
 @import "style-parts/header";
 @import "style-parts/main";
 @import "style-parts/user";
 @import "style-parts/footer";
-
 @import "style-parts/responsive";
 @import "style-parts/loaderanimation";

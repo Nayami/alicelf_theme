@@ -1,5 +1,5 @@
 <?php
-//define( 'DISALLOW_FILE_EDIT', true );
+// define( 'DISALLOW_FILE_EDIT', true );
 //basename(__FILE__, '.php');
 if ( ! function_exists( 'restrict_content_rules' ) ) {
 	function restrict_content_rules()
@@ -49,14 +49,7 @@ add_action( 'admin_menu', 'aa_remove_main_menus' );
 function aa_remove_main_menus()
 {
 	if ( get_userdata( get_current_user_id() )->data->user_email !== aa_allowfor() ) {
-		?>
-		<style type="text/css">
-			form[action="theme-editor.php"] input[type="submit"],
-			form[action="plugin-editor.php"] input[type="submit"] {
-				display : none !important;
-			}
-		</style>
-		<?php
+
 		foreach ( restrict_content_rules() as $content ) {
 			remove_menu_page( $content );
 		}

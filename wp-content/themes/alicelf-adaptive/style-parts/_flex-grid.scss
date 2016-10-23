@@ -1,0 +1,51 @@
+.flex-container {
+	display   : flex;
+	flex-flow : row wrap;
+}
+
+// flex-col flex-col-desktop flex-col-tablet flex-col-phone
+@mixin flex-col {
+	$baseFlexWidth : 5;
+	@for $i from 5 through 24 {
+		.flex-col-#{$baseFlexWidth} {
+			flex-basis : percentage($baseFlexWidth)/100;
+		}
+		$baseFlexWidth : $baseFlexWidth + 5;
+	}
+
+	/*Desktop*/
+	$baseFlexWidth : 5;
+	@media (min-width : 952px) {
+		@for $i from 5 through 24 {
+			.flex-col-desktop-#{$baseFlexWidth} {
+				flex-basis : percentage($baseFlexWidth)/100;
+			}
+			$baseFlexWidth : $baseFlexWidth + 5;
+		}
+	}
+
+	/*Tablet*/
+	$baseFlexWidth : 5;
+	@media (max-width : 951px) {
+		@for $i from 5 through 24 {
+			.flex-col-tablet-#{$baseFlexWidth} {
+				flex-basis : percentage($baseFlexWidth)/100;
+			}
+			$baseFlexWidth : $baseFlexWidth + 5;
+		}
+	}
+
+	/*Mobile*/
+	$baseFlexWidth : 5;
+	@media (max-width : 767px) {
+		@for $i from 5 through 24 {
+			.flex-col-phone-#{$baseFlexWidth} {
+				flex-basis : percentage($baseFlexWidth)/100;
+			}
+			$baseFlexWidth : $baseFlexWidth + 5;
+		}
+	}
+
+}
+
+@include flex-col;

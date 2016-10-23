@@ -18,4 +18,4 @@
 			<?php comments_template( '/templates/tpl-comment.php' ); ?>
 		</div>
 
-	<?php endwhile; ?>
+<?php endwhile; ?>
