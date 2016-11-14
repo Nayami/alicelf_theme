@@ -189,6 +189,20 @@ function aa_getthmeoption( $option )
 	return ob_get_clean();
 }
 
+// ============= Aa_img =============
+if ( ! function_exists( 'aa_img' ) ) {
+	function aa_img( $args )
+	{
+		ob_start();
+		$sha = shortcode_atts( [
+			'id'    => $args[ 'id' ],
+			'class' => ! empty( $args[ 'class' ] ) ? $args[ 'class' ] : "img-responsive",
+		], $args );
+		echo "<img src='" . wp_get_attachment_url( $sha[ 'id' ] ) . "' class='{$sha['class']}'>";
+
+		return ob_get_clean();
+	}
+}
 /**
  * Custom Post Types
  * [custom_posts type="recent_projects" order="asc" cat="46,71,52,64"]
@@ -203,6 +217,7 @@ function release_alicelf_shortcodes()
 	add_shortcode( 'custom_posts', 'custom_posts_shortcode' );
 	add_shortcode( 'theme_carousel', 'get_theme_slider' );
 	add_shortcode( 'aa_option', 'aa_getthmeoption' );
+	add_shortcode( 'aa_img', 'aa_img' );
 }
 
 add_action( 'init', 'release_alicelf_shortcodes' );
