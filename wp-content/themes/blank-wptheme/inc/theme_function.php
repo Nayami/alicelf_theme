@@ -72,20 +72,6 @@ if ( ! function_exists( 'trim_data' ) ) {
 	}
 }
 
-if ( ! function_exists( 'aa_fetch_curl' ) ) {
-	/**
-	 * Regular curl or Wp curl
-	 *
-	 * @param $url
-	 * @param int $timeout
-	 *
-	 * @return mixed|string
-	 */
-	function aa_fetch_curl( $url, $timeout = 20 )
-	{
-		return Helper::fetchCurl( $url, $timeout );
-	}
-}
 
 if ( ! function_exists( 'aa_check_plugin' ) ) {
 	/**

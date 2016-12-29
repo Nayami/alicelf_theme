@@ -1,8 +1,5 @@
 <?php
-/**
- * ==================== Custom admin columns ======================
- * 03.06.2016
- */
+
 if ( ! function_exists( '__cc_config' ) ) {
 	function __cc_config()
 	{

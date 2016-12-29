@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Creating custom posts by plugin
  */

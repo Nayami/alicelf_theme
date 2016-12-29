@@ -116,8 +116,7 @@ body {
 #toplevel_page_alicelf_theme_setup_options {
 	div.wp-menu-image {
 		&:before {
-			font-family : alicelf-icon;
-			content     : "a";
+			content : "\f180";
 		}
 	}
 }

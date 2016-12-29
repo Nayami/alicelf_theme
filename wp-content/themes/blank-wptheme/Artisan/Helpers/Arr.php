@@ -1,8 +1,4 @@
 <?php
-/**
- * ==================== Array operations ======================
- * 25.03.2016
- */
 
 namespace Alicelf\Helpers;
 

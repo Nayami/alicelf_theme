@@ -28,7 +28,7 @@ $args = array(
 	// Show the sections below the admin menu item or not
 	'menu_title'      => 'Theme Options',
 	'page_title'      => 'Theme Customization',
-	'admin_bar_icon'  => 'icon-alicelf-brand',
+	'admin_bar_icon'  => 'dashicons-screenoptions',
 	'menu_icon'       => '',
 	'page_priority'   => 61,
 	'global_variable' => 'alicelf',
