@@ -7,6 +7,9 @@ class AmAttachment {
 
 	static function get_attachment( $attachment_id, $with_meta = false )
 	{
+		if ( ! $attachment_id )
+			return false;
+
 		$attachment = get_post( $attachment_id );
 		$data       = [
 			'attachment_ID' => $attachment->ID,
@@ -29,12 +32,12 @@ class AmAttachment {
 		return $data;
 	}
 
-	/**
-	 * @param array $file
-	 *
-	 * @return bool|int
-	 */
-	static function upload_user_file( $file = [ ] )
+	static function delete_attachment( $id )
+	{
+		return Helper::deleteAttachment( $id );
+	}
+
+	static function upload_user_file( $file = [] )
 	{
 		require_once( ABSPATH . 'wp-admin/includes/admin.php' );
 		$file_return = wp_handle_upload( $file, [ 'test_form' => false ] );
@@ -65,17 +68,11 @@ class AmAttachment {
 		return false;
 	}
 
-	/**
-	 * @param int $size
-	 * @param array $allowed_types
-	 *
-	 * @return array
-	 */
 	static function uploadfiles( $size = 30000, $allowed_types = [ 'image/png', 'image/jpeg' ] )
 	{
 		$response = [
 			'message' => null,
-			'data'    => [ ],
+			'data'    => [],
 			'status'  => 'fail'
 		];
 		foreach ( $_FILES as $file ) {

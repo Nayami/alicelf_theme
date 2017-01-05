@@ -70,11 +70,6 @@ function alicelf_theme_register_dependences()
 			'slug'     => 'wp-pagenavi',
 			'required' => false,
 		),
-		array(
-			'name'     => 'Instagram Feed',
-			'slug'     => 'instagram-feed',
-			'required' => false,
-		),
 
 	);
 

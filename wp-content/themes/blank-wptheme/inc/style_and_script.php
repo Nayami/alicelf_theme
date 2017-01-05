@@ -8,6 +8,7 @@ function invoke_scripts()
 	global $alicelf;
 	$theme_path = get_template_directory_uri();
 	$t_dir = get_template_directory_uri() . '/style-parts';
+	$partials = get_template_directory_uri().'/partials/';
 
 	// Font Icons
 	wp_enqueue_style( 'alice-font_awesome', $t_dir . '/font-awesome/css/font-awesome.min.css' );
@@ -21,6 +22,12 @@ function invoke_scripts()
 	wp_deregister_script( 'jquery' );
 	wp_register_script( 'jquery', $theme_path . '/js_prod/jquery2.1.js', array(), false, true );
 	wp_enqueue_script( 'jquery' );
+	// jQuery UI
+//	wp_enqueue_style( 'alicelf-jqui-style', $partials . 'jq-ui/style.css' );
+//	wp_enqueue_script( 'alicelf-jqui-script', $partials . 'jq-ui/script.js', ['jquery'], false, true );
+	// Custom Scroll bar
+//	wp_enqueue_style( 'csb-style', $path . 'customScrollbar/style.css' );
+//	wp_enqueue_script( 'csb-script', $path . 'customScrollbar/script.min.js', ['jquery'], false, true );
 
 	// ================== Plugins and Libs ==================
 	wp_enqueue_script( 'aa-tp-scripts', $theme_path . '/js_prod/compiled-plugins-script.js', array('jquery'), false, true );
