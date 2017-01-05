@@ -95,7 +95,7 @@ body {
   top      : 32%;
   left     : 5%;
   z-index  : 1;
-  @media (#{max-width 767px}) {
+  @media (max-width: 767px) {
     display    : block;
     width      : 30%;
     right      : 5%;
