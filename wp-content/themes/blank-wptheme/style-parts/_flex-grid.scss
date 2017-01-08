@@ -1,4 +1,5 @@
 .flex-container {
+	display   : -ms-flexbox;
 	display   : flex;
 	flex-flow : row wrap;
 }
@@ -6,12 +7,14 @@
 // flex-col flex-col-desktop flex-col-tablet flex-col-phone
 @mixin flex-col {
 	.flex-col-33 {
-		flex-basis: 33.3333333333%;
+		flex-basis : 33.3333333333%;
+		max-width  : 33.3333333333%;
 	}
 	$baseFlexWidth : 5;
 	@for $i from 5 through 24 {
 		.flex-col-#{$baseFlexWidth} {
 			flex-basis : percentage($baseFlexWidth)/100;
+			max-width  : percentage($baseFlexWidth)/100;
 		}
 		$baseFlexWidth : $baseFlexWidth + 5;
 	}
@@ -20,11 +23,13 @@
 	$baseFlexWidth : 5;
 	@media (min-width : 952px) {
 		.flex-col-desktop-33 {
-			flex-basis: 33.3333333333%;
+			flex-basis : 33.3333333333%;
+			max-width  : 33.3333333333%;
 		}
 		@for $i from 5 through 24 {
 			.flex-col-desktop-#{$baseFlexWidth} {
 				flex-basis : percentage($baseFlexWidth)/100;
+				max-width  : percentage($baseFlexWidth)/100;
 			}
 			$baseFlexWidth : $baseFlexWidth + 5;
 		}
@@ -34,11 +39,13 @@
 	$baseFlexWidth : 5;
 	@media (max-width : 951px) {
 		.flex-col-tablet-33 {
-			flex-basis: 33.3333333333%;
+			flex-basis : 33.3333333333%;
+			max-width  : 33.3333333333%;
 		}
 		@for $i from 5 through 24 {
 			.flex-col-tablet-#{$baseFlexWidth} {
 				flex-basis : percentage($baseFlexWidth)/100;
+				max-width  : percentage($baseFlexWidth)/100;
 			}
 			$baseFlexWidth : $baseFlexWidth + 5;
 		}
@@ -49,16 +56,16 @@
 	$baseFlexWidth : 5;
 	@media (max-width : 767px) {
 		.flex-col-phone-33 {
-			flex-basis: 33.3333333333%;
+			flex-basis : 33.3333333333%;
+			max-width  : 33.3333333333%;
 		}
 		@for $i from 5 through 24 {
 			.flex-col-phone-#{$baseFlexWidth} {
 				flex-basis : percentage($baseFlexWidth)/100;
+				max-width  : percentage($baseFlexWidth)/100;
 			}
 			$baseFlexWidth : $baseFlexWidth + 5;
 		}
 	}
-
 }
-
 @include flex-col;

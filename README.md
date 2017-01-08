@@ -1,6 +1,6 @@
 ## Synopsis
 
-Alicelf Adaptive Wordpress theme
+Boilerplate development Wordpress theme
 
 ## Code Example
 
@@ -9,8 +9,3 @@ Alicelf Adaptive Wordpress theme
 ## Motivation
 
 Complex adaptive templates for dev purposes
-
-
-## License
-
-Do with this whatever you want (MIT license)
